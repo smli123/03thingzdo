@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true"/>   
+       
+    <RelativeLayout
+	    android:id="@+id/layout_whole_back"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"        
+        android:layout_below="@+id/commontitlebar"
+        android:background="@color/commom_bg_color">  
+        
+	    <RelativeLayout
+		    android:id="@+id/rl_sep_01"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+	        android:layout_marginTop="10dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"	         
+	        android:background="@color/white"> 
+	                
+		    <ImageView
+		        android:id="@+id/image_sep_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		</RelativeLayout> 
+			
+	    <RelativeLayout
+		    android:id="@+id/rl_function_control"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"	
+	        android:layout_marginTop="30dp"
+	        android:layout_marginBottom="0dp"	           
+	        android:background="@color/white"
+	        android:layout_below="@+id/rl_sep_01"> 	
+	        
+		    <LinearLayout
+		        android:id="@+id/ll_function_control_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		       
+		       	<RelativeLayout
+				    android:id="@+id/rl_sunup"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content" 
+			        android:layout_marginLeft="0dp"
+			        android:layout_marginRight="0dp"	
+			        android:layout_marginTop="30dp"
+			        android:layout_marginBottom="0dp"	           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"
+			        android:orientation="vertical" > 	
+		        
+			        <ImageView
+			            android:id="@+id/iv_light_sunup"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_centerHorizontal="true"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:src="@drawable/smp_growlight_sunup" />
+			        
+			        <TextView
+			            android:id="@+id/tv_light_sunup"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/iv_light_sunup"
+			            android:layout_centerHorizontal="true"
+			            android:layout_marginLeft="5dp"
+			            android:background="@null"
+			            android:gravity="center"
+			            android:text="@string/smartplug_growlight_sunup"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+			        
+			        <TextView
+			            android:id="@+id/tv_light_sunup_time"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/tv_light_sunup"
+			            android:layout_centerHorizontal="true"
+			            android:layout_marginLeft="5dp"
+			            android:background="@null"
+			            android:gravity="center"
+			            android:text="@string/smartplug_growlight_sunup_time"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+
+			    </RelativeLayout>
+		        
+		       	
+		       	<RelativeLayout
+				    android:id="@+id/rl_sundown"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content" 
+			        android:layout_marginLeft="0dp"
+			        android:layout_marginRight="0dp"	
+			        android:layout_marginTop="30dp"
+			        android:layout_marginBottom="0dp"	           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"
+			        android:layout_below="@+id/rl_sep"
+			        android:orientation="vertical" > 	
+		        
+			        <ImageView
+			            android:id="@+id/iv_light_control_auto"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_centerHorizontal="true"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:src="@drawable/smp_growlight_sundown" />
+
+		            <TextView
+		                android:id="@+id/tv_light_sundown"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_below="@+id/iv_light_control_auto"
+		                android:layout_centerHorizontal="true"
+		                android:layout_marginLeft="5dp"
+		                android:background="@null"
+		                android:gravity="center"
+		                android:text="@string/smartplug_growlight_sundown"
+		                android:textColor="@color/black"
+		                android:textSize="@dimen/text_size_larsamll" />
+			        
+			        <TextView
+			            android:id="@+id/tv_light_sundown_time"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/tv_light_sundown"
+			            android:layout_centerHorizontal="true"
+			            android:layout_marginLeft="5dp"
+			            android:background="@null"
+			            android:gravity="center"
+			            android:text="@string/smartplug_growlight_sundown_time"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+
+			    </RelativeLayout>
+		    </LinearLayout>
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_2"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/ll_function_control_1"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		    
+		</RelativeLayout>
+		   
+		<RelativeLayout
+		    android:id="@+id/rl_sep_02"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"	
+	        android:layout_marginTop="30dp"
+	        android:layout_marginBottom="0dp"	           
+	        android:background="@color/white"
+	        android:gravity="center"
+	        android:layout_below="@+id/rl_function_control"> 	
+	        
+		    <Button
+	      		android:id="@+id/btn_submit"
+	       		android:layout_width="wrap_content"
+	       		android:layout_height="wrap_content"
+	       		android:layout_gravity="center"
+	       		android:text="@string/smartplug_commit" 
+	       		android:textColor="@color/white"
+	       		android:textSize="@dimen/text_size_larsamll"
+	       		android:background="@drawable/btn_selector" 
+	       		android:layout_centerInParent="true"
+	       		android:layout_below="@+id/layout_connect"/>
+		   
+		</RelativeLayout> 
+			
+	</RelativeLayout>    
+</RelativeLayout>    

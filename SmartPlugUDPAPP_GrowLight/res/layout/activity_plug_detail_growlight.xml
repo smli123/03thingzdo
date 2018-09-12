@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true"/>   
+       
+    <RelativeLayout
+        android:id="@+id/rl_light_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/commontitlebar"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginBottom="10dp"
+	    android:background="@color/white"
+        android:layout_gravity="center">
+        
+        <ImageView
+            android:id="@+id/iv_light_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:src="@drawable/smp_light_off_big" />
+
+        <TextView
+            android:id="@+id/tv_light_curtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+	    	android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+	        android:textSize="@dimen/text_size_larsamll"
+            android:text="@null" />
+      
+     </RelativeLayout>    
+        
+    <RelativeLayout
+	    android:id="@+id/layout_whole_back"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"        
+        android:layout_below="@+id/rl_light_control"
+        android:background="@color/commom_bg_color">  
+        
+	    <RelativeLayout
+		    android:id="@+id/rl_sep_01"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+	        android:layout_marginTop="0dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"	         
+	        android:background="@color/white"> 
+	                
+		    <ImageView
+		        android:id="@+id/image_sep_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		</RelativeLayout> 
+		
+	    <RelativeLayout
+		    android:id="@+id/rl_workmode"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"
+	        android:background="@color/white"
+	        android:layout_below="@+id/rl_sep_01" > 
+	                
+	        <ImageView
+	           android:id="@+id/iv_workmode_type"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_margin="5dp"
+	           android:layout_centerVertical="true"
+	           android:background="@drawable/smp_growlight_workmode_type" />
+	        
+		    <TextView 
+		        android:id="@+id/tv_workmode_type"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+		        android:layout_toRightOf="@id/iv_workmode_type"
+	           android:layout_margin="3dp"
+	           android:layout_centerVertical="true"
+               android:layout_centerHorizontal="true"
+               android:text="@string/smartplug_growlight_workmode"
+               android:textColor="@color/black"
+               android:textSize="@dimen/text_size_larsamll" />
+		    <Spinner
+		        android:id="@+id/spinner_workmode"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@id/tv_workmode_type"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+	            android:layout_centerVertical="true"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		</RelativeLayout> 
+			
+	    
+	    <RelativeLayout
+		    android:id="@+id/rl_sep_02"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+	        android:layout_marginTop="0dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"	 
+	        android:layout_below="@+id/rl_workmode"        
+	        android:background="@color/white"> 
+	                
+		    <ImageView
+		        android:id="@+id/image_sep_2"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		</RelativeLayout> 
+		
+	    <RelativeLayout
+	        android:id="@+id/rl_function_control"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/rl_sep_02"
+	        android:layout_margin="0dp"
+	        android:layout_marginBottom="0dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"
+	        android:background="@color/white" >
+	        
+		    <LinearLayout
+		        android:id="@+id/ll_function_control_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="0dp"
+		        android:layout_marginTop="0dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        			
+			    <RelativeLayout
+				    android:id="@+id/rl_control_manual"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"> 	
+			        
+			        <ImageView
+			            android:id="@+id/iv_light_control_manual"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_centerHorizontal="true"
+			            android:src="@drawable/smp_hand" />
+			        
+			        <TextView
+			            android:id="@+id/tv_light_control_manual"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/iv_light_control_manual"
+			            android:layout_centerInParent="true"
+			            android:text="@string/smartplug_growlight_manual"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+
+			    </RelativeLayout>
+			    
+			     <RelativeLayout
+				    android:id="@+id/rl_control_auto"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"
+			        android:layout_below="@+id/rl_control_manual"> 	
+			        
+			        <ImageView
+			            android:id="@+id/iv_light_control_auto"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_centerHorizontal="true"
+			            android:src="@drawable/smp_sun" />
+			        
+			        <TextView
+			            android:id="@+id/tv_light_control_auto"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/iv_light_control_auto"
+			            android:layout_centerHorizontal="true"
+			            android:text="@string/smartplug_growlight_auto"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+			    </RelativeLayout>
+		    </LinearLayout>
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_3"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/ll_function_control_1"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" /> 
+		        
+		  <LinearLayout
+		        android:id="@+id/ll_function_control_2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"               
+		        android:layout_below="@+id/image_sep_3"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		      
+		     	<RelativeLayout
+				    android:id="@+id/rl_control_timetask"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"> 	
+			        
+			        <ImageView
+			            android:id="@+id/iv_light_control_timetask"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_centerHorizontal="true"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:src="@drawable/smp_timetask" />
+			        
+			        <TextView
+			            android:id="@+id/tv_light_control_timetask"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/iv_light_control_timetask"
+			            android:layout_centerHorizontal="true"
+			            android:text="@string/smartplug_growlight_timetask"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+			    </RelativeLayout>
+			    
+		     	<RelativeLayout
+				    android:id="@+id/rl_control_timecurve"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"
+			        android:layout_below="@+id/rl_control_timetask"> 	
+			        
+			        <ImageView
+			            android:id="@+id/iv_light_control_timecurve"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_centerHorizontal="true"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:src="@drawable/smp_time_curves" />
+		        
+			        <TextView
+			            android:id="@+id/tv_light_control_timecurve"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/iv_light_control_timecurve"
+			            android:layout_centerHorizontal="true"
+			            android:text="@string/smartplug_growlight_timecurve"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+			    </RelativeLayout>
+			    
+		  </LinearLayout>
+		    
+		  <ImageView
+		        android:id="@+id/image_sep_4"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/ll_function_control_2"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />     
+		  <LinearLayout
+		        android:id="@+id/ll_function_control_3"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"               
+		        android:layout_below="@+id/image_sep_4"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		         
+		     	<RelativeLayout
+				    android:id="@+id/rl_control_setting"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"> 	
+			        
+			        <ImageView
+			            android:id="@+id/iv_light_control_setting"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:gravity="center"
+			            android:layout_weight="1"
+			            android:layout_centerHorizontal="true"
+			            android:src="@drawable/smp_setting" />
+		        
+			        <TextView
+			            android:id="@+id/tv_light_control_setting"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/iv_light_control_setting"
+			            android:layout_centerHorizontal="true"
+			            android:text="@string/smartplug_growlight_setting"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+			    </RelativeLayout>
+		  </LinearLayout>
+		    
+		  <ImageView
+		        android:id="@+id/image_sep_5"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/ll_function_control_3"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" /> 
+		</RelativeLayout>	    
+	</RelativeLayout>    
+</RelativeLayout>    

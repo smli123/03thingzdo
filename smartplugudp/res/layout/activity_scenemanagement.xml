@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true"/>        
+        
+    <RelativeLayout
+        android:id="@+id/layout_whole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/commontitlebar"
+        android:background="@color/commom_bg_color" >
+        
+        <ListView 
+            android:id="@+id/lv_scene"
+          	android:layout_width="match_parent"
+          	android:layout_height="wrap_content"
+          	android:divider="@drawable/list_item_diliver_left10_right0"
+	        android:dividerHeight="1px" />
+        
+	</RelativeLayout>    
+</RelativeLayout>    

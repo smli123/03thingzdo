@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true"/>   
+       
+    <RelativeLayout
+        android:id="@+id/rl_light_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/commontitlebar"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginBottom="10dp"
+	    android:background="@color/white"
+        android:layout_gravity="center">
+        
+        <TextView
+            android:id="@+id/tv_light_curtemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+	        android:textSize="@dimen/text_size_larsamll"
+            android:text="@null" />
+      
+     </RelativeLayout>    
+        
+    <RelativeLayout
+	    android:id="@+id/layout_whole_back"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"        
+        android:layout_below="@+id/rl_light_control"
+        android:background="@color/commom_bg_color">  
+        
+	    <RelativeLayout
+		    android:id="@+id/rl_sep_01"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+	        android:layout_marginTop="0dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"	         
+	        android:background="@color/white"> 
+	                
+		    <ImageView
+		        android:id="@+id/image_sep_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		</RelativeLayout> 
+		
+	    <RelativeLayout
+		    android:id="@+id/rl_set_temperature"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:background="@color/white"
+	        android:layout_below="@+id/rl_sep_01" 
+	        android:orientation="vertical"> 
+	                
+		    <TextView 
+		       android:id="@+id/tv_set_temperature"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_marginBottom="10dp"
+		       android:layout_marginLeft="10dp"
+		       android:layout_marginRight="10dp"
+               android:text="@string/smartplug_growlight_settemperature"
+               android:textColor="@color/black"
+               android:textSize="@dimen/text_size_larsamll" />
+		    
+		    <RelativeLayout
+		        android:id="@+id/rl_set_temperature_result"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/tv_set_temperature"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_marginTop="10dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		                
+			    <TextView
+			        android:id="@+id/tv_set_temperature_result"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+			        android:layout_marginRight="10dp"
+			        android:text="456"
+			        android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll" />
+			    
+			    <SeekBar
+			        android:id="@+id/sb_set_temperature"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toLeftOf="@id/tv_set_temperature_result"
+			        android:layout_centerVertical="true"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginRight="10dp"
+			        android:progressDrawable="@drawable/po_seekbar_blue"  
+			        android:background="@color/lightwhite"
+			        android:progress="0" 
+			        android:max="20" />
+
+			</RelativeLayout>
+		</RelativeLayout> 
+			
+		  <ImageView
+		        android:id="@+id/image_sep_5"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/ll_function_control_3"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" /> 
+	</RelativeLayout>    
+</RelativeLayout>    

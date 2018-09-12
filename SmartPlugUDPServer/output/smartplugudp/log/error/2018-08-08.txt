@@ -1,0 +1,7 @@
+00:43:56 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>
+00:43:56 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>
+15:01:19 [ERROR]	 SEND 	 (192.168.0.111:5002)	 [0,APPLOGIN,hexiaoxu,0,20000004#] user name not registered. (hexiaoxu)<ICallFunction.java: Line 317>
+15:13:43 [ERROR]	 SEND 	 (192.168.0.111:5002)	 [0,APPLOGIN,hexiaoxu,0,20000004#] user name not registered. (hexiaoxu)<ICallFunction.java: Line 317>
+15:13:45 [ERROR]	 SEND 	 (192.168.0.111:5002)	 [0,APPLOGIN,hexiaoxu,0,20000004#] user name not registered. (hexiaoxu)<ICallFunction.java: Line 317>
+15:31:24 [ERROR]	 SEND 	 (192.168.0.111:5002)	 [0,APPLOGIN,hexiaoxu,0,20000004#] user name not registered. (hexiaoxu)<ICallFunction.java: Line 317>
+15:32:03 [ERROR]	 SELF 	 (648044)db operation failed. <NotifyPowerStatusHandle.java: Line 67>

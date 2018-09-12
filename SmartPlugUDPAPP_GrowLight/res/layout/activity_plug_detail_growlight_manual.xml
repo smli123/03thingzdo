@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true"/>   
+       
+    <RelativeLayout
+	    android:id="@+id/rl_whole"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"        
+        android:layout_below="@+id/commontitlebar"
+        android:background="@color/commom_bg_color">  
+        
+	    <RelativeLayout
+		    android:id="@+id/rl_function_control"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"	
+	        android:layout_marginTop="30dp"
+	        android:layout_marginBottom="30dp"	           
+	        android:background="@color/white"
+	        android:orientation="vertical" > 	
+	        
+		    <RelativeLayout
+		        android:id="@+id/ll_function_control_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_01"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="1" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_right_01"
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll" 
+		            android:text="@null" />
+		        
+		        <SeekBar
+		            android:id="@+id/sb_light_01"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_light_01"
+		            android:layout_toLeftOf="@id/tv_light_right_01"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginTop="10dp"
+		            android:focusable="true"
+		            android:max="255"
+		            android:maxHeight="8dp"
+		            android:minHeight="8dp"
+		            android:paddingLeft="10dip"
+		            android:paddingRight="10dip"
+		            android:progress="0"
+		            android:progressDrawable="@drawable/po_seekbar_green"
+		            android:thumb="@drawable/seekbar_thumb" />
+
+		    </RelativeLayout>
+		          
+		    <RelativeLayout
+		        android:id="@+id/ll_function_control_2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/ll_function_control_1"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_02"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="2" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_right_02"
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="@null" />
+		        
+		        <SeekBar
+		            android:id="@+id/sb_light_02"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_light_02"
+		            android:layout_toLeftOf="@id/tv_light_right_02"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginTop="10dp"
+		            android:focusable="true"
+		            android:max="255"
+		            android:maxHeight="8dp"
+		            android:minHeight="8dp"
+		            android:paddingLeft="10dip"
+		            android:paddingRight="10dip"
+		            android:progress="0"
+		            android:progressDrawable="@drawable/po_seekbar_green"
+		            android:thumb="@drawable/seekbar_thumb" />
+		        
+		    </RelativeLayout>
+		        
+		    <RelativeLayout
+		        android:id="@+id/ll_function_control_3"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/ll_function_control_2"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_03"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="3" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_right_03"
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="@null" />
+		        
+		        <SeekBar
+		            android:id="@+id/sb_light_03"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_light_03"
+		            android:layout_toLeftOf="@id/tv_light_right_03"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginTop="10dp"
+		            android:focusable="true"
+		            android:max="255"
+		            android:maxHeight="8dp"
+		            android:minHeight="8dp"
+		            android:paddingLeft="10dip"
+		            android:paddingRight="10dip"
+		            android:progress="0"
+		            android:progressDrawable="@drawable/po_seekbar_green"
+		            android:thumb="@drawable/seekbar_thumb" />
+		        
+		    </RelativeLayout>
+		        
+		    <RelativeLayout
+		        android:id="@+id/ll_function_control_4"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/ll_function_control_3"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_04"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="4" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_right_04"
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="@null" />
+		        
+		        <SeekBar
+		            android:id="@+id/sb_light_04"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_light_04"
+		            android:layout_toLeftOf="@id/tv_light_right_04"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginTop="10dp"
+		            android:focusable="true"
+		            android:max="255"
+		            android:maxHeight="8dp"
+		            android:minHeight="8dp"
+		            android:paddingLeft="10dip"
+		            android:paddingRight="10dip"
+		            android:progress="0"
+		            android:progressDrawable="@drawable/po_seekbar_green"
+		            android:thumb="@drawable/seekbar_thumb" />
+		        
+		    </RelativeLayout>
+		        
+		    <RelativeLayout
+		        android:id="@+id/ll_function_control_5"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/ll_function_control_4"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_05"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="5" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_right_05"
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="@null" />
+		        
+		        <SeekBar
+		            android:id="@+id/sb_light_05"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_light_05"
+		            android:layout_toLeftOf="@id/tv_light_right_05"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginTop="10dp"
+		            android:focusable="true"
+		            android:max="255"
+		            android:maxHeight="8dp"
+		            android:minHeight="8dp"
+		            android:paddingLeft="10dip"
+		            android:paddingRight="10dip"
+		            android:progress="0"
+		            android:progressDrawable="@drawable/po_seekbar_green"
+		            android:thumb="@drawable/seekbar_thumb" />
+		        
+		    </RelativeLayout>
+		    
+		  <ImageView
+		        android:id="@+id/image_sep_4"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/ll_function_control_5"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" /> 
+		</RelativeLayout>	    
+	</RelativeLayout>    
+</RelativeLayout>    

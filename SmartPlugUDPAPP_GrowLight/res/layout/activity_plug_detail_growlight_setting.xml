@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true"/>   
+       
+    <RelativeLayout
+	    android:id="@+id/rl_whole"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"        
+        android:layout_below="@+id/commontitlebar"
+        android:background="@color/commom_bg_color">  
+        
+	    <RelativeLayout
+		    android:id="@+id/rl_function_control"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" 
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"	
+	        android:layout_marginTop="30dp"
+	        android:layout_marginBottom="30dp"	           
+	        android:background="@color/white"
+	        android:orientation="vertical" > 	
+	        
+		    <RelativeLayout
+		        android:id="@+id/ll_curtime"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_curtime_memo"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="@string/smartplug_growlight_curtime" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_curtime"
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll" 
+		            android:text="@null" />
+		        
+		    </RelativeLayout>
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_below="@id/ll_curtime"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		     
+		    <RelativeLayout
+		        android:id="@+id/ll_temperature_control"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/image_sep_1"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_temperature_control_memo"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="@string/smartplug_growlight_temperature_control" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_temperature_control"
+		            android:layout_width="60dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:text="@null"
+		            android:textColor="@color/black"
+		            android:textSize="@dimen/text_size_larsamll" />
+		        
+		    </RelativeLayout>
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_2"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_below="@id/ll_temperature_control"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		          
+		    <RelativeLayout
+		        android:id="@+id/ll_lushu_control"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/image_sep_2"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >
+		        
+		        <TextView
+		            android:id="@+id/tv_light_lushu_control_memo"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+		            android:text="@string/smartplug_growlight_lushu_control_memo" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_lushu_control"
+		            android:layout_width="60dp"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll" 
+		            android:text="@null" />
+		        
+		    </RelativeLayout>
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_3"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_below="@id/ll_lushu_control"
+		        android:layout_marginLeft="0dp"
+		        android:layout_marginRight="0dp"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		          
+		</RelativeLayout>	    
+	</RelativeLayout>    
+</RelativeLayout>    

@@ -1,0 +1,24 @@
+11:04:56 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+11:05:09 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+11:05:11 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+11:05:11 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+11:15:51 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+11:18:26 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+11:21:20 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+15:22:12 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+15:34:40 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+15:36:44 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+15:46:30 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+15:46:30 [ERROR]	 SELF 	 (648145)	 Succeed to InsertModuleData:<ModuleLoginHandle.java: Line 289>
+15:46:30 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>
+16:22:05 [ERROR]	 SEND 	 (192.168.0.111:5002)	 [20180807162205,APPADDTIMER,hexiaoxu,648145,10000002#] faild to operate db. (hexiaoxu)<ICallFunction.java: Line 180>
+16:22:10 [ERROR]	 SEND 	 (192.168.0.111:5002)	 [20180807162210,APPADDTIMER,hexiaoxu,648145,10000002#] faild to operate db. (hexiaoxu)<ICallFunction.java: Line 180>
+16:23:29 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>
+16:42:59 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:d1] 648145 - 648145<ModuleLoginHandle.java: Line 88>
+16:42:59 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>
+16:49:24 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>
+16:49:24 [ERROR]	 SELF 	 (648145)	 Succeed to UpdateModuleData:[2018-08-07 15:46:30.0 - 2018-08-07 16:49:24.457]<ModuleHeartBeatTask.java: Line 106>
+17:06:40 [ERROR]	 SELF 	 	 [0/1]Find it Mac:[60:01:94:09:e3:6c] 648044 - 648044<ModuleLoginHandle.java: Line 88>
+17:06:40 [ERROR]	 SELF 	 (648044)	 Succeed to InsertModuleData:<ModuleLoginHandle.java: Line 289>
+19:12:58 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>
+19:12:59 [ERROR]	 SEND 	 user(hexiaoxu) is offline.<ICallFunction.java: Line 375>

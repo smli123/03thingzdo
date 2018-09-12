@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/commontitlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/view_common_titlebar" />
+
+    <LinearLayout
+        android:id="@+id/ll_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/commontitlebar"
+        android:background="@color/commom_bg_color"
+        android:textColor="@color/black"
+        android:orientation="vertical"
+        android:padding="5dp" >
+        
+		<RelativeLayout
+	         android:layout_width="match_parent"
+	         android:layout_height="1dp"
+             android:layout_marginBottom="3dp"
+	         android:background="@color/gray"
+	         android:orientation="horizontal" >
+		</RelativeLayout>
+		
+        <LinearLayout
+            android:id="@+id/ll_scene_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical"
+            android:background="@color/commom_bg_color"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_scene_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="场景名字"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_midnormal"
+                android1:gravity="center_vertical" />
+
+            <EditText
+                android:id="@+id/et_scene_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android1:layout_marginLeft="10dp"
+                android:text="@null"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_midnormal"
+                android1:hint="输入场景的名字"
+                android1:maxLines="1" />
+            
+        </LinearLayout>
+        
+		<RelativeLayout
+	         android:layout_width="match_parent"
+	         android:layout_height="1dp"
+                android:layout_marginBottom="3dp"
+	         android:background="@color/gray"
+	         android:orientation="horizontal" >
+		</RelativeLayout>
+        
+		<RelativeLayout
+            android:id="@+id/ll_power"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical"
+            android:background="@color/commom_bg_color"
+            android:orientation="vertical"  >
+		
+	        <RelativeLayout
+	            android:id="@+id/ll_power_top"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+	            android:background="@color/commom_bg_color"
+	            android:orientation="horizontal"  >
+	
+	            <TextView
+	                android:id="@+id/tv_power"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentLeft="true"
+	                android:text="电源"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	
+	         	 <ImageView
+	                android:id="@+id/iv_power_switch"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_toRightOf="@id/tv_power"
+	            	android:layout_gravity="center_vertical"
+	                android:contentDescription="@null"
+	                android:src="@drawable/smp_switcher_close" />
+	         	 
+	            <TextView
+	                android:id="@+id/tv_power_moduleids"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentRight="true"
+	                android:text="未设置"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	         	 
+	        </RelativeLayout>
+	        
+           <RelativeLayout
+	            android:id="@+id/ll_power_bottom"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+        		android:layout_below="@id/ll_power_top"
+	            android:background="@color/commom_bg_color"
+	            android:orientation="horizontal"  >
+
+         	 <ImageView
+                android:id="@+id/iv_power_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android1:layout_alignParentRight="true"
+            	android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
+                android:src="@drawable/smp_switcher_close" />
+         	 
+       		</RelativeLayout>
+        </RelativeLayout>
+        
+	
+		<RelativeLayout
+	         android:layout_width="match_parent"
+	         android:layout_height="1dp"
+                android:layout_marginBottom="3dp"
+	         android:background="@color/gray"
+	         android:orientation="horizontal" >
+		</RelativeLayout>
+        
+		<RelativeLayout
+            android:id="@+id/ll_curtain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical"
+            android:background="@color/commom_bg_color"
+            android:orientation="vertical"  >
+		
+	        <RelativeLayout
+	            android:id="@+id/ll_curtain_top"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+	            android:background="@color/commom_bg_color"
+	            android:orientation="horizontal"  >
+	
+	            <TextView
+	                android:id="@+id/tv_curtain"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentLeft="true"
+	                android:text="窗帘"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	
+	         	 <ImageView
+	                android:id="@+id/iv_curtain_switch"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_toRightOf="@id/tv_curtain"
+	            	android:layout_gravity="center_vertical"
+	                android:contentDescription="@null"
+	                android:src="@drawable/smp_switcher_close" />
+	         	 
+	            <TextView
+	                android:id="@+id/tv_curtain_moduleids"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentRight="true"
+	                android:text="未设置"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	         	 
+	        </RelativeLayout>
+	        
+           <RelativeLayout
+	            android:id="@+id/ll_curtain_bottom"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+	            android:background="@color/commom_bg_color"
+        		android:layout_below="@id/ll_curtain_top"
+	            android:orientation="horizontal"  >
+
+         	 <ImageView
+                android:id="@+id/iv_curtain_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android1:layout_alignParentRight="true"
+            	android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
+                android:src="@drawable/smp_switcher_close" />
+         	 
+       		</RelativeLayout>
+        </RelativeLayout>
+        
+		
+		
+		<RelativeLayout
+	         android:layout_width="match_parent"
+	         android:layout_height="1dp"
+                android:layout_marginBottom="3dp"
+	         android:background="@color/gray"
+	         android:orientation="horizontal" >
+		</RelativeLayout>
+        
+		<RelativeLayout
+            android:id="@+id/ll_aircon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical"
+            android:background="@color/commom_bg_color"
+            android:orientation="vertical"  >
+		
+	        <RelativeLayout
+	            android:id="@+id/ll_aircon_top"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+	            android:background="@color/commom_bg_color"
+	            android:orientation="horizontal"  >
+	
+	            <TextView
+	                android:id="@+id/tv_aircon"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentLeft="true"
+	                android:text="空调"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	
+	         	 <ImageView
+	                android:id="@+id/iv_aircon_switch"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_toRightOf="@id/tv_aircon"
+	            	android:layout_gravity="center_vertical"
+	                android:contentDescription="@null"
+	                android:src="@drawable/smp_switcher_close" />
+	         	 
+	            <TextView
+	                android:id="@+id/tv_aircon_moduleids"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentRight="true"
+	                android:text="未设置"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	         	 
+	        </RelativeLayout>
+	        
+           <RelativeLayout
+	            android:id="@+id/ll_aircon_bottom"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+	            android:background="@color/commom_bg_color"
+        		android:layout_below="@id/ll_aircon_top"
+	            android:orientation="horizontal"  >
+
+         	 <ImageView
+                android:id="@+id/iv_aircon_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android1:layout_alignParentRight="true"
+            	android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
+                android:src="@drawable/smp_switcher_close" />
+         	 
+       		</RelativeLayout>
+        </RelativeLayout>
+        
+		
+		<RelativeLayout
+	         android:layout_width="match_parent"
+	         android:layout_height="1dp"
+                android:layout_marginBottom="3dp"
+	         android:background="@color/gray"
+	         android:orientation="horizontal" >
+		</RelativeLayout>
+        
+		<RelativeLayout
+            android:id="@+id/ll_pc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical"
+            android:background="@color/commom_bg_color"
+            android:orientation="vertical"  >
+		
+	        <RelativeLayout
+	            android:id="@+id/ll_pc_top"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+	            android:background="@color/commom_bg_color"
+	            android:orientation="horizontal"  >
+	
+	            <TextView
+	                android:id="@+id/tv_pc"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentLeft="true"
+	                android:text="电脑"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	
+	         	 <ImageView
+	                android:id="@+id/iv_pc_switch"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_toRightOf="@id/tv_pc"
+	            	android:layout_gravity="center_vertical"
+	                android:contentDescription="@null"
+	                android:src="@drawable/smp_switcher_close" />
+	         	 
+	            <TextView
+	                android:id="@+id/tv_pc_moduleids"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentRight="true"
+	                android:text="未设置"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+	         	 
+	        </RelativeLayout>
+	        
+           <RelativeLayout
+	            android:id="@+id/ll_pc_bottom"
+	            android:layout_width="match_parent"
+	            android:layout_height="@dimen/activity_irscene_margin"
+	            android1:layout_gravity="center_vertical"
+	            android:background="@color/commom_bg_color"
+        		android:layout_below="@id/ll_pc_top"
+	            android:orientation="horizontal"  >
+ 
+	            <TextView
+	                android:id="@+id/tv_pc_mac_moduleids"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android1:layout_alignParentLeft="true"
+	                android:text="未设置"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_midnormal" />
+         	 <ImageView
+                android:id="@+id/iv_pc_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android1:layout_alignParentRight="true"
+            	android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
+                android:src="@drawable/smp_switcher_close" />
+         	 
+       		</RelativeLayout>
+        </RelativeLayout>
+        
+        <RelativeLayout
+	         android:layout_width="match_parent"
+	         android:layout_height="1dp"
+                android:layout_marginBottom="3dp"
+	         android:background="@color/gray"
+	         android:orientation="horizontal" >
+		</RelativeLayout>
+		
+        
+        <LinearLayout
+            android:id="@+id/ll_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_vertical"
+            android:background="@color/commom_bg_color"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_deletescene"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_selector"
+                android:text="删除"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_larsamll" />
+
+        </LinearLayout>
+	</LinearLayout>
+	
+</RelativeLayout>
