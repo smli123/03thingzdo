@@ -110,7 +110,7 @@ public class DetailGrowLightActivity extends TitledActivity
 			}
 
 			if (intent.getAction().equals(
-					PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION)) {
+					PubDefine.PLUG_GROWLIGHT_SET_WORK_MODE_ACTION)) {
 				i_Current_WorkMode = intent.getIntExtra("WORKMODE", 0);
 				spinner_workmode.setSelection(i_Current_WorkMode);
 
@@ -148,7 +148,7 @@ public class DetailGrowLightActivity extends TitledActivity
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
 		filter.addAction(PubDefine.PLUG_GROWLIGHT_QRY_STATUS_ACTION);
-		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_WORK_MODE_ACTION);
 		registerReceiver(mDetailRev, filter);
 
 		mPlugHelper = new SmartPlugHelper(this);
@@ -430,8 +430,8 @@ public class DetailGrowLightActivity extends TitledActivity
 		iv_light_control_setting = (ImageView) findViewById(R.id.iv_light_control_setting);
 
 		iv_light_control.setImageResource(m_isOpen
-				? R.drawable.smp_light_off_big
-				: R.drawable.smp_light_on_big);
+				? R.drawable.smp_light_on_big
+				: R.drawable.smp_light_off_big);
 
 		spinner_workmode = (Spinner) findViewById(R.id.spinner_workmode);
 
@@ -478,6 +478,8 @@ public class DetailGrowLightActivity extends TitledActivity
 			return;
 		}
 		setTitle(mPlug.mPlugName);
+
+		spinner_workmode.setSelection(i_Current_WorkMode);
 
 		// 使用定时器来 更新 时间
 		new Timer("GrowLightTime").schedule(new TimerTask() {

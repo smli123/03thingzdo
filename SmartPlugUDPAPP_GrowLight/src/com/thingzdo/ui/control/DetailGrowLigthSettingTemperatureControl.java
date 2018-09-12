@@ -110,9 +110,9 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 
 		UDPClient.getInstance().setIPAddress(mPlugIp);
 
-		init();
-
 		loadData();
+
+		init();
 
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
 			mTcpSocketThread = new RevCmdFromSocketThread();
@@ -150,6 +150,8 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 		// TODO Auto-generated method stub
 		super.onResume();
 		SmartPlugApplication.resetTask();
+
+		loadData();
 		init();
 	}
 
@@ -217,7 +219,8 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 		sb_set_temperature = (SeekBar) findViewById(R.id.sb_set_temperature);
 
 		if (null != sb_set_temperature) {
-			sb_set_temperature.setProgress(i_Set_Temperature);
+			sb_set_temperature
+					.setProgress(re_adjust_progressbar(i_Set_Temperature));
 			sb_set_temperature.setOnSeekBarChangeListener(this);
 			tv_set_temperature_result
 					.setText(String.valueOf(i_Set_Temperature));
@@ -249,7 +252,7 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 
 				i_Set_Temperature = value;
 				tv_set_temperature_result.setText(String.valueOf(value));
-				// saveData();
+				saveData();
 
 				SetTemperator();
 				break;
@@ -285,6 +288,11 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 		return trans_pos;
 	}
 
+	private int re_adjust_progressbar(int value) {
+		int trans_pos = value - 35;
+		return trans_pos;
+	}
+
 	private void disconnectSocket() {
 		// WiFi 直连模式下，退出或者重选时，必须close TCP连接；
 		/*
@@ -305,6 +313,7 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 
 		tv_light_curtemperature.setText(String.valueOf(i_Current_Temperature));
 		tv_set_temperature_result.setText(String.valueOf(i_Set_Temperature));
-		sb_set_temperature.setProgress(i_Set_Temperature);
+		sb_set_temperature
+				.setProgress(re_adjust_progressbar(i_Set_Temperature));
 	}
 }

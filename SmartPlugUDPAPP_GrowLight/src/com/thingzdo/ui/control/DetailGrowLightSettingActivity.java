@@ -146,6 +146,8 @@ public class DetailGrowLightSettingActivity extends TitledActivity
 		// TODO Auto-generated method stub
 		super.onResume();
 		SmartPlugApplication.resetTask();
+
+		loadData();
 		init();
 	}
 
@@ -229,7 +231,7 @@ public class DetailGrowLightSettingActivity extends TitledActivity
 						public void onClick(int which) {
 							Message msg = new Message();
 							msg.what = 0;
-							msg.arg1 = which + 1;
+							msg.arg1 = which;
 							mHandler.sendMessage(msg);
 						}
 					});
@@ -271,6 +273,8 @@ public class DetailGrowLightSettingActivity extends TitledActivity
 		tv_light_curtime = (TextView) findViewById(R.id.tv_light_curtime);
 		tv_light_temperature_control = (TextView) findViewById(R.id.tv_light_temperature_control);
 		tv_light_lushu_control = (TextView) findViewById(R.id.tv_light_lushu_control);
+
+		tv_light_temperature_control.setText(String.valueOf(i_Set_Temperature));
 
 		ll_curtime = (RelativeLayout) findViewById(R.id.ll_curtime);
 		ll_temperature_control = (RelativeLayout) findViewById(R.id.ll_temperature_control);
