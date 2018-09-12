@@ -105,18 +105,24 @@
 			        android:textColor="@color/black"
 			        android:textSize="@dimen/text_size_larsamll" />
 			    
+			    
 			    <SeekBar
-			        android:id="@+id/sb_set_temperature"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
+		            android:id="@+id/sb_set_temperature"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
 			        android:layout_toLeftOf="@id/tv_set_temperature_result"
-			        android:layout_centerVertical="true"
-			        android:layout_marginLeft="10dp"
-			        android:layout_marginRight="10dp"
-			        android:progressDrawable="@drawable/po_seekbar_blue"  
-			        android:background="@color/lightwhite"
-			        android:progress="0" 
-			        android:max="20" />
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="10dp"
+		            android:layout_marginTop="10dp"
+		            android:focusable="true"
+		            android:progress="0"
+		            android:max="20"
+		            android:maxHeight="8dp"
+		            android:minHeight="8dp"
+		            android:paddingLeft="20dip"
+		            android:paddingRight="10dip"
+		            android:progressDrawable="@drawable/po_seekbar_green"
+		            android:thumb="@drawable/seekbar_thumb" />
 
 			</RelativeLayout>
 		</RelativeLayout> 

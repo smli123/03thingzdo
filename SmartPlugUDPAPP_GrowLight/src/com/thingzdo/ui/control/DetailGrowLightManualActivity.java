@@ -243,7 +243,7 @@ public class DetailGrowLightManualActivity extends TitledActivity
 		if (null != sb_light_05) {
 			sb_light_05.setProgress(value_light_05_pos);
 			sb_light_05.setOnSeekBarChangeListener(this);
-			tv_light_right_01.setText(String.valueOf(value_light_05_pos));
+			tv_light_right_05.setText(String.valueOf(value_light_05_pos));
 		}
 	}
 
@@ -305,7 +305,7 @@ public class DetailGrowLightManualActivity extends TitledActivity
 				break;
 			case R.id.sb_light_05 :
 				value_light_05_pos = bar.getProgress();
-				tv_light_right_05.setText(String.valueOf(value_light_02_pos));
+				tv_light_right_05.setText(String.valueOf(value_light_05_pos));
 
 				LightPos();
 				break;

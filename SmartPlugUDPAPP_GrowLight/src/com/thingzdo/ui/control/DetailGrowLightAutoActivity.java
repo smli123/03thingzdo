@@ -196,10 +196,10 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 	private void do_commit() {
 		String data = tv_light_sunup_time.getText().toString() + ","
-				+ tv_light_sunup_time.getText().toString();
+				+ tv_light_sundown_time.getText().toString();
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_BRIGHT)
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_SUNTIME)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.g_CurUserName)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)

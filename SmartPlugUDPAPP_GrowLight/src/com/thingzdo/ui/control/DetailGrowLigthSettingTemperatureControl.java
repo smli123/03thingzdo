@@ -127,7 +127,7 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 			public void run() {
 				getCurrentTemperature();
 			}
-		}, 1000, 5000);
+		}, 1000, 10000);
 	}
 
 	private void saveData() {
@@ -243,7 +243,7 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 	@Override
 	public void onStopTrackingTouch(SeekBar bar) {
 		switch (bar.getId()) {
-			case R.id.sb_curtain_max_length :
+			case R.id.sb_set_temperature :
 				// adjust Bar's progress position. step = 5;
 				int value = adjust_progressbar(bar.getProgress());
 
