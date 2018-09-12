@@ -20,6 +20,19 @@ import com.thingzdo.platform.LogTool.LogWriter;
 import com.thingzdo.smartplug.udpserver.Function.AppAddSceneMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppApplySceneMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppDelSceneMsgHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightAddTimeTaskHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightDelTimeTaskHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightModTimeTaskHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQryStatusHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQrySunTimeHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQryTimeCurveHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQryTimeTaskHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetBrightHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetCurTimeHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetSunTimeHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetTemperatureHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetTimeCurveHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetWorkModeHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppQuerySceneMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.AddModuleMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppLogOutMsgHandle;
@@ -468,7 +481,22 @@ public class ServerWorkThread  implements Runnable{
 		/** 转发器功能  **/
 		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_HEARBEAT_MSG_HEADER, new TransmitHearBeatMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_TRANS_MSG_HEADER, new TransmitTransMsgHandle());
-
+		
+		/** 植物生长灯 **/
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_STATUS_MSG_HEADER, new AppGrowLightQryStatusHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_BRIGHT_MSG_HEADER, new AppGrowLightSetBrightHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_TIMECURVE_MSG_HEADER, new AppGrowLightQryTimeCurveHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_TIMECURVE_MSG_HEADER, new AppGrowLightSetTimeCurveHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_TEMPERATURE_MSG_HEADER, new AppGrowLightSetTemperatureHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_CURTIME_MSG_HEADER, new AppGrowLightSetCurTimeHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_WORKMODE_MSG_HEADER, new AppGrowLightSetWorkModeHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_ADD_TIMETASK_MSG_HEADER, new AppGrowLightAddTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_DEL_TIMETASK_MSG_HEADER, new AppGrowLightDelTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_MOD_TIMETASK_MSG_HEADER, new AppGrowLightModTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
+		
 		/* 空调红外数据接口 */
 		String jsonStr = JsonFileReader.getJson(ServerParamConfiger.strIRFileName);
 		parseJSONWithGSON_IRDATA(jsonStr);
