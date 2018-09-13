@@ -14,6 +14,7 @@
 
 # view res/layout/activity_detail_aircon2.xml #generated:418
 # view res/layout/activity_plug_detail.xml #generated:532
+# view res/layout/activity_plug_detail_growlight_timetask.xml #generated:166
 -keep class com.thingzdo.SwipeMenuListView.SwipeMenuListView { <init>(...); }
 
 # view AndroidManifest.xml #generated:100
@@ -70,16 +71,19 @@
 # view AndroidManifest.xml #generated:422
 -keep class com.thingzdo.ui.control.DetailGrowLightManualActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:450
+# view AndroidManifest.xml #generated:457
 -keep class com.thingzdo.ui.control.DetailGrowLightSettingActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:443
+# view AndroidManifest.xml #generated:450
 -keep class com.thingzdo.ui.control.DetailGrowLightTimeCurveActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:436
 -keep class com.thingzdo.ui.control.DetailGrowLightTimeTaskActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:458
+# view AndroidManifest.xml #generated:443
+-keep class com.thingzdo.ui.control.DetailGrowLightTimerActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:465
 -keep class com.thingzdo.ui.control.DetailGrowLigthSettingTemperatureControl { <init>(...); }
 
 # view AndroidManifest.xml #generated:339
@@ -181,10 +185,10 @@
 # view AndroidManifest.xml #generated:211
 -keep class com.thingzdo.ui.manage.ParameterConfigActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:466
+# view AndroidManifest.xml #generated:473
 -keep class com.thingzdo.ui.manage.SceneManagement_Activity { <init>(...); }
 
-# view AndroidManifest.xml #generated:471
+# view AndroidManifest.xml #generated:478
 -keep class com.thingzdo.ui.manage.Scene_Activity { <init>(...); }
 
 # view AndroidManifest.xml #generated:141

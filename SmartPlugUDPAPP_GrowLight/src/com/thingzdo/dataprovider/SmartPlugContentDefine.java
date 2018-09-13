@@ -401,6 +401,68 @@ public class SmartPlugContentDefine {
 		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
 	}
 
+	// ������ʱ����
+	public final static class SmartPlugGrowLightTimer implements BaseColumns {
+		public static final String AUTHORITY = "com.thingzdo.smartpluggrowlighttimerprovider";
+
+		public static final String ALL_RECORD = "smartpluggrowlighttimers";
+		public static final String ONE_RECORD = "smartpluggrowlighttimer";
+
+		// �����Content�ṩ�����Uri
+		public static final Uri ALL_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ALL_RECORD);
+		public static final Uri ONE_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ONE_RECORD);
+
+		// ����������Ϣ���ݱ�����
+		public static final String TABLE_NAME = "SmartPlugsGrowLightTimers";
+
+		// �ֶ�����������
+		public static final String TIMER_ID = "TimerId";
+		public static final String PLUG_ID = "PlugId";
+		public static final String PLUG_TIMER_TYPE = "Type";
+		public static final String PLUG_TIMER_ENABLE = "Enable";
+		public static final String PLUG_PERIOD = "Period";
+		public static final String PLUG_BEGINTIME = "BeginTime";
+		public static final String PLUG_ENDTIME = "EndTime";
+
+		public static final String PLUG_LIGHT01 = "Light01";
+		public static final String PLUG_LIGHT02 = "Light02";
+		public static final String PLUG_LIGHT03 = "Light03";
+		public static final String PLUG_LIGHT04 = "Light04";
+		public static final String PLUG_LIGHT05 = "Light05";
+
+		// �� ����ֵ
+		public static final int ID_COLUMN = 0;
+		public static final int TIMER_ID_COLUMN = 1;
+		public static final int PLUG_ID_COLUMN = 2;
+		public static final int TIMER_TYPE_COLUMN = 3;
+		public static final int PLUG_TIMER_ENABLE_COLUMN = 4;
+		public static final int PLUG_PERIOD_COLUMN = 5;
+		public static final int PLUG_BEGINTIME_COLUMN = 6;
+		public static final int PLUG_ENDTIME_COLUMN = 7;
+		public static final int PLUG_LIGHT01_COLUMN = 8;
+		public static final int PLUG_LIGHT02_COLUMN = 9;
+		public static final int PLUG_LIGHT03_COLUMN = 10;
+		public static final int PLUG_LIGHT04_COLUMN = 11;
+		public static final int PLUG_LIGHT05_COLUMN = 12;
+
+		// ������ṹ��SQL�ű�
+		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
+				+ TABLE_NAME + " (" + _ID
+				+ " integer primary key autoincrement, " + TIMER_ID
+				+ " integer default 0," + PLUG_ID + " text default '',"
+				+ PLUG_TIMER_TYPE + " integer default 0," + PLUG_TIMER_ENABLE
+				+ " int default 0," + PLUG_PERIOD + " text default '',"
+				+ PLUG_BEGINTIME + " text default ''," + PLUG_ENDTIME
+				+ " text default '');" + PLUG_LIGHT01 + " integer default 0,"
+				+ PLUG_LIGHT02 + " integer default 0," + PLUG_LIGHT03
+				+ " integer default 0," + PLUG_LIGHT04 + " integer default 0,"
+				+ PLUG_LIGHT05 + " integer default 0,";
+
+		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
+	}
+
 	/*
 	 * public static final class View_User_SmartPlug implements BaseColumns{
 	 * public static final String AUTHORITY =

@@ -442,6 +442,13 @@
 		</activity>
 		<activity
             android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.control.DetailGrowLightTimerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
             android:name="com.thingzdo.ui.control.DetailGrowLightTimeCurveActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar"

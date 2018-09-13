@@ -12,7 +12,7 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class SmartPlugEventHandlerGrowLightAddTimeTask
 		extends
 			SmartPlugEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_QUERYSCENE_ACTION);
+	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_ADD_TIMETASK_ACTION);
 
 	@Override
 	public void handleMessage(Message msg) {

@@ -641,5 +641,7 @@
     <string name="smartplug_growlight_lushu_control_2">"2 Route"</string>
     <string name="smartplug_growlight_lushu_control_3">"3 Route"</string>
     <string name="smartplug_growlight_lushu_control_4">"4 Route"</string>
-    <string name="smartplug_growlight_lushu_control_5">"5 Route"</string>    
+    <string name="smartplug_growlight_lushu_control_5">"5 Route"</string>
+    
+    <string name="smartplug_growlight_timetask_count">Count:</string>
 </resources>

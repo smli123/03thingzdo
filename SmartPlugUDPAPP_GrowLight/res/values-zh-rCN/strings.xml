@@ -644,6 +644,8 @@
     <string name="smartplug_growlight_lushu_control_4">四路</string>
     <string name="smartplug_growlight_lushu_control_5">五路</string>
     
+    <string name="smartplug_growlight_timetask_count">总计:</string>
+    
     
 </resources>
 
