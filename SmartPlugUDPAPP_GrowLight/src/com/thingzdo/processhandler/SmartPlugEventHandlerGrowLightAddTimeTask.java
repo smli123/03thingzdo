@@ -25,20 +25,22 @@ public class SmartPlugEventHandlerGrowLightAddTimeTask
 
 			mIntent.putExtra("Number",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 1])));
-			mIntent.putExtra("LIGHT01",
+			mIntent.putExtra("TYPE",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 2])));
-			mIntent.putExtra("LIGHT02",
+			mIntent.putExtra("LIGHT01",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 3])));
-			mIntent.putExtra("LIGHT03",
+			mIntent.putExtra("LIGHT02",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 4])));
-			mIntent.putExtra("LIGHT04",
+			mIntent.putExtra("LIGHT03",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 5])));
-			mIntent.putExtra("LIGHT05",
+			mIntent.putExtra("LIGHT04",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 6])));
-			mIntent.putExtra("TIME", buffer[EVENT_MESSAGE_HEADER + 6]);
-			mIntent.putExtra("PERIOD", buffer[EVENT_MESSAGE_HEADER + 7]);
+			mIntent.putExtra("LIGHT05",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 7])));
+			mIntent.putExtra("PERIOD", buffer[EVENT_MESSAGE_HEADER + 8]);
+			mIntent.putExtra("TIME", buffer[EVENT_MESSAGE_HEADER + 9]);
 			mIntent.putExtra("ENABLED",
-					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 8])));
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 10])));
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

@@ -81,24 +81,32 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_ADD_TIMETASK_ACTION)) {
-
+				querydTimers();
 			}
 
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_DEL_TIMETASK_ACTION)) {
-
+				querydTimers();
 			}
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_MOD_TIMETASK_ACTION)) {
-
+				querydTimers();
 			}
 
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_QRY_TIMETASK_ACTION)) {
+				// String recv_cmd = intent.getStringExtra("TIMETASK");
+				RefreshTimers();
 
 			}
 		}
 	};
+
+	private void RefreshTimers() {
+		timers.clear();
+		timers = mTimerHelper.getAllTimer(mPlugId);
+		mAdapter.notifyDataSetChanged();
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
