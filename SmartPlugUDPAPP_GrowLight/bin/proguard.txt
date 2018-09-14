@@ -21,6 +21,9 @@
 -keep class com.thingzdo.dataprovider.SmartPlugActionProvider { <init>(...); }
 
 # view AndroidManifest.xml #generated:116
+-keep class com.thingzdo.dataprovider.SmartPlugGrowLightTimerProvider { <init>(...); }
+
+# view AndroidManifest.xml #generated:120
 -keep class com.thingzdo.dataprovider.SmartPlugIRSceneProvider { <init>(...); }
 
 # view AndroidManifest.xml #generated:108
@@ -32,172 +35,172 @@
 # view AndroidManifest.xml #generated:104
 -keep class com.thingzdo.dataprovider.SmartPlugUserProvider { <init>(...); }
 
-# view AndroidManifest.xml #generated:263
+# view AndroidManifest.xml #generated:267
 -keep class com.thingzdo.smartplug.ui.share.SelectSharePeopleWizardActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:267
+# view AndroidManifest.xml #generated:271
 -keep class com.thingzdo.smartplug.ui.share.SelectSharePlugWizardActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:84
 -keep class com.thingzdo.smartplug_udp.StartUpReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:163
+# view AndroidManifest.xml #generated:167
 -keep class com.thingzdo.tool.camera.CameraDemoActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:121
+# view AndroidManifest.xml #generated:125
 -keep class com.thingzdo.ui.WelcomeActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:332
+# view AndroidManifest.xml #generated:336
 -keep class com.thingzdo.ui.control.DetailAirCon2Activity { <init>(...); }
 
-# view AndroidManifest.xml #generated:325
+# view AndroidManifest.xml #generated:329
 -keep class com.thingzdo.ui.control.DetailAirConActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:361
+# view AndroidManifest.xml #generated:365
 -keep class com.thingzdo.ui.control.DetailBattery2Activity { <init>(...); }
 
-# view AndroidManifest.xml #generated:353
+# view AndroidManifest.xml #generated:357
 -keep class com.thingzdo.ui.control.DetailBatteryActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:311
+# view AndroidManifest.xml #generated:315
 -keep class com.thingzdo.ui.control.DetailCurtainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:415
+# view AndroidManifest.xml #generated:419
 -keep class com.thingzdo.ui.control.DetailGrowLightActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:429
+# view AndroidManifest.xml #generated:433
 -keep class com.thingzdo.ui.control.DetailGrowLightAutoActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:422
+# view AndroidManifest.xml #generated:426
 -keep class com.thingzdo.ui.control.DetailGrowLightManualActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:457
+# view AndroidManifest.xml #generated:461
 -keep class com.thingzdo.ui.control.DetailGrowLightSettingActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:450
+# view AndroidManifest.xml #generated:454
 -keep class com.thingzdo.ui.control.DetailGrowLightTimeCurveActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:436
+# view AndroidManifest.xml #generated:440
 -keep class com.thingzdo.ui.control.DetailGrowLightTimeTaskActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:443
+# view AndroidManifest.xml #generated:447
 -keep class com.thingzdo.ui.control.DetailGrowLightTimerActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:465
+# view AndroidManifest.xml #generated:469
 -keep class com.thingzdo.ui.control.DetailGrowLigthSettingTemperatureControl { <init>(...); }
 
-# view AndroidManifest.xml #generated:339
+# view AndroidManifest.xml #generated:343
 -keep class com.thingzdo.ui.control.DetailIRSceneActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:368
+# view AndroidManifest.xml #generated:372
 -keep class com.thingzdo.ui.control.DetailKettleActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:376
+# view AndroidManifest.xml #generated:380
 -keep class com.thingzdo.ui.control.DetailKettleAddWaterActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:384
+# view AndroidManifest.xml #generated:388
 -keep class com.thingzdo.ui.control.DetailPCCtrlActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:399
+# view AndroidManifest.xml #generated:403
 -keep class com.thingzdo.ui.control.DetailSmartCarActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:407
+# view AndroidManifest.xml #generated:411
 -keep class com.thingzdo.ui.control.DetailSmartSteelyardActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:392
+# view AndroidManifest.xml #generated:396
 -keep class com.thingzdo.ui.control.DetailTVActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:318
+# view AndroidManifest.xml #generated:322
 -keep class com.thingzdo.ui.control.DetailWindowActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:346
+# view AndroidManifest.xml #generated:350
 -keep class com.thingzdo.ui.control.EnergeActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:304
+# view AndroidManifest.xml #generated:308
 -keep class com.thingzdo.ui.control.InterConnect { <init>(...); }
 
-# view AndroidManifest.xml #generated:258
+# view AndroidManifest.xml #generated:262
 -keep class com.thingzdo.ui.control.LightColorSettingActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:232
+# view AndroidManifest.xml #generated:236
 -keep class com.thingzdo.ui.control.PlugDetailActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:239
+# view AndroidManifest.xml #generated:243
 -keep class com.thingzdo.ui.control.PlugDetailInfoActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:246
+# view AndroidManifest.xml #generated:250
 -keep class com.thingzdo.ui.control.PlugTimerActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:297
+# view AndroidManifest.xml #generated:301
 -keep class com.thingzdo.ui.control.SetPeriodActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:290
+# view AndroidManifest.xml #generated:294
 -keep class com.thingzdo.ui.control.WifiPlugActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:169
+# view AndroidManifest.xml #generated:173
 -keep class com.thingzdo.ui.login.FindPwdActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:133
+# view AndroidManifest.xml #generated:137
 -keep class com.thingzdo.ui.login.LoginActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:155
+# view AndroidManifest.xml #generated:159
 -keep class com.thingzdo.ui.login.RegisterActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:191
+# view AndroidManifest.xml #generated:195
 -keep class com.thingzdo.ui.manage.AboutUsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:196
+# view AndroidManifest.xml #generated:200
 -keep class com.thingzdo.ui.manage.AboutUs_v2Activity { <init>(...); }
 
-# view AndroidManifest.xml #generated:271
+# view AndroidManifest.xml #generated:275
 -keep class com.thingzdo.ui.manage.AccountSecurityActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:175
+# view AndroidManifest.xml #generated:179
 -keep class com.thingzdo.ui.manage.AddOneSocket { <init>(...); }
 
-# view AndroidManifest.xml #generated:181
+# view AndroidManifest.xml #generated:185
 -keep class com.thingzdo.ui.manage.AddSocketActivity2 { <init>(...); }
 
-# view AndroidManifest.xml #generated:186
+# view AndroidManifest.xml #generated:190
 -keep class com.thingzdo.ui.manage.AddSocketActivity3 { <init>(...); }
 
-# view AndroidManifest.xml #generated:206
+# view AndroidManifest.xml #generated:210
 -keep class com.thingzdo.ui.manage.DuerOSActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:276
+# view AndroidManifest.xml #generated:280
 -keep class com.thingzdo.ui.manage.FeedbackActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:283
+# view AndroidManifest.xml #generated:287
 -keep class com.thingzdo.ui.manage.HelpActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:201
+# view AndroidManifest.xml #generated:205
 -keep class com.thingzdo.ui.manage.IatDemo { <init>(...); }
 
-# view AndroidManifest.xml #generated:222
+# view AndroidManifest.xml #generated:226
 -keep class com.thingzdo.ui.manage.ModifyEmailActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:217
+# view AndroidManifest.xml #generated:221
 -keep class com.thingzdo.ui.manage.ModifyPasswdActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:227
+# view AndroidManifest.xml #generated:231
 -keep class com.thingzdo.ui.manage.ModifyServerIPActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:211
+# view AndroidManifest.xml #generated:215
 -keep class com.thingzdo.ui.manage.ParameterConfigActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:473
+# view AndroidManifest.xml #generated:477
 -keep class com.thingzdo.ui.manage.SceneManagement_Activity { <init>(...); }
 
-# view AndroidManifest.xml #generated:478
+# view AndroidManifest.xml #generated:482
 -keep class com.thingzdo.ui.manage.Scene_Activity { <init>(...); }
 
-# view AndroidManifest.xml #generated:141
+# view AndroidManifest.xml #generated:145
 -keep class com.thingzdo.ui.shakeshake.ShakeShake { <init>(...); }
 
 # view AndroidManifest.xml #generated:94
 -keep class com.thingzdo.ui.smartplug.ShutdownReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:148
+# view AndroidManifest.xml #generated:152
 -keep class com.thingzdo.ui.smartplug.SmartPlugActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:62
@@ -240,7 +243,7 @@
 # view res/layout/activity_detail_aircon.xml #generated:46
 -keep class com.thingzdo.util.ThingzdoPickerView { <init>(...); }
 
-# view AndroidManifest.xml #generated:254
+# view AndroidManifest.xml #generated:258
 -keep class com.umeng.update.UpdateDialogActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:78

@@ -113,6 +113,10 @@
             android:authorities="com.thingzdo.smartplugtimerprovider">
         </provider>
         
+        <provider android:name="com.thingzdo.dataprovider.SmartPlugGrowLightTimerProvider" 
+            android:authorities="com.thingzdo.smartpluggrowlighttimerprovider">
+        </provider>
+        
         <provider android:name="com.thingzdo.dataprovider.SmartPlugIRSceneProvider" 
             android:authorities="com.thingzdo.smartplugirsceneprovider">
         </provider>

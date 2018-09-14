@@ -554,7 +554,7 @@
 				        
 				        <TextView
 				            android:id="@+id/tv_light_right_01"
-				            android:layout_width="30dp"
+				            android:layout_width="40dp"
 				            android:layout_height="wrap_content"
 				            android:layout_alignParentRight="true"
 				            android:layout_centerVertical="true"
@@ -606,7 +606,7 @@
 				        
 				        <TextView
 				            android:id="@+id/tv_light_right_02"
-				            android:layout_width="30dp"
+				            android:layout_width="40dp"
 				            android:layout_height="wrap_content"
 				            android:layout_alignParentRight="true"
 				            android:layout_centerVertical="true"
@@ -658,7 +658,7 @@
 				        
 				        <TextView
 				            android:id="@+id/tv_light_right_03"
-				            android:layout_width="30dp"
+				            android:layout_width="40dp"
 				            android:layout_height="wrap_content"
 				            android:layout_alignParentRight="true"
 				            android:layout_centerVertical="true"
@@ -710,7 +710,7 @@
 				        
 				        <TextView
 				            android:id="@+id/tv_light_right_04"
-				            android:layout_width="30dp"
+				            android:layout_width="40dp"
 				            android:layout_height="wrap_content"
 				            android:layout_alignParentRight="true"
 				            android:layout_centerVertical="true"
@@ -762,7 +762,7 @@
 				        
 				        <TextView
 				            android:id="@+id/tv_light_right_05"
-				            android:layout_width="30dp"
+				            android:layout_width="40dp"
 				            android:layout_height="wrap_content"
 				            android:layout_alignParentRight="true"
 				            android:layout_centerVertical="true"

@@ -242,7 +242,7 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 				if (i_current_no < i_count) {
 					PubFunc.thinzdoToast(mContext, "通讯超时");
 				}
-				finish();
+				// finish();
 			} else {
 
 			}
