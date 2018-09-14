@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				.add(SmartPlugContentDefine.SmartPlugGrowLightTimer.TABLE_NAME);
 
 		// mTableList.add(SmartPlugContentDefine.User.TABLE_NAME);
-		// mTableList.add(SmartPlugContentDefine.SmartPlugTimer.TABLE_NAME);
+		mTableList.add(SmartPlugContentDefine.SmartPlugTimer.TABLE_NAME);
 		// mTableList.add(SmartPlugContentDefine.SmartPlugIRScene.TABLE_NAME);
 		// mTableList.add(SmartPlugContentDefine.SmartPlugContent.TABLE_NAME);
 	}

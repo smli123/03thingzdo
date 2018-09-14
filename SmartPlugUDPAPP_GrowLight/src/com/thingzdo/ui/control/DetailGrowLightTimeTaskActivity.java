@@ -96,16 +96,67 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_QRY_TIMETASK_ACTION)) {
 				// String recv_cmd = intent.getStringExtra("TIMETASK");
-				RefreshTimers();
+				// parseQryResult(mPlugId, recv_cmd);
 
+				RefreshTimers();
 			}
 		}
 	};
 
+	private void parseQryResult(String moduleID, String command) {
+		// Count, NO, Type, light01,
+		// light02,light03,light04,light05,time,peroid,eanble
+
+		timers.clear();
+
+		String[] infors = command.split(",");
+		if (infors.length > 0) {
+			int count = Integer.parseInt((infors[0]));
+
+			int baseIdx = 1;
+			int BLOCK_SIZE = 10;
+			for (int j = 0; j < count; j++) {
+				GrowLightTimerDefine ti = new GrowLightTimerDefine();
+
+				ti.mTimerId = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+						+ 0]);
+				ti.mPlugId = moduleID;
+				ti.mType = Integer
+						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 1]);
+				ti.light01 = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+						+ 2]);
+				ti.light02 = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+						+ 3]);
+				ti.light03 = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+						+ 4]);
+				ti.light04 = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+						+ 5]);
+				ti.light05 = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+						+ 6]);
+				ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 7];
+				ti.mPeriod = infors[baseIdx + j * BLOCK_SIZE + 8];
+				ti.mPowerOffTime = infors[baseIdx + j * BLOCK_SIZE + 7];
+
+				ti.mEnable = infors[baseIdx + j * BLOCK_SIZE + 9].equals("1")
+						? true
+						: false;
+
+				timers.add(ti);
+			}
+		}
+	}
+
 	private void RefreshTimers() {
 		timers.clear();
 		timers = mTimerHelper.getAllTimer(mPlugId);
+
+		mAdapter = new GrowLightTimerlistAdapter(this, mPlugId, mPlugIp,
+				timers, mTimerHandler, mPlug.mIsOnline);
+		mListView.setAdapter(mAdapter);
+
 		mAdapter.notifyDataSetChanged();
+
+		initStatics(timers);
 	}
 
 	@Override
@@ -202,11 +253,29 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 			intent.putExtra("PLUGID", mPlugId);
 			intent.putExtra("PLUGIP", mPlugIp);
 			intent.putExtra("TIMER_TYPE", PubDefine.TIMER_TYPE_POWER);
+			intent.putExtra("MAXID", getMaxTimerID());
 			intent.setClass(DetailGrowLightTimeTaskActivity.this,
 					DetailGrowLightTimerActivity.class);
 			startActivity(intent);
 		}
 	};
+
+	private int getMaxTimerID() {
+		int maxID = 1;
+		boolean b_change = false;
+
+		for (int i = 0; i < timers.size(); i++) {
+			if (maxID <= timers.get(i).mTimerId) {
+				maxID = timers.get(i).mTimerId;
+				b_change = true;
+			}
+		}
+		if (b_change == true) {
+			maxID += 1;
+		}
+
+		return maxID;
+	}
 
 	OnClickListener editCLick = new OnClickListener() {
 
@@ -398,7 +467,6 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 		mAdapter = new GrowLightTimerlistAdapter(this, mPlugId, mPlugIp,
 				timers, mTimerHandler, mPlug.mIsOnline);
 		// mAdapter.setEditable(mIsEditable);
-		initStatics(timers);
 
 		if (PubDefine.SmartPlug_Connect_Mode.WiFi == PubDefine.g_Connect_Mode) {
 			if (false == mPlug.mIsOnline) {

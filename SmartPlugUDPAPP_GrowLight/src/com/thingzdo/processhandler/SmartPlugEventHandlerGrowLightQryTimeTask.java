@@ -64,9 +64,9 @@ public class SmartPlugEventHandlerGrowLightQryTimeTask
 
 		mTimerHelper.clearTimer(moduleID);
 
-		String[] infors = command.split(",#");
+		String[] infors = command.split(",");
 		if (infors.length > 0) {
-			int count = Integer.parseInt(infors[0]);
+			int count = Integer.parseInt((infors[0]));
 
 			int baseIdx = 1;
 			int BLOCK_SIZE = 10;
@@ -99,5 +99,7 @@ public class SmartPlugEventHandlerGrowLightQryTimeTask
 				mTimerHelper.addTimer(ti);
 			}
 		}
+
+		mTimerHelper = null;
 	}
 }

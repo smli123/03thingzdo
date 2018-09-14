@@ -507,8 +507,8 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_ADD_TIMETASK_MSG_HEADER, new AppGrowLightAddTimeTaskHandle());
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_DEL_TIMETASK_MSG_HEADER, new AppGrowLightDelTimeTaskHandle());
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_MOD_TIMETASK_MSG_HEADER, new AppGrowLightModTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
 		
 		/* 空调红外数据接口 */

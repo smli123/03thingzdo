@@ -273,6 +273,7 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState, layoutResID, backToExit);
 		SmartPlugApplication.resetTask();
+
 	}
 
 	private void modifyTimer() {
@@ -347,6 +348,7 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 
 		mIsActive = true;
 		Intent intent = getIntent();
+		mMaxTimerId = intent.getIntExtra("MAXID", 0);
 		mPlugId = intent.getStringExtra("PLUGID");
 		// mPlugIp = intent.getStringExtra("PLUGIp");
 		mTimerType = intent.getIntExtra("TIMER_TYPE", 0);
@@ -759,22 +761,6 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 					return;
 				}
 
-				if (PubDefine.TIMER_TYPE_CLOSEPC == mTimerType) {
-					mPwrOnTime.setText(mPwrOffTime.getText().toString());
-				}
-				// BELL和关机棒不进行检查
-				if (PubDefine.TIMER_TYPE_BELL != mTimerType
-						&& PubDefine.TIMER_TYPE_CLOSEPC != mTimerType) {
-					if (mPwrOnTime.getText().toString()
-							.equals(mPwrOffTime.getText().toString())) {
-						PubFunc.thinzdoToast(mContext, mContext
-								.getString(R.string.timer_task_sametime));
-						return;
-					}
-				}
-
-				// et_mac.setText(et_mac.getText().toString().toUpperCase());
-
 				mPeriod = (String) mTxtPeriod.getTag();
 				String str_temp = mTxtPeriod_minute.getText().toString().trim();
 				if (!str_temp.equals("0") && !str_temp.equals("")) {
@@ -782,19 +768,6 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 				}
 				mPoweronTime = mPwrOnTime.getText().toString();
 				mPoweroffTime = mPwrOffTime.getText().toString();
-
-				// if (PubDefine.TIMER_TYPE_BELL != mTimerType) {
-				// mPoweroffTime = mPwrOffTime.getText().toString();
-				// } else {
-				// mPoweroffTime = mPoweronTime;
-				// }
-
-				if (mTimerType == PubDefine.TIMER_TYPE_OPENPC
-						&& isMACValid(et_mac.getText().toString()) == false) {
-					PubFunc.thinzdoToast(mContext,
-							mContext.getString(R.string.timer_task_mac_fail));
-					return;
-				}
 
 				if (true == mIsCreateTimer) {
 					// 提供延时退出机制
@@ -980,7 +953,7 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 				getString(R.string.smartplug_ctrl_adding), false);
 		mProgress.show();
 
-		mMaxTimerId = mTimerHelper.getMaxTimerId(mPlugId) + 1;
+		// mMaxTimerId = mTimerHelper.getMaxTimerId(mPlugId) + 1;
 
 		String str_light = String.valueOf(value_light_01_pos) + ","
 				+ String.valueOf(value_light_02_pos) + ","
@@ -1014,8 +987,6 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 				DetailGrowLightTimerActivity.this,
 				getString(R.string.smartplug_ctrl_modifying), false);
 		mProgress.show();
-
-		mMaxTimerId = mTimerHelper.getMaxTimerId(mPlugId) + 1;
 
 		String str_light = String.valueOf(value_light_01_pos) + ","
 				+ String.valueOf(value_light_02_pos) + ","
