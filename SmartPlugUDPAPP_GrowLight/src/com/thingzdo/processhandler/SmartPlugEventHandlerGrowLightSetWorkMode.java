@@ -12,7 +12,7 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class SmartPlugEventHandlerGrowLightSetWorkMode
 		extends
 			SmartPlugEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION);
+	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_SET_WORK_MODE_ACTION);
 
 	@Override
 	public void handleMessage(Message msg) {
@@ -23,8 +23,8 @@ public class SmartPlugEventHandlerGrowLightSetWorkMode
 		if (0 == ret) {
 			mIntent.putExtra("RESULT", 0);
 
-			mIntent.putExtra("WORKMODE", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 1]));
+			mIntent.putExtra("WORKMODE",
+					Integer.parseInt(buffer[EVENT_MESSAGE_HEADER + 1]));
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

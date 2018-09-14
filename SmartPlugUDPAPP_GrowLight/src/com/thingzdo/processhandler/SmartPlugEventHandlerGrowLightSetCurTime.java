@@ -12,7 +12,7 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class SmartPlugEventHandlerGrowLightSetCurTime
 		extends
 			SmartPlugEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_QUERYSCENE_ACTION);
+	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_SET_CUR_TIME_ACTION);
 
 	@Override
 	public void handleMessage(Message msg) {
@@ -23,8 +23,7 @@ public class SmartPlugEventHandlerGrowLightSetCurTime
 		if (0 == ret) {
 			mIntent.putExtra("RESULT", 0);
 
-			mIntent.putExtra("CURTIME", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 1]));
+			mIntent.putExtra("CURTIME", buffer[EVENT_MESSAGE_HEADER + 1]);
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

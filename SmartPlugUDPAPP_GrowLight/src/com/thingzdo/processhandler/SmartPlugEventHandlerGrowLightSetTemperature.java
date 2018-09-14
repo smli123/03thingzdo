@@ -23,8 +23,8 @@ public class SmartPlugEventHandlerGrowLightSetTemperature
 		if (0 == ret) {
 			mIntent.putExtra("RESULT", 0);
 
-			mIntent.putExtra("SETTEMPERATURE", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 1]));
+			mIntent.putExtra("SETTEMPERATURE",
+					Integer.parseInt(buffer[EVENT_MESSAGE_HEADER + 1]));
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

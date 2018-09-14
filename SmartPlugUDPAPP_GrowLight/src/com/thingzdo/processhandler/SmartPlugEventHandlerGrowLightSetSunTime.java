@@ -1,7 +1,6 @@
 package com.thingzdo.processhandler;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Message;
 
 import com.thingzdo.smartplug_udp.R;
@@ -10,8 +9,10 @@ import com.thingzdo.ui.common.PubFunc;
 import com.thingzdo.ui.smartplug.AppServerReposeDefine;
 import com.thingzdo.ui.smartplug.SmartPlugApplication;
 
-public class SmartPlugEventHandlerGrowLightSetSunTime extends SmartPlugEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_QUERYSCENE_ACTION);
+public class SmartPlugEventHandlerGrowLightSetSunTime
+		extends
+			SmartPlugEventHandler {
+	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_SET_SUNTIME_ACTION);
 
 	@Override
 	public void handleMessage(Message msg) {
@@ -22,9 +23,8 @@ public class SmartPlugEventHandlerGrowLightSetSunTime extends SmartPlugEventHand
 		if (0 == ret) {
 			mIntent.putExtra("RESULT", 0);
 
-			Bundle bu = new Bundle();
-			bu.putStringArray("DATA", buffer);
-			mIntent.putExtras(bu);
+			mIntent.putExtra("SUNUP", buffer[EVENT_MESSAGE_HEADER + 1]);
+			mIntent.putExtra("SUNDOWN", buffer[EVENT_MESSAGE_HEADER + 2]);
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

@@ -109,13 +109,13 @@ public class AppGrowLightModTimeTaskHandle implements ICallFunction{
 		// TODO Auto-generated method stub
 		String strRet[] 	= strMsg.split(ServerCommDefine.CMD_SPLIT_STRING);
 		String strNewCookie	= strRet[0].trim();
-		String strMsgHeader = strRet[1].trim();
+		String strMsgHeader = ServerCommDefine.APP_GROWLIGHT_MOD_TIMETASK_MSG_HEADER;
 		String strUserName 	= strRet[2].trim();
 		String strModuleID	= strRet[3].trim();
 		int iRetCode = Integer.valueOf(strRet[4].trim());
 		
 		String strNEResult = "";
-		for (int i = 0; i < strRet.length; i++) {
+		for (int i = 5; i < strRet.length; i++) {
 			strNEResult += strRet[i];
 			if (i < strRet.length - 1) {
 				strNEResult += ",";

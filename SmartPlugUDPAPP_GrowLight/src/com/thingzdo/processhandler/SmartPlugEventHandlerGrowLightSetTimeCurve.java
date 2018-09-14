@@ -12,7 +12,7 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class SmartPlugEventHandlerGrowLightSetTimeCurve
 		extends
 			SmartPlugEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_QUERYSCENE_ACTION);
+	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_SET_TIMECURVE_ACTION);
 
 	@Override
 	public void handleMessage(Message msg) {

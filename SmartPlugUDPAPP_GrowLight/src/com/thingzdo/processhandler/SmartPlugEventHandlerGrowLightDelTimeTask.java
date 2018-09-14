@@ -23,22 +23,22 @@ public class SmartPlugEventHandlerGrowLightDelTimeTask
 		if (0 == ret) {
 			mIntent.putExtra("RESULT", 0);
 
-			mIntent.putExtra("Number", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 1]));
-			mIntent.putExtra("LIGHT01", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 2]));
-			mIntent.putExtra("LIGHT02", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 3]));
-			mIntent.putExtra("LIGHT03", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 4]));
-			mIntent.putExtra("LIGHT04", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 5]));
-			mIntent.putExtra("LIGHT05", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 6]));
+			mIntent.putExtra("Number",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 1])));
+			mIntent.putExtra("LIGHT01",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 2])));
+			mIntent.putExtra("LIGHT02",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 3])));
+			mIntent.putExtra("LIGHT03",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 4])));
+			mIntent.putExtra("LIGHT04",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 5])));
+			mIntent.putExtra("LIGHT05",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 6])));
 			mIntent.putExtra("TIME", buffer[EVENT_MESSAGE_HEADER + 6]);
 			mIntent.putExtra("PERIOD", buffer[EVENT_MESSAGE_HEADER + 7]);
-			mIntent.putExtra("ENABLED", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 8]));
+			mIntent.putExtra("ENABLED",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 8])));
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

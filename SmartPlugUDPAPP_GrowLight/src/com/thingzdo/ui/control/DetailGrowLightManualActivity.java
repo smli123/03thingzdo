@@ -55,12 +55,6 @@ public class DetailGrowLightManualActivity extends TitledActivity
 	private String mPlugId = "0";
 	private String mPlugIp = "0.0.0.0";
 
-	private int i_light_01 = 0;
-	private int i_light_02 = 0;
-	private int i_light_03 = 0;
-	private int i_light_04 = 0;
-	private int i_light_05 = 0;
-
 	private SharedPreferences mSharedPreferences;
 	private SharedPreferences.Editor editor;
 
@@ -77,16 +71,18 @@ public class DetailGrowLightManualActivity extends TitledActivity
 				}
 			}
 
-			if (intent.getAction().equals(PubDefine.PLUG_NOTIFY_POWER)) {
-				if (true == NotifyProcessor.powerNotify(
-						DetailGrowLightManualActivity.this, intent)) {
-					updateUI();
-				}
+			if (intent.getAction().equals(
+					PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION)) {
+				value_light_01_pos = intent.getIntExtra("LIGHT01", 0);
+				value_light_02_pos = intent.getIntExtra("LIGHT02", 0);
+				value_light_03_pos = intent.getIntExtra("LIGHT03", 0);
+				value_light_04_pos = intent.getIntExtra("LIGHT04", 0);
+				value_light_05_pos = intent.getIntExtra("LIGHT05", 0);
+
+				saveData();
+				updateUI();
 			}
 
-			if (intent.getAction().equals(PubDefine.PLUG_POWER_ACTION)) {
-				// nothing to do;
-			}
 		}
 	};
 
@@ -101,9 +97,8 @@ public class DetailGrowLightManualActivity extends TitledActivity
 				+ PubStatus.g_CurUserName, Activity.MODE_PRIVATE);
 
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.PLUG_POWER_ACTION);
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
-		filter.addAction(PubDefine.PLUG_NOTIFY_POWER);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION);
 		registerReceiver(mDetailRev, filter);
 
 		mPlugHelper = new SmartPlugHelper(this);
@@ -118,6 +113,8 @@ public class DetailGrowLightManualActivity extends TitledActivity
 
 		init();
 
+		loadData();
+
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
 			mTcpSocketThread = new RevCmdFromSocketThread();
 			mTcpSocketThread.start();
@@ -126,21 +123,20 @@ public class DetailGrowLightManualActivity extends TitledActivity
 
 	private void saveData() {
 		editor = mSharedPreferences.edit();
-		editor.putInt("LIGHT01" + mPlugId, i_light_01);
-		editor.putInt("LIGHT02" + mPlugId, i_light_02);
-		editor.putInt("LIGHT03" + mPlugId, i_light_03);
-		editor.putInt("LIGHT04" + mPlugId, i_light_04);
-		editor.putInt("LIGHT05" + mPlugId, i_light_05);
-
+		editor.putInt("LIGHT01" + mPlugId, value_light_01_pos);
+		editor.putInt("LIGHT02" + mPlugId, value_light_02_pos);
+		editor.putInt("LIGHT03" + mPlugId, value_light_03_pos);
+		editor.putInt("LIGHT04" + mPlugId, value_light_04_pos);
+		editor.putInt("LIGHT05" + mPlugId, value_light_05_pos);
 		editor.commit();
 	}
 
 	private void loadData() {
-		i_light_01 = mSharedPreferences.getInt("LIGHT01" + mPlugId, 0);
-		i_light_02 = mSharedPreferences.getInt("LIGHT02" + mPlugId, 0);
-		i_light_03 = mSharedPreferences.getInt("LIGHT03" + mPlugId, 0);
-		i_light_04 = mSharedPreferences.getInt("LIGHT04" + mPlugId, 0);
-		i_light_05 = mSharedPreferences.getInt("LIGHT05" + mPlugId, 0);
+		value_light_01_pos = mSharedPreferences.getInt("LIGHT01" + mPlugId, 0);
+		value_light_02_pos = mSharedPreferences.getInt("LIGHT02" + mPlugId, 0);
+		value_light_03_pos = mSharedPreferences.getInt("LIGHT03" + mPlugId, 0);
+		value_light_04_pos = mSharedPreferences.getInt("LIGHT04" + mPlugId, 0);
+		value_light_05_pos = mSharedPreferences.getInt("LIGHT05" + mPlugId, 0);
 	}
 
 	@Override
@@ -348,5 +344,26 @@ public class DetailGrowLightManualActivity extends TitledActivity
 			return;
 		}
 		setTitle(mPlug.mPlugName);
+
+		if (null != sb_light_01) {
+			sb_light_01.setProgress(value_light_01_pos);
+			tv_light_right_01.setText(String.valueOf(value_light_01_pos));
+		}
+		if (null != sb_light_02) {
+			sb_light_02.setProgress(value_light_02_pos);
+			tv_light_right_02.setText(String.valueOf(value_light_02_pos));
+		}
+		if (null != sb_light_03) {
+			sb_light_03.setProgress(value_light_03_pos);
+			tv_light_right_03.setText(String.valueOf(value_light_03_pos));
+		}
+		if (null != sb_light_04) {
+			sb_light_04.setProgress(value_light_04_pos);
+			tv_light_right_04.setText(String.valueOf(value_light_04_pos));
+		}
+		if (null != sb_light_05) {
+			sb_light_05.setProgress(value_light_05_pos);
+			tv_light_right_05.setText(String.valueOf(value_light_05_pos));
+		}
 	}
 }

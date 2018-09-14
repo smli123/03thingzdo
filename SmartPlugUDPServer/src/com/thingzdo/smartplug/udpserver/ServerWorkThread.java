@@ -497,6 +497,20 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
 		
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_STATUS_MSG_HEADER, new AppGrowLightQryStatusHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_BRIGHT_MSG_HEADER, new AppGrowLightSetBrightHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMECURVE_MSG_HEADER, new AppGrowLightQryTimeCurveHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_TIMECURVE_MSG_HEADER, new AppGrowLightSetTimeCurveHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_TEMPERATURE_MSG_HEADER, new AppGrowLightSetTemperatureHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_CURTIME_MSG_HEADER, new AppGrowLightSetCurTimeHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_WORKMODE_MSG_HEADER, new AppGrowLightSetWorkModeHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_ADD_TIMETASK_MSG_HEADER, new AppGrowLightAddTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_DEL_TIMETASK_MSG_HEADER, new AppGrowLightDelTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_MOD_TIMETASK_MSG_HEADER, new AppGrowLightModTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
+		
 		/* 空调红外数据接口 */
 		String jsonStr = JsonFileReader.getJson(ServerParamConfiger.strIRFileName);
 		parseJSONWithGSON_IRDATA(jsonStr);

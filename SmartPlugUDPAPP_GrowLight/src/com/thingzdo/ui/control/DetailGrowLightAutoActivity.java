@@ -65,15 +65,14 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 				}
 			}
 
-			if (intent.getAction().equals(PubDefine.PLUG_NOTIFY_POWER)) {
-				if (true == NotifyProcessor.powerNotify(
-						DetailGrowLightAutoActivity.this, intent)) {
-					updateUI();
-				}
-			}
+			if (intent.getAction().equals(
+					PubDefine.PLUG_GROWLIGHT_SET_SUNTIME_ACTION)) {
 
-			if (intent.getAction().equals(PubDefine.PLUG_POWER_ACTION)) {
-				// nothing to do;
+				str_sunup = intent.getStringExtra("SUNUP");
+				str_sundown = intent.getStringExtra("SUNDOWN");
+
+				saveData();
+				updateUI();
 			}
 		}
 	};
@@ -91,9 +90,8 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 				+ PubStatus.g_CurUserName, Activity.MODE_PRIVATE);
 
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.PLUG_POWER_ACTION);
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
-		filter.addAction(PubDefine.PLUG_NOTIFY_POWER);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_SUNTIME_ACTION);
 		registerReceiver(mDetailRev, filter);
 
 		mPlugHelper = new SmartPlugHelper(this);
@@ -107,6 +105,8 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 		UDPClient.getInstance().setIPAddress(mPlugIp);
 
 		init();
+
+		loadData();
 
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
 			mTcpSocketThread = new RevCmdFromSocketThread();
@@ -308,5 +308,9 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 			return;
 		}
 		setTitle(mPlug.mPlugName);
+
+		tv_light_sunup_time.setText(str_sunup);
+		tv_light_sundown_time.setText(str_sundown);
+
 	}
 }

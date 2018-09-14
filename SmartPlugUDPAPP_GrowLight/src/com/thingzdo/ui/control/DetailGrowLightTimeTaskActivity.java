@@ -94,7 +94,7 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 			}
 
 			if (intent.getAction().equals(
-					PubDefine.PLUG_GROWLIGHT_DEL_TIMETASK_ACTION)) {
+					PubDefine.PLUG_GROWLIGHT_QRY_TIMETASK_ACTION)) {
 
 			}
 		}
@@ -139,6 +139,7 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 
 		querydTimers();
 	}
+
 	private int mFocusTimerId = 0;
 	private boolean mFocusTimerEnabled = true;
 	private Handler mTimerHandler = new Handler() {

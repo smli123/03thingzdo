@@ -12,7 +12,7 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class SmartPlugEventHandlerGrowLightQrySunTime
 		extends
 			SmartPlugEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_QUERYSCENE_ACTION);
+	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_QRY_SUNTIME_ACTION);
 
 	@Override
 	public void handleMessage(Message msg) {

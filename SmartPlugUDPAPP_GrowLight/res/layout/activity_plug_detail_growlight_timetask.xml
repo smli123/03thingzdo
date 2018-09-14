@@ -20,7 +20,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginBottom="0dp"	           
 	        android:background="@color/white"
-	        android:layout_below="@+id/layout_light_setting"> 	
+	        android:layout_below="@+id/commontitlebar"> 	
 	        
 		    <RelativeLayout
 		        android:id="@+id/layout_timer_all"

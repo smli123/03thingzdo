@@ -110,9 +110,8 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 
 		UDPClient.getInstance().setIPAddress(mPlugIp);
 
-		loadData();
-
 		init();
+		loadData();
 
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
 			mTcpSocketThread = new RevCmdFromSocketThread();
@@ -151,7 +150,6 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 		super.onResume();
 		SmartPlugApplication.resetTask();
 
-		loadData();
 		init();
 	}
 
@@ -252,7 +250,6 @@ public class DetailGrowLigthSettingTemperatureControl extends TitledActivity
 
 				i_Set_Temperature = value;
 				tv_set_temperature_result.setText(String.valueOf(value));
-				saveData();
 
 				SetTemperator();
 				break;

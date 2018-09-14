@@ -158,7 +158,8 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(PubDefine.PLUG_ADD_TIMERTASK)) {
+			if (intent.getAction().equals(
+					PubDefine.PLUG_GROWLIGHT_ADD_TIMETASK_ACTION)) {
 				i_current_no++;
 
 				if (i_current_no >= i_count) {
@@ -183,7 +184,8 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 				}
 			}
 
-			if (intent.getAction().equals(PubDefine.PLUG_MOD_TIMERTASK)) {
+			if (intent.getAction().equals(
+					PubDefine.PLUG_GROWLIGHT_MOD_TIMETASK_ACTION)) {
 				if (null != mProgress) {
 					mProgress.dismiss();
 				}
@@ -339,9 +341,8 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 		layout_mac.setOnClickListener(this);
 
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.PLUG_ADD_TIMERTASK);
-		filter.addAction(PubDefine.PLUG_MOD_TIMERTASK);
-		filter.addAction(PubDefine.PLUG_SHAKE_FAIL_ACTION);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_ADD_TIMETASK_ACTION);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_MOD_TIMETASK_ACTION);
 		registerReceiver(mTimerTaskReceiver, filter);
 
 		mIsActive = true;

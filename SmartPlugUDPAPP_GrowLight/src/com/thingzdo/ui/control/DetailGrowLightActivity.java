@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -481,16 +479,16 @@ public class DetailGrowLightActivity extends TitledActivity
 
 		spinner_workmode.setSelection(i_Current_WorkMode);
 
-		// 使用定时器来 更新 时间
-		new Timer("GrowLightTime").schedule(new TimerTask() {
-			@Override
-			public void run() {
-				// show NE Time
-				getNextSecond();
-				mHandler.sendEmptyMessage(0);
-				// tv_light_curtime.setText(str_curtime);
-			}
-		}, 500, 1000);
+		// // 使用定时器来 更新 时间
+		// new Timer("GrowLightTime").schedule(new TimerTask() {
+		// @Override
+		// public void run() {
+		// // show NE Time
+		// getNextSecond();
+		// mHandler.sendEmptyMessage(0);
+		// // tv_light_curtime.setText(str_curtime);
+		// }
+		// }, 500, 1000);
 	}
 
 	private String getNextSecond() {

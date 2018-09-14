@@ -62,15 +62,15 @@ public class SmartPlugGrowLightTimerHelper {
 				timer.mPowerOffTime = cur
 						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_ENDTIME_COLUMN);
 				timer.light01 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT01_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT01_COLUMN);
 				timer.light02 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT02_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT02_COLUMN);
 				timer.light03 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT03_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT03_COLUMN);
 				timer.light04 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT04_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT04_COLUMN);
 				timer.light05 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT05_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT05_COLUMN);
 				timers.add(timer);
 			}
 			cur.close();
@@ -112,15 +112,15 @@ public class SmartPlugGrowLightTimerHelper {
 				timer.mPowerOffTime = cur
 						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_ENDTIME_COLUMN);
 				timer.light01 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT01_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT01_COLUMN);
 				timer.light02 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT02_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT02_COLUMN);
 				timer.light03 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT03_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT03_COLUMN);
 				timer.light04 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT04_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT04_COLUMN);
 				timer.light05 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT05_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT05_COLUMN);
 				timers.add(timer);
 			}
 			cur.close();
@@ -165,15 +165,15 @@ public class SmartPlugGrowLightTimerHelper {
 				timer.mPowerOffTime = cur
 						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_ENDTIME_COLUMN);
 				timer.light01 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT01_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT01_COLUMN);
 				timer.light02 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT02_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT02_COLUMN);
 				timer.light03 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT03_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT03_COLUMN);
 				timer.light04 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT04_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT04_COLUMN);
 				timer.light05 = cur
-						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT05_COLUMN);
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimer.PLUG_LIGHT05_COLUMN);
 			}
 			cur.close();
 			return timer;

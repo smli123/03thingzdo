@@ -12,7 +12,7 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class SmartPlugEventHandlerGrowLightSetBright
 		extends
 			SmartPlugEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_QUERYSCENE_ACTION);
+	Intent mIntent = new Intent(PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION);
 
 	@Override
 	public void handleMessage(Message msg) {
@@ -23,16 +23,16 @@ public class SmartPlugEventHandlerGrowLightSetBright
 		if (0 == ret) {
 			mIntent.putExtra("RESULT", 0);
 
-			mIntent.putExtra("LIGHT01", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 1]));
-			mIntent.putExtra("LIGHT02", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 2]));
-			mIntent.putExtra("LIGHT03", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 3]));
-			mIntent.putExtra("LIGHT04", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 4]));
-			mIntent.putExtra("LIGHT05", PubFunc
-					.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER + 5]));
+			mIntent.putExtra("LIGHT01",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 1])));
+			mIntent.putExtra("LIGHT02",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 2])));
+			mIntent.putExtra("LIGHT03",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 3])));
+			mIntent.putExtra("LIGHT04",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 4])));
+			mIntent.putExtra("LIGHT05",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 5])));
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {
