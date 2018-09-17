@@ -15,4 +15,5 @@ public class GrowLightTimerDefine {
 	public int light03;
 	public int light04;
 	public int light05;
+	public int light_lushu;
 }

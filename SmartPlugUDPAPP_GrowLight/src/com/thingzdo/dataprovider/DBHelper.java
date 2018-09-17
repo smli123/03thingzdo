@@ -27,13 +27,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
 		mTableList
 				.add(SmartPlugContentDefine.SmartPlugGrowLightTimer.TABLE_NAME);
+		mTableList
+				.add(SmartPlugContentDefine.SmartPlugGrowLightTimer.TABLE_NAME);
 
-		// mTableList.add(SmartPlugContentDefine.User.TABLE_NAME);
+		mTableList.add(SmartPlugContentDefine.User.TABLE_NAME);
 		mTableList.add(SmartPlugContentDefine.SmartPlugTimer.TABLE_NAME);
-		// mTableList.add(SmartPlugContentDefine.SmartPlugIRScene.TABLE_NAME);
-		// mTableList.add(SmartPlugContentDefine.SmartPlugContent.TABLE_NAME);
+		mTableList.add(SmartPlugContentDefine.SmartPlugIRScene.TABLE_NAME);
+		mTableList.add(SmartPlugContentDefine.SmartPlugContent.TABLE_NAME);
 	}
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		if (null == db) {
@@ -48,6 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 		db.execSQL(SmartPlugContentDefine.SmartPlugTimer.TABLE_CREATE);
 		db.execSQL(SmartPlugContentDefine.SmartPlugGrowLightTimer.TABLE_CREATE);
+		db.execSQL(SmartPlugContentDefine.SmartPlugGrowLightTimerCurve.TABLE_CREATE);
 
 		db.execSQL(SmartPlugContentDefine.SmartPlugIRScene.TABLE_CREATE);
 
