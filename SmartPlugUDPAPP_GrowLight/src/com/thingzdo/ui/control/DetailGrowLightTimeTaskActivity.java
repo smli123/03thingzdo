@@ -36,7 +36,6 @@ import com.thingzdo.processhandler.SmartPlugMessage;
 import com.thingzdo.smartplug_udp.R;
 import com.thingzdo.ui.GrowLightTimerDefine;
 import com.thingzdo.ui.SmartPlugDefine;
-import com.thingzdo.ui.TimerDefine;
 import com.thingzdo.ui.common.PubDefine;
 import com.thingzdo.ui.common.PubFunc;
 import com.thingzdo.ui.common.StringUtils;
@@ -493,7 +492,7 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 					long arg3) {
 				Intent intent = new Intent(
 						DetailGrowLightTimeTaskActivity.this,
-						PlugTimerActivity.class);
+						DetailGrowLightTimerActivity.class);
 				// intent.putExtra("PLUGID", mPlugId);
 				intent.putExtra("PLUGIP", mPlugIp);
 				ImageView imgType = (ImageView) v
@@ -556,7 +555,7 @@ public class DetailGrowLightTimeTaskActivity extends TitledActivity
 				switch (index) {
 					case 0 :
 						// delete timer
-						TimerDefine timer = (TimerDefine) mListView
+						GrowLightTimerDefine timer = (GrowLightTimerDefine) mListView
 								.getItemAtPosition(position);
 						Message msg = new Message();
 						msg.what = 2;

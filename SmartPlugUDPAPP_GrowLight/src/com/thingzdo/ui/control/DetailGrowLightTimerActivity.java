@@ -997,7 +997,7 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 		String enabled = "1";
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_ADD_TIMETASK)
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_MOD_TIMETASK)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
