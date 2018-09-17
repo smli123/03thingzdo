@@ -103,7 +103,13 @@ public class GrowLightTimerlistAdapter extends BaseAdapter {
 						img_timer_stop.setText(SmartPlugApplication
 								.getInstance().getString(
 										R.string.timer_task_timer_mac));
-						txtTimerPCMac.setText(task.mPCName);
+
+						String lightvalue = String.valueOf(task.light01) + " "
+								+ String.valueOf(task.light02) + " "
+								+ String.valueOf(task.light03) + " "
+								+ String.valueOf(task.light04) + " "
+								+ String.valueOf(task.light05);
+						txtTimerPCMac.setText(lightvalue);
 						break;
 					default :
 						txtTaskEnd.setVisibility(View.VISIBLE);

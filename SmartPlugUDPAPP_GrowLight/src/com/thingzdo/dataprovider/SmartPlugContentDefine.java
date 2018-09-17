@@ -455,10 +455,10 @@ public class SmartPlugContentDefine {
 				+ PLUG_TIMER_TYPE + " integer default 0," + PLUG_TIMER_ENABLE
 				+ " int default 0," + PLUG_PERIOD + " text default '',"
 				+ PLUG_BEGINTIME + " text default ''," + PLUG_ENDTIME
-				+ " text default '');" + PLUG_LIGHT01 + " integer default 0,"
+				+ " text default ''," + PLUG_LIGHT01 + " integer default 0,"
 				+ PLUG_LIGHT02 + " integer default 0," + PLUG_LIGHT03
 				+ " integer default 0," + PLUG_LIGHT04 + " integer default 0,"
-				+ PLUG_LIGHT05 + " integer default 0,";
+				+ PLUG_LIGHT05 + " integer default 0);";
 
 		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
 	}
