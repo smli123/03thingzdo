@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -28,6 +29,9 @@ import com.thingzdo.ui.common.PubDefine;
 import com.thingzdo.ui.common.TitledActivity;
 import com.thingzdo.ui.manage.AddSocketActivity2;
 import com.thingzdo.ui.smartplug.SmartPlugApplication;
+import com.thingzdo.ui.wheelutils.MyAlertDialog;
+import com.thingzdo.ui.wheelutils.ScreenInfo;
+import com.thingzdo.ui.wheelutils.WheelMain;
 import com.thingzdo.util.ThingzdoCheckBox;
 
 public class DetailGrowLightPointActivity extends TitledActivity
@@ -39,6 +43,11 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	private static int OPERATOR_MODIFY = 2;
 
 	private int Activity_Operator_Mode = OPERATOR_ADD;
+	private Context mContext;
+	private String[] mSelDays = {"0", "0", "0", "0", "0", "0", "0"};
+	private String[] mDays = null;
+
+	private WheelMain wheelMain;
 
 	private Spinner spinner_channel;
 	private Spinner spinner_type;
@@ -182,6 +191,7 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				R.layout.activity_plug_detail_growlight_point, false);
 		SmartPlugApplication.resetTask();
 		SmartPlugApplication.getInstance().addActivity(this);
+		mContext = this;
 
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
@@ -273,7 +283,98 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	}
 
 	private void set_peroid() {
+		Intent intent = new Intent();
+		intent.setClass(this, SetPeriodActivity.class);
+		intent.putExtra("selected_days", mSelDays);
+		startActivityForResult(intent, 0);
 
+		// showDialog(tv_peroid, tv_peroid.getText().toString());
+	}
+
+	private String getPeriodValue() {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < mSelDays.length; i++) {
+			sb.append(mSelDays[i]);
+		}
+		return sb.toString();
+	}
+
+	private String getPeriodText() {
+		StringBuffer sbDay = new StringBuffer();
+		for (int i = 0; i < mSelDays.length; i++) {
+			if (mSelDays[i].equals("1")) {
+				if (i < mSelDays.length - 1) {
+					sbDay.append(mDays[i]).append(" ");
+				} else {
+					sbDay.append(mDays[i]);
+				}
+			}
+		}
+
+		return sbDay.toString();
+	}
+
+	private void showDialog(TextView view, String timer) {
+		String[] time_val_t = timer.split(":");
+		String[] time_val = {"00", "00", "00"};
+
+		if (time_val_t.length > 0) {
+			time_val[0] = time_val_t[0];
+		}
+		if (time_val_t.length > 1) {
+			time_val[1] = time_val_t[1];
+		}
+		if (time_val_t.length > 2) {
+			time_val[2] = time_val_t[2];
+		}
+		final TextView mView = view;
+
+		LayoutInflater inflater = LayoutInflater.from(mContext);
+		final View timepickerview = inflater.inflate(R.layout.timepicker, null);
+		ScreenInfo screenInfo = new ScreenInfo(
+				DetailGrowLightPointActivity.this);
+		wheelMain = new WheelMain(timepickerview);
+		wheelMain.screenheight = screenInfo.getHeight();
+		wheelMain.initDateTimePicker(Integer.parseInt(time_val[0]),
+				Integer.parseInt(time_val[1]), Integer.parseInt(time_val[2]));
+		final MyAlertDialog dialog = new MyAlertDialog(mContext)
+				.builder()
+				.setTitle(mContext.getString(R.string.timer_task_selecttime))
+				.setView(timepickerview)
+				.setNegativeButton(
+						mContext.getString(R.string.smartplug_cancel),
+						new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+
+							}
+						});
+		dialog.setPositiveButton(mContext.getString(R.string.smartplug_ok),
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						String[] time = wheelMain.getTime().split(":");
+						StringBuffer sb = new StringBuffer();
+						if (1 == time[0].length()) {
+							sb.append("0").append(time[0]).append(":");
+						} else {
+							sb.append(time[0]).append(":");
+						}
+						if (1 == time[1].length()) {
+							sb.append("0").append(time[1]).append(":");
+						} else {
+							sb.append(time[1]).append(":");
+						}
+						if (1 == time[2].length()) {
+							sb.append("0").append(time[2]);
+						} else {
+							sb.append(time[2]);
+						}
+
+						mView.setText(sb);
+					}
+				});
+		dialog.show();
 	}
 
 	private void init() {
@@ -480,6 +581,17 @@ public class DetailGrowLightPointActivity extends TitledActivity
 			spinner_type.setSelection(i_Current_Type);
 		}
 
+		for (int i = 0; i < 7; i++) {
+			mSelDays[i] = "1";
+		}
+		initPeriod(mSelDays);
+
+	}
+
+	public void initPeriod(String[] selDays) {
+		mDays = getResources().getStringArray(R.array.current_week);
+		tv_peroid.setTag(getPeriodValue());
+		tv_peroid.setText(getPeriodText());
 	}
 
 	private void restoreParameter() {
