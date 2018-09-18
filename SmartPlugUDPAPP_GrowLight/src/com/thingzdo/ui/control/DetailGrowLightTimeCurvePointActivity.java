@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurvePointHelper;
 import com.thingzdo.dataprovider.SmartPlugHelper;
@@ -24,6 +25,11 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		implements
 			OnClickListener {
+
+	private TextView tv_add;
+	private TextView tv_del;
+	private TextView tv_modify;
+	private TextView tv_clear;
 
 	private SmartPlugHelper mPlugHelper = null;
 	private SmartPlugGrowLightTimerCurvePointHelper mTimerHelper = null;
@@ -79,7 +85,8 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, R.layout.activity_plug_detail, false);
+		super.onCreate(savedInstanceState,
+				R.layout.activity_plug_detail_growlight_timercurvepoint, false);
 		SmartPlugApplication.resetTask();
 		SmartPlugApplication.getInstance().addActivity(this);
 
@@ -158,9 +165,55 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 					}
 				}
 				break;
+			case R.id.tv_add :
+				timecurve_add();
+				break;
+			case R.id.tv_del :
+				timecurve_del();
+				break;
+			case R.id.tv_modify :
+				timecurve_modify();
+				break;
+			case R.id.tv_clear :
+				timecurve_clear();
+				break;
 			default :
 				break;
 		}
+	}
+
+	private void timecurve_add() {
+		Intent intent = new Intent();
+		intent.putExtra("PLUGID", mPlugId);
+		intent.putExtra("OPERATE", "ADD");
+		intent.setClass(DetailGrowLightTimeCurvePointActivity.this,
+				DetailGrowLightPointActivity.class);
+		startActivity(intent);
+	}
+
+	private void timecurve_del() {
+		Intent intent = new Intent();
+		intent.putExtra("PLUGID", mPlugId);
+		intent.putExtra("OPERATE", "DEL");
+		intent.setClass(DetailGrowLightTimeCurvePointActivity.this,
+				DetailGrowLightPointActivity.class);
+		startActivity(intent);
+	}
+
+	private void timecurve_modify() {
+		Intent intent = new Intent();
+		intent.putExtra("PLUGID", mPlugId);
+		intent.putExtra("OPERATE", "MODIFY");
+		intent.setClass(DetailGrowLightTimeCurvePointActivity.this,
+				DetailGrowLightPointActivity.class);
+		startActivity(intent);
+	}
+
+	private void timecurve_clear() {
+		// 提示是否要删除
+		mTimerHelper.clearTimer(mPlugId);
+
+		refreshView();
 	}
 
 	private void init() {
@@ -173,6 +226,16 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 				.getString(R.string.smartplug_growlight_timecurve));
 		setTitleLeftButton(R.string.smartplug_goback,
 				R.drawable.title_btn_selector, this);
+
+		tv_add = (TextView) findViewById(R.id.tv_add);
+		tv_del = (TextView) findViewById(R.id.tv_del);
+		tv_modify = (TextView) findViewById(R.id.tv_modify);
+		tv_clear = (TextView) findViewById(R.id.tv_clear);
+
+		tv_add.setOnClickListener(this);
+		tv_del.setOnClickListener(this);
+		tv_modify.setOnClickListener(this);
+		tv_clear.setOnClickListener(this);
 	}
 
 	private void disconnectSocket() {

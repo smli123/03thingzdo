@@ -643,5 +643,14 @@
     <string name="smartplug_growlight_lushu_control_4">"4 Route"</string>
     <string name="smartplug_growlight_lushu_control_5">"5 Route"</string>
     
+    <string name="smartplug_growlight_type_1">"Gradual Change"</string>
+    <string name="smartplug_growlight_type_2">"Jump Change"</string>
+    
     <string name="smartplug_growlight_timetask_count">Count:</string>
+    
+    <string name="growlight_timecurve_add">Add</string>
+    <string name="growlight_timecurve_delete">Del</string>
+    <string name="growlight_timecurve_modify">Modify</string>
+    <string name="growlight_timecurve_clear">Clear</string>
+    <string name="growlight_timecurve_enable">Enabled</string>
 </resources>
