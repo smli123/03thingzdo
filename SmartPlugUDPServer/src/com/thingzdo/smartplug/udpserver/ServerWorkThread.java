@@ -26,12 +26,14 @@ import com.thingzdo.smartplug.udpserver.Function.AppGrowLightModTimeTaskHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQryStatusHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQrySunTimeHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQryTimeCurveHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQryTimeCurvePointHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightQryTimeTaskHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetBrightHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetCurTimeHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetSunTimeHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetTemperatureHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetTimeCurveHandle;
+import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetTimeCurvePointHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppGrowLightSetWorkModeHandle;
 import com.thingzdo.smartplug.udpserver.Function.AppQuerySceneMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.AddModuleMsgHandle;
@@ -496,6 +498,8 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_TIMECURVEPOINT_MSG_HEADER, new AppGrowLightQryTimeCurvePointHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_TIMECURVEPOINT_MSG_HEADER, new AppGrowLightSetTimeCurvePointHandle());
 		
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_STATUS_MSG_HEADER, new AppGrowLightQryStatusHandle());
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_BRIGHT_MSG_HEADER, new AppGrowLightSetBrightHandle());
@@ -510,6 +514,8 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
 		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMECURVEPOINT_MSG_HEADER, new AppGrowLightQryTimeCurvePointHandle());
+		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_TIMECURVEPOINT_MSG_HEADER, new AppGrowLightSetTimeCurvePointHandle());
 		
 		/* 空调红外数据接口 */
 		String jsonStr = JsonFileReader.getJson(ServerParamConfiger.strIRFileName);

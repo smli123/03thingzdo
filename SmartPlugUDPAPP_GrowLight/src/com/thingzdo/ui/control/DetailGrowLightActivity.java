@@ -49,6 +49,7 @@ public class DetailGrowLightActivity extends TitledActivity
 	private ImageView iv_light_control_auto;
 	private ImageView iv_light_control_timetask;
 	private ImageView iv_light_control_timecurve;
+	private ImageView iv_light_control_timecurve_new;
 	private ImageView iv_light_control_setting;
 
 	private Spinner spinner_workmode;
@@ -331,6 +332,9 @@ public class DetailGrowLightActivity extends TitledActivity
 			case R.id.iv_light_control_timecurve :
 				light_control_timecurve();
 				break;
+			case R.id.iv_light_control_timecurve_new :
+				light_control_timecurve_new();
+				break;
 			case R.id.iv_light_control_setting :
 				light_control_setting();
 				break;
@@ -403,6 +407,16 @@ public class DetailGrowLightActivity extends TitledActivity
 
 	}
 
+	private void light_control_timecurve_new() {
+		Intent intent = new Intent();
+		intent.putExtra("PLUGID", mPlugId);
+		intent.putExtra("PLUGIP", mPlugIp);
+		intent.setClass(DetailGrowLightActivity.this,
+				DetailGrowLightTimeCurvePointActivity.class);
+		startActivity(intent);
+
+	}
+
 	private void light_control_setting() {
 		Intent intent = new Intent();
 		intent.putExtra("PLUGID", mPlugId);
@@ -425,6 +439,7 @@ public class DetailGrowLightActivity extends TitledActivity
 		iv_light_control_auto = (ImageView) findViewById(R.id.iv_light_control_auto);
 		iv_light_control_timetask = (ImageView) findViewById(R.id.iv_light_control_timetask);
 		iv_light_control_timecurve = (ImageView) findViewById(R.id.iv_light_control_timecurve);
+		iv_light_control_timecurve_new = (ImageView) findViewById(R.id.iv_light_control_timecurve_new);
 		iv_light_control_setting = (ImageView) findViewById(R.id.iv_light_control_setting);
 
 		iv_light_control.setImageResource(m_isOpen
@@ -438,6 +453,7 @@ public class DetailGrowLightActivity extends TitledActivity
 		iv_light_control_auto.setOnClickListener(this);
 		iv_light_control_timetask.setOnClickListener(this);
 		iv_light_control_timecurve.setOnClickListener(this);
+		iv_light_control_timecurve_new.setOnClickListener(this);
 		iv_light_control_setting.setOnClickListener(this);
 
 		// init spinner data

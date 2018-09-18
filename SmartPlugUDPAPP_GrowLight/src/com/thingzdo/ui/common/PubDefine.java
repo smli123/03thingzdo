@@ -69,6 +69,8 @@ public class PubDefine {
 	public static final String PLUG_GROWLIGHT_SET_BRIGHT_ACTION = "com.thingzdo.ctrl.growlight_set_bright";
 	public static final String PLUG_GROWLIGHT_QRY_TIMECURVE_ACTION = "com.thingzdo.ctrl.growlight_qry_timecurve";
 	public static final String PLUG_GROWLIGHT_SET_TIMECURVE_ACTION = "com.thingzdo.ctrl.growlight_set_timecurve";
+	public static final String PLUG_GROWLIGHT_QRY_TIMECURVEPOINT_ACTION = "com.thingzdo.ctrl.growlight_qry_timecurvepoint";
+	public static final String PLUG_GROWLIGHT_SET_TIMECURVEPOINT_ACTION = "com.thingzdo.ctrl.growlight_set_timecurvepoint";
 	public static final String PLUG_GROWLIGHT_SET_TEMPERATURE_ACTION = "com.thingzdo.ctrl.growlight_set_temperature";
 	public static final String PLUG_GROWLIGHT_SET_CUR_TIME_ACTION = "com.thingzdo.ctrl.growlight_set_curtime";
 	public static final String PLUG_GROWLIGHT_SET_WORK_MODE_ACTION = "com.thingzdo.ctrl.growlight_set_workmode";

@@ -295,6 +295,12 @@ public class SmartPlugEventHandler extends Handler {
 				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_TIMECURVE,
 				new SmartPlugEventHandlerGrowLightSetTimeCurve()));
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
+				SmartPlugMessage.EVT_SP_GROWLIGHT_QRY_TIMECURVEPOINT,
+				new SmartPlugEventHandlerGrowLightQryTimeCurvePoint()));
+		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
+				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_TIMECURVEPOINT,
+				new SmartPlugEventHandlerGrowLightSetTimeCurvePoint()));
+		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_TEMPERATURE,
 				new SmartPlugEventHandlerGrowLightSetTemperature()));
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
@@ -322,7 +328,6 @@ public class SmartPlugEventHandler extends Handler {
 				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_SUNTIME,
 				new SmartPlugEventHandlerGrowLightSetSunTime()));
 	}
-
 	protected void log(String logString) {
 		Log.d(getClass().getName(), logString);
 	}

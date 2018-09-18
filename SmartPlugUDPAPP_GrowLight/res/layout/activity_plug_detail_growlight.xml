@@ -306,6 +306,34 @@
 		        android:orientation="horizontal" >
 		         
 		     	<RelativeLayout
+				    android:id="@+id/rl_control_timecurve_new"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"           
+			        android:background="@color/white"
+		            android:gravity="center"
+		            android:layout_weight="1"> 	
+			        
+			        <ImageView
+			            android:id="@+id/iv_light_control_timecurve_new"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:gravity="center"
+			            android:layout_weight="1"
+			            android:layout_centerHorizontal="true"
+			            android:src="@drawable/smp_time_curves" />
+		        
+			        <TextView
+			            android:id="@+id/tv_light_control_timecurve_new"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_below="@+id/iv_light_control_timecurve_new"
+			            android:layout_centerHorizontal="true"
+			            android:text="@string/smartplug_growlight_timecurve"
+			            android:textColor="@color/black"
+			            android:textSize="@dimen/text_size_larsamll" />
+			    </RelativeLayout>
+			    
+		     	<RelativeLayout
 				    android:id="@+id/rl_control_setting"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"           

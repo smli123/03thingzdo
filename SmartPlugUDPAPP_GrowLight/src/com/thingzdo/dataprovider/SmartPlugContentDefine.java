@@ -530,6 +530,61 @@ public class SmartPlugContentDefine {
 		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
 	}
 
+	// ������ʱ����
+	public final static class SmartPlugGrowLightTimerCurvePoint
+			implements
+				BaseColumns {
+		public static final String AUTHORITY = "com.thingzdo.smartpluggrowlighttimerCurvePointprovider";
+
+		public static final String ALL_RECORD = "smartpluggrowlighttimercurvepoints";
+		public static final String ONE_RECORD = "smartpluggrowlighttimercurvepoint";
+
+		// �����Content�ṩ�����Uri
+		public static final Uri ALL_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ALL_RECORD);
+		public static final Uri ONE_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ONE_RECORD);
+
+		// ����������Ϣ���ݱ�����
+		public static final String TABLE_NAME = "SmartPlugsGrowLightTimerCurvePoints";
+
+		// �ֶ�����������
+		public static final String TIMER_ID = "TimerId";
+		public static final String PLUG_ID = "PlugId";
+		public static final String PLUG_TIMER_TYPE = "Type"; // WorkMode
+		public static final String PLUG_TIMER_ENABLE = "Enable";
+		public static final String PLUG_PERIOD = "Period";
+		public static final String PLUG_BEGINTIME = "BeginTime";
+		public static final String PLUG_LIGHT = "Light";
+
+		public static final String PLUG_LIGHT_CHANNEL = "Channel";
+
+		// �� ����ֵ
+		public static final int ID_COLUMN = 0;
+		public static final int TIMER_ID_COLUMN = 1;
+		public static final int PLUG_ID_COLUMN = 2;
+		public static final int TIMER_TYPE_COLUMN = 3;
+		public static final int PLUG_TIMER_ENABLE_COLUMN = 4;
+		public static final int PLUG_PERIOD_COLUMN = 5;
+		public static final int PLUG_BEGINTIME_COLUMN = 6;
+		public static final int PLUG_LIGHT_COLUMN = 7;
+		public static final int PLUG_LIGHT_CHANNEL_COLUMN = 8;
+
+		// ������ṹ��SQL�ű�
+		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
+				+ TABLE_NAME + " (" + _ID
+				+ " integer primary key autoincrement, " + TIMER_ID
+				+ " integer default 0," + PLUG_ID + " text default '',"
+				+ PLUG_TIMER_TYPE + " integer default 0," + PLUG_TIMER_ENABLE
+				+ " int default 0," + PLUG_PERIOD + " text default '',"
+				+ PLUG_BEGINTIME + " text default ''," + PLUG_LIGHT
+				+ " integer default 0," + PLUG_LIGHT_CHANNEL
+				+ " integer default 0);";
+
+		// public final static String DEFAULT_SORT_ORDER = _ID + " desc";
+		public final static String DEFAULT_SORT_ORDER = PLUG_BEGINTIME + " asc";
+	}
+
 	/*
 	 * public static final class View_User_SmartPlug implements BaseColumns{
 	 * public static final String AUTHORITY =
