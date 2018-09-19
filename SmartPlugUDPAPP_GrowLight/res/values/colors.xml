@@ -35,4 +35,10 @@
     <!-- 联系人详情界面职位字体颜色 -->
     <color name="person_company_color">#ababab</color>
     
+    <!-- 植物灯 画图颜色-->
+    <color name="color_999999">#999999</color>
+    <color name="color_f2f2f2">#f2f2f2</color>
+    <color name="color_ff4631">#ff4631</color>
+    
+    
 </resources>

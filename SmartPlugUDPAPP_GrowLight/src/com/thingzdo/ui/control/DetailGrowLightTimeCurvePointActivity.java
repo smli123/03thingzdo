@@ -29,11 +29,13 @@ import com.thingzdo.ui.common.TitledActivity;
 import com.thingzdo.ui.manage.AddSocketActivity2;
 import com.thingzdo.ui.smartplug.PubStatus;
 import com.thingzdo.ui.smartplug.SmartPlugApplication;
+import com.thingzdo.util.LineGraphicView;
 
 public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		implements
 			OnClickListener {
 
+	private LineGraphicView view_show;
 	private TextView tv_add;
 	private TextView tv_del;
 	private TextView tv_modify;
@@ -50,6 +52,18 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_03 = new ArrayList<GrowLightTimerCurvePointDefine>();
 	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_04 = new ArrayList<GrowLightTimerCurvePointDefine>();
 	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_05 = new ArrayList<GrowLightTimerCurvePointDefine>();
+
+	private ArrayList<Double> yList_01 = new ArrayList<Double>();
+	private ArrayList<Double> yList_02 = new ArrayList<Double>();
+	private ArrayList<Double> yList_03 = new ArrayList<Double>();
+	private ArrayList<Double> yList_04 = new ArrayList<Double>();
+	private ArrayList<Double> yList_05 = new ArrayList<Double>();
+
+	private ArrayList<String> xList_01 = new ArrayList<String>();
+	private ArrayList<String> xList_02 = new ArrayList<String>();
+	private ArrayList<String> xList_03 = new ArrayList<String>();
+	private ArrayList<String> xList_04 = new ArrayList<String>();
+	private ArrayList<String> xList_05 = new ArrayList<String>();
 
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
@@ -107,14 +121,52 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		mTimer_05.clear();
 		mTimer_05 = mTimerHelper.getAllTimer(mPlugId, 5);
 
+		copyData(mTimer_01, xList_01, yList_01);
+		copyData(mTimer_02, xList_02, yList_02);
+		copyData(mTimer_03, xList_03, yList_03);
+		copyData(mTimer_04, xList_04, yList_04);
+		copyData(mTimer_05, xList_05, yList_05);
+
 		// 根据数据重新画图
 		DrawView();
 	}
 
-	private void DrawView() {
-		Toast.makeText(this, "Now is drawing...", Toast.LENGTH_SHORT).show();
+	private void copyData(ArrayList<GrowLightTimerCurvePointDefine> mTimer,
+			ArrayList<String> xList, ArrayList<Double> yList) {
+		xList.clear();
+		yList.clear();
+
+		for (int i = 0; i < mTimer.size(); i++) {
+			GrowLightTimerCurvePointDefine ti = mTimer.get(i);
+			xList.add(ti.mPowerOnTime);
+			yList.add((double) ti.light);
+		}
 	}
 
+	private void DrawView() {
+		Toast.makeText(this, "Now is drawing...", Toast.LENGTH_SHORT).show();
+		// view_show.setData(yList_01, xList_01, 255, 100);
+
+		ArrayList<Double> yList = new ArrayList<Double>();
+		yList.add((double) 2.103);
+		yList.add(4.05);
+		yList.add(6.60);
+		yList.add(3.08);
+		yList.add(4.32);
+		yList.add(2.0);
+		yList.add(5.0);
+
+		ArrayList<String> xRawDatas = new ArrayList<String>();
+		xRawDatas.add("05-19");
+		xRawDatas.add("05-20");
+		xRawDatas.add("05-21");
+		xRawDatas.add("05-22");
+		xRawDatas.add("05-23");
+		xRawDatas.add("05-24");
+		xRawDatas.add("05-25");
+		xRawDatas.add("05-26");
+		view_show.setData(yList, xRawDatas, 8, 2);
+	}
 	private void queryAllTimeCurvePoint() {
 		for (int i = 1; i <= 5; i++) {
 			queryTimeCurvePoint(i);
@@ -289,6 +341,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		setTitleLeftButton(R.string.smartplug_goback,
 				R.drawable.title_btn_selector, this);
 
+		view_show = (LineGraphicView) findViewById(R.id.view_show);
 		tv_add = (TextView) findViewById(R.id.tv_add);
 		tv_del = (TextView) findViewById(R.id.tv_del);
 		tv_modify = (TextView) findViewById(R.id.tv_modify);

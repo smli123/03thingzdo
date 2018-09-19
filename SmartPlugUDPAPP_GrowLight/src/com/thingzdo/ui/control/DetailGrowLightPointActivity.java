@@ -609,7 +609,11 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		rl_function_control = (RelativeLayout) findViewById(R.id.rl_function_control);
 
 		if (Activity_Operator_Mode == OPERATOR_DEL) {
+			spinner_type.setVisibility(View.GONE);
+			cb_enable.setVisibility(View.GONE);
+			tv_peroid.setVisibility(View.GONE);
 			rl_function_control.setVisibility(View.GONE);
+
 		} else {
 			rl_function_control.setVisibility(View.VISIBLE);
 		}

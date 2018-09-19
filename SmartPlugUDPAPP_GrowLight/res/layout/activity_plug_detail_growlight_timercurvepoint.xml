@@ -105,7 +105,7 @@
 	        android:background="@color/lightwhite"        
 	        android:contentDescription="@null" /> 
 	        
-	    <RelativeLayout
+	  	<RelativeLayout
 		    android:id="@+id/rl_function_view"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content" 	               
@@ -117,12 +117,12 @@
 	        android:background="@color/white"
 	        android:orientation="vertical" > 	
 	        
-	        <View 
+	        <com.thingzdo.util.LineGraphicView 
 			    android:id="@+id/view_show"
 			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content" />
-	        
-	    </RelativeLayout>
+			    android:layout_height="0dp" />
+	            
+		</RelativeLayout>
 	    
 	</RelativeLayout>    
 </RelativeLayout>    
