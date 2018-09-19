@@ -166,6 +166,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		xRawDatas.add("05-26");
 		view_show.setData(yList, xRawDatas, 8, 2);
 	}
+
 	private void queryAllTimeCurvePoint() {
 		for (int i = 1; i <= 5; i++) {
 			queryTimeCurvePoint(i);

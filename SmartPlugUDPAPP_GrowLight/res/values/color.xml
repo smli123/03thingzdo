@@ -33,4 +33,9 @@
     <color name="actionsheet_blue">#0074E1</color>
     <color name="actionsheet_red">#FD4A2E</color>
     <color name="actionsheet_gray">#8F8F8F</color>    
+    
+    <!-- 植物灯 画图颜色-->
+    <color name="color_999999">#999999</color>
+    <color name="color_f2f2f2">#f2f2f2</color>
+    <color name="color_ff4631">#ff4631</color>
 </resources>
