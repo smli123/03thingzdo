@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -223,11 +222,13 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 
-		new Handler().postDelayed(new Runnable() {
-			public void run() {
-				queryAllTimeCurvePoint();
-			}
-		}, 1000);
+		DrawView();
+
+		// new Handler().postDelayed(new Runnable() {
+		// public void run() {
+		// queryAllTimeCurvePoint();
+		// }
+		// }, 1000);
 	}
 
 	@Override
