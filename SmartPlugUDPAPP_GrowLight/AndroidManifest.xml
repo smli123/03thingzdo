@@ -117,6 +117,14 @@
             android:authorities="com.thingzdo.smartpluggrowlighttimerprovider">
         </provider>
         
+        <provider android:name="com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurveProvider" 
+            android:authorities="com.thingzdo.smartpluggrowlighttimerCurveprovider">
+        </provider>
+        
+        <provider android:name="com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurvePointProvider" 
+            android:authorities="com.thingzdo.smartpluggrowlighttimerCurvePointprovider">
+        </provider>
+        
         <provider android:name="com.thingzdo.dataprovider.SmartPlugIRSceneProvider" 
             android:authorities="com.thingzdo.smartplugirsceneprovider">
         </provider>

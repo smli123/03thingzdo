@@ -3,7 +3,9 @@ package com.thingzdo.processhandler;
 import android.content.Intent;
 import android.os.Message;
 
+import com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurvePointHelper;
 import com.thingzdo.smartplug_udp.R;
+import com.thingzdo.ui.GrowLightTimerCurvePointDefine;
 import com.thingzdo.ui.common.PubDefine;
 import com.thingzdo.ui.common.PubFunc;
 import com.thingzdo.ui.smartplug.AppServerReposeDefine;
@@ -23,10 +25,11 @@ public class SmartPlugEventHandlerGrowLightSetTimeCurvePoint
 
 		if (0 == ret) {
 			mIntent.putExtra("RESULT", 0);
+			String moduleID = buffer[3];
+			int channel = Integer.parseInt(buffer[5]);
 
-			mIntent.putExtra("MODULEID", buffer[3]);
-			mIntent.putExtra("CHANNEL",
-					Integer.parseInt(buffer[EVENT_MESSAGE_HEADER + 1]));
+			mIntent.putExtra("MODULEID", moduleID);
+			mIntent.putExtra("CHANNEL", channel);
 
 			String value = "";
 			for (int i = 5; i < buffer.length; i++) {
@@ -36,6 +39,7 @@ public class SmartPlugEventHandlerGrowLightSetTimeCurvePoint
 				}
 			}
 			mIntent.putExtra("TIMECURVE", value);
+			parseQryResult(moduleID, value);
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {
@@ -52,5 +56,42 @@ public class SmartPlugEventHandlerGrowLightSetTimeCurvePoint
 			}
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		}
+	}
+
+	private void parseQryResult(String moduleID, String command) {
+		// Count, NO, Type, light01,
+		// light02,light03,light04,light05,time,peroid,eanble
+		SmartPlugGrowLightTimerCurvePointHelper mTimerHelper = new SmartPlugGrowLightTimerCurvePointHelper(
+				SmartPlugApplication.getContext());
+
+		String[] infors = command.split(",");
+		if (infors.length >= 5) {
+			int type = Integer.parseInt((infors[0]));
+			int channel = Integer.parseInt((infors[1]));
+			String peroid = infors[2];
+			int enable = Integer.parseInt((infors[3]));
+			int count = Integer.parseInt((infors[4]));
+
+			mTimerHelper.clearTimer(moduleID, channel);
+
+			int baseIdx = 4;
+			int BLOCK_SIZE = 2;
+			for (int j = 0; j < count; j++) {
+				GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();
+
+				ti.mPlugId = moduleID;
+				ti.mType = type;
+				ti.mPeriod = peroid;
+				ti.light_channel = channel;
+				ti.mEnable = (enable == 1) ? true : false;
+				ti.light = Integer
+						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 0]);
+				ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 1];
+
+				mTimerHelper.addTimer(ti);
+			}
+		}
+
+		mTimerHelper = null;
 	}
 }

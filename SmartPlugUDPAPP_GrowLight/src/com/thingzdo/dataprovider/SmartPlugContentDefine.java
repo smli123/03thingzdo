@@ -581,8 +581,9 @@ public class SmartPlugContentDefine {
 				+ " integer default 0," + PLUG_LIGHT_CHANNEL
 				+ " integer default 0);";
 
-		// public final static String DEFAULT_SORT_ORDER = _ID + " desc";
-		public final static String DEFAULT_SORT_ORDER = PLUG_BEGINTIME + " asc";
+		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
+		// public final static String DEFAULT_SORT_ORDER = PLUG_BEGINTIME +
+		// " asc";
 	}
 
 	/*

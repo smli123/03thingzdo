@@ -69,6 +69,55 @@ public class SmartPlugGrowLightTimerCurvePointHelper {
 		}
 		return timers;
 	}
+	// ���ָ�����������ж�ʱ����
+	public ArrayList<GrowLightTimerCurvePointDefine> getAllTimer(String plugId,
+			int channelId) {
+		ArrayList<GrowLightTimerCurvePointDefine> timers = new ArrayList<GrowLightTimerCurvePointDefine>();
+		if (null == mContentResolver) {
+			return null;
+		}
+		String where = SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_ID
+				+ " = '"
+				+ plugId
+				+ "'"
+				+ " AND "
+				+ SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_LIGHT_CHANNEL
+				+ " = '" + channelId + "'";
+		String order = SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_BEGINTIME
+				+ " asc";
+		Cursor cur = mContentResolver
+				.query(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.ALL_CONTENT_URI,
+						null, where, null, order);
+
+		if (null != cur) {
+			while (cur.moveToNext()) {
+				GrowLightTimerCurvePointDefine timer = new GrowLightTimerCurvePointDefine();
+				timer.mId = cur
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.ID_COLUMN);
+				timer.mTimerId = cur
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.TIMER_ID_COLUMN);
+				timer.mPlugId = cur
+						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_ID_COLUMN);
+				timer.mType = cur
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.TIMER_TYPE_COLUMN);
+				timer.mEnable = cur
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_TIMER_ENABLE_COLUMN) == 1
+						? true
+						: false;
+				timer.mPeriod = cur
+						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_PERIOD_COLUMN);
+				timer.mPowerOnTime = cur
+						.getString(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_BEGINTIME_COLUMN);
+				timer.light = cur
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_LIGHT_COLUMN);
+				timer.light_channel = cur
+						.getInt(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_LIGHT_CHANNEL_COLUMN);
+				timers.add(timer);
+			}
+			cur.close();
+		}
+		return timers;
+	}
 
 	// ������ж�ʱ����
 	public ArrayList<GrowLightTimerCurvePointDefine> getAllTimer() {
@@ -248,7 +297,7 @@ public class SmartPlugGrowLightTimerCurvePointHelper {
 				+ "'"
 				+ " AND "
 				+ SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.PLUG_LIGHT_CHANNEL
-				+ "='" + String.valueOf(channel) + "'";
+				+ " = '" + channel + "'";
 		int count = mContentResolver
 				.delete(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.ALL_CONTENT_URI,
 						where, null);

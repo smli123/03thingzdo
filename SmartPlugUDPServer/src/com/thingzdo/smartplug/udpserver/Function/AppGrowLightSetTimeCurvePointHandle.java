@@ -109,7 +109,7 @@ public class AppGrowLightSetTimeCurvePointHandle implements ICallFunction{
 		// TODO Auto-generated method stub
 		String strRet[] 	= strMsg.split(ServerCommDefine.CMD_SPLIT_STRING);
 		String strNewCookie	= strRet[0].trim();
-		String strMsgHeader = ServerCommDefine.APP_GROWLIGHT_SET_TIMECURVE_MSG_HEADER;
+		String strMsgHeader = ServerCommDefine.APP_GROWLIGHT_SET_TIMECURVEPOINT_MSG_HEADER;
 		String strUserName 	= strRet[2].trim();
 		String strModuleID	= strRet[3].trim();
 		int iRetCode = Integer.valueOf(strRet[4].trim());

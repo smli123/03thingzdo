@@ -28,7 +28,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		mTableList
 				.add(SmartPlugContentDefine.SmartPlugGrowLightTimer.TABLE_NAME);
 		mTableList
-				.add(SmartPlugContentDefine.SmartPlugGrowLightTimer.TABLE_NAME);
+				.add(SmartPlugContentDefine.SmartPlugGrowLightTimerCurve.TABLE_NAME);
+		mTableList
+				.add(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.TABLE_NAME);
 
 		mTableList.add(SmartPlugContentDefine.User.TABLE_NAME);
 		mTableList.add(SmartPlugContentDefine.SmartPlugTimer.TABLE_NAME);
@@ -50,6 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL(SmartPlugContentDefine.SmartPlugTimer.TABLE_CREATE);
 		db.execSQL(SmartPlugContentDefine.SmartPlugGrowLightTimer.TABLE_CREATE);
 		db.execSQL(SmartPlugContentDefine.SmartPlugGrowLightTimerCurve.TABLE_CREATE);
+		db.execSQL(SmartPlugContentDefine.SmartPlugGrowLightTimerCurvePoint.TABLE_CREATE);
 
 		db.execSQL(SmartPlugContentDefine.SmartPlugIRScene.TABLE_CREATE);
 

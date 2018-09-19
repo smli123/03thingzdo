@@ -9,25 +9,31 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurvePointHelper;
 import com.thingzdo.dataprovider.SmartPlugHelper;
 import com.thingzdo.internet.RevCmdFromSocketThread;
 import com.thingzdo.internet.UDPClient;
+import com.thingzdo.processhandler.SmartPlugMessage;
 import com.thingzdo.smartplug_udp.R;
+import com.thingzdo.ui.GrowLightTimerCurvePointDefine;
 import com.thingzdo.ui.SmartPlugDefine;
 import com.thingzdo.ui.common.PubDefine;
+import com.thingzdo.ui.common.StringUtils;
 import com.thingzdo.ui.common.TitledActivity;
-import com.thingzdo.ui.manage.AddSocketActivity2;
+import com.thingzdo.ui.smartplug.PubStatus;
 import com.thingzdo.ui.smartplug.SmartPlugApplication;
 import com.thingzdo.ui.wheelutils.MyAlertDialog;
 import com.thingzdo.ui.wheelutils.ScreenInfo;
@@ -53,6 +59,8 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	private Spinner spinner_type;
 	private ThingzdoCheckBox cb_enable;
 	private TextView tv_peroid;
+
+	private RelativeLayout rl_function_control;
 
 	private TextView tv_light_01;
 	private TextView tv_light_02;
@@ -154,6 +162,31 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	private int value_light_23_pos = 0;
 	private int value_light_24_pos = 0;
 
+	private String value_light_01_time = "00:00";
+	private String value_light_02_time = "01:00";
+	private String value_light_03_time = "02:00";
+	private String value_light_04_time = "03:00";
+	private String value_light_05_time = "04:00";
+	private String value_light_06_time = "05:00";
+	private String value_light_07_time = "06:00";
+	private String value_light_08_time = "07:00";
+	private String value_light_09_time = "08:00";
+	private String value_light_10_time = "09:00";
+	private String value_light_11_time = "10:00";
+	private String value_light_12_time = "11:00";
+	private String value_light_13_time = "12:00";
+	private String value_light_14_time = "13:00";
+	private String value_light_15_time = "14:00";
+	private String value_light_16_time = "15:00";
+	private String value_light_17_time = "16:00";
+	private String value_light_18_time = "17:00";
+	private String value_light_19_time = "18:00";
+	private String value_light_20_time = "19:00";
+	private String value_light_21_time = "20:00";
+	private String value_light_22_time = "21:00";
+	private String value_light_23_time = "22:00";
+	private String value_light_24_time = "23:00";
+
 	private List<String> irlist_channel = new ArrayList<String>();
 	private List<String> irlist_type = new ArrayList<String>();
 
@@ -161,9 +194,11 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	private int i_Current_Type = 0;
 
 	private SmartPlugHelper mPlugHelper = null;
+	private SmartPlugGrowLightTimerCurvePointHelper mTimerHelper = null;
 	private SmartPlugDefine mPlug = null;
 	private String mPlugId = "0";
 	private String mPlugIp = "0.0.0.0";
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer = new ArrayList<GrowLightTimerCurvePointDefine>();
 
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
@@ -180,7 +215,10 @@ public class DetailGrowLightPointActivity extends TitledActivity
 
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_SET_TIMECURVEPOINT_ACTION)) {
-				// do something... ReQuery;
+				String moduleID = intent.getStringExtra("MODULEID");
+				if (moduleID.equals(mPlugId) == true) {
+					finish();
+				}
 			}
 		}
 	};
@@ -199,6 +237,7 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		registerReceiver(mDetailRev, filter);
 
 		mPlugHelper = new SmartPlugHelper(this);
+		mTimerHelper = new SmartPlugGrowLightTimerCurvePointHelper(this);
 		Intent intent = getIntent();
 		mPlugId = intent.getStringExtra("PLUGID");
 		if (TextUtils.isEmpty(mPlugId)) {
@@ -230,7 +269,7 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		// TODO Auto-generated method stub
 		super.onResume();
 		SmartPlugApplication.resetTask();
-		init();
+		// init();
 	}
 
 	@Override
@@ -252,27 +291,15 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				finish();
 				break;
 			case R.id.titlebar_rightbutton :
-				Button btn_TitleRight = (Button) findViewById(R.id.titlebar_rightbutton);
-				// Internet模式：“详情”界面
-				if (btn_TitleRight.getText().equals(
-						getString(R.string.smartplug_title_plug_detail))) {
-					Intent intent = new Intent();
-					intent.putExtra("PLUGID", mPlugId);
-					intent.setClass(DetailGrowLightPointActivity.this,
-							PlugDetailInfoActivity.class);
-					startActivity(intent);
-				} else {
-					// WiFi直连：“重选”界面
-					// PubDefine.disconnect();
-					disconnectSocket();
-					Intent intent = new Intent();
-					intent.setClass(DetailGrowLightPointActivity.this,
-							AddSocketActivity2.class);
-					startActivity(intent);
-					if (PubDefine.SmartPlug_Connect_Mode.WiFi != PubDefine.g_Connect_Mode) {
-						finish();
-					}
+				// OK for Add new TimeCurvePoint
+				if (Activity_Operator_Mode == OPERATOR_ADD) {
+					addTimeCurvePoint();
+				} else if (Activity_Operator_Mode == OPERATOR_DEL) {
+					delTimeCurvePoint();
+				} else if (Activity_Operator_Mode == OPERATOR_MODIFY) {
+					addTimeCurvePoint();
 				}
+
 				break;
 			case R.id.tv_peroid :
 				set_peroid();
@@ -282,6 +309,160 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		}
 	}
 
+	private void addTimeCurvePoint() {
+		String strEnable = "1";
+		int count = 24;
+		String points = "";
+		points = String.valueOf(value_light_01_pos) + "," + value_light_01_time
+				+ "," + String.valueOf(value_light_02_pos) + ","
+				+ value_light_02_time + ","
+				+ String.valueOf(value_light_03_pos) + ","
+				+ value_light_03_time + ","
+				+ String.valueOf(value_light_04_pos) + ","
+				+ value_light_04_time + ","
+				+ String.valueOf(value_light_05_pos) + ","
+				+ value_light_05_time + ","
+				+ String.valueOf(value_light_06_pos) + ","
+				+ value_light_06_time + ","
+				+ String.valueOf(value_light_07_pos) + ","
+				+ value_light_07_time + ","
+				+ String.valueOf(value_light_08_pos) + ","
+				+ value_light_08_time + ","
+				+ String.valueOf(value_light_09_pos) + ","
+				+ value_light_09_time + ","
+				+ String.valueOf(value_light_10_pos) + ","
+				+ value_light_10_time + ","
+				+ String.valueOf(value_light_11_pos) + ","
+				+ value_light_11_time + ","
+				+ String.valueOf(value_light_12_pos) + ","
+				+ value_light_12_time + ","
+				+ String.valueOf(value_light_13_pos) + ","
+				+ value_light_13_time + ","
+				+ String.valueOf(value_light_14_pos) + ","
+				+ value_light_14_time + ","
+				+ String.valueOf(value_light_15_pos) + ","
+				+ value_light_15_time + ","
+				+ String.valueOf(value_light_16_pos) + ","
+				+ value_light_16_time + ","
+				+ String.valueOf(value_light_17_pos) + ","
+				+ value_light_17_time + ","
+				+ String.valueOf(value_light_18_pos) + ","
+				+ value_light_18_time + ","
+				+ String.valueOf(value_light_19_pos) + ","
+				+ value_light_19_time + ","
+				+ String.valueOf(value_light_20_pos) + ","
+				+ value_light_20_time + ","
+				+ String.valueOf(value_light_21_pos) + ","
+				+ value_light_21_time + ","
+				+ String.valueOf(value_light_22_pos) + ","
+				+ value_light_22_time + ","
+				+ String.valueOf(value_light_23_pos) + ","
+				+ value_light_23_time + ","
+				+ String.valueOf(value_light_24_pos) + ","
+				+ value_light_24_time;
+
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_TIMECURVEPOINT)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(i_Current_Type)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(i_Current_Channel)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(tv_peroid.getTag())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(strEnable)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(String.valueOf(count))
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(points);
+
+		sendMsg(true, sb.toString(), true);
+	}
+
+	private void delTimeCurvePoint() {
+		String strEnable = "0";
+		int count = 24;
+		String points = "";
+		points = String.valueOf(value_light_01_pos) + "," + value_light_01_time
+				+ "," + String.valueOf(value_light_02_pos) + ","
+				+ value_light_02_time + ","
+				+ String.valueOf(value_light_03_pos) + ","
+				+ value_light_03_time + ","
+				+ String.valueOf(value_light_04_pos) + ","
+				+ value_light_04_time + ","
+				+ String.valueOf(value_light_05_pos) + ","
+				+ value_light_05_time + ","
+				+ String.valueOf(value_light_06_pos) + ","
+				+ value_light_06_time + ","
+				+ String.valueOf(value_light_07_pos) + ","
+				+ value_light_07_time + ","
+				+ String.valueOf(value_light_08_pos) + ","
+				+ value_light_08_time + ","
+				+ String.valueOf(value_light_09_pos) + ","
+				+ value_light_09_time + ","
+				+ String.valueOf(value_light_10_pos) + ","
+				+ value_light_10_time + ","
+				+ String.valueOf(value_light_11_pos) + ","
+				+ value_light_11_time + ","
+				+ String.valueOf(value_light_12_pos) + ","
+				+ value_light_12_time + ","
+				+ String.valueOf(value_light_13_pos) + ","
+				+ value_light_13_time + ","
+				+ String.valueOf(value_light_14_pos) + ","
+				+ value_light_14_time + ","
+				+ String.valueOf(value_light_15_pos) + ","
+				+ value_light_15_time + ","
+				+ String.valueOf(value_light_16_pos) + ","
+				+ value_light_16_time + ","
+				+ String.valueOf(value_light_17_pos) + ","
+				+ value_light_17_time + ","
+				+ String.valueOf(value_light_18_pos) + ","
+				+ value_light_18_time + ","
+				+ String.valueOf(value_light_19_pos) + ","
+				+ value_light_19_time + ","
+				+ String.valueOf(value_light_20_pos) + ","
+				+ value_light_20_time + ","
+				+ String.valueOf(value_light_21_pos) + ","
+				+ value_light_21_time + ","
+				+ String.valueOf(value_light_22_pos) + ","
+				+ value_light_22_time + ","
+				+ String.valueOf(value_light_23_pos) + ","
+				+ value_light_23_time + ","
+				+ String.valueOf(value_light_24_pos) + ","
+				+ value_light_24_time;
+
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_TIMECURVEPOINT)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(i_Current_Type)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(i_Current_Channel)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(tv_peroid.getTag())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(strEnable)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(String.valueOf(count))
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(points);
+
+		sendMsg(true, sb.toString(), true);
+	}
+
+	// private void queryTimeCurvePoint() {
+	// StringBuffer sb = new StringBuffer();
+	// sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVEPOINT)
+	// .append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+	// .append(PubStatus.getUserName())
+	// .append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
+	// .append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+	// .append(i_Current_Channel);
+	//
+	// sendMsg(true, sb.toString(), true);
+	// }
+
 	private void set_peroid() {
 		Intent intent = new Intent();
 		intent.setClass(this, SetPeriodActivity.class);
@@ -290,6 +471,37 @@ public class DetailGrowLightPointActivity extends TitledActivity
 
 		// showDialog(tv_peroid, tv_peroid.getText().toString());
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// super.onActivityResult(requestCode, resultCode, data);
+		if (null == data) {
+			return;
+		}
+		if (0 == resultCode) {
+			mSelDays = data.getStringArrayExtra("selected_days");
+		}
+
+		mHandler.sendEmptyMessage(0);
+
+		// tv_peroid.setTag(getPeriodValue());
+		// tv_peroid.setText(getPeriodText());
+	}
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case 0 :
+					tv_peroid.setTag(getPeriodValue());
+					tv_peroid.setText(getPeriodText());
+					break;
+				case 1 :
+					break;
+				default :
+					break;
+			}
+		};
+	};
 
 	private String getPeriodValue() {
 		StringBuffer sb = new StringBuffer();
@@ -387,13 +599,20 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				.getString(R.string.smartplug_growlight_timecurve));
 		setTitleLeftButton(R.string.smartplug_goback,
 				R.drawable.title_btn_selector, this);
-		setTitleRightButton(R.string.smartplug_title_plug_detail,
+		setTitleRightButton(R.string.smartplug_ok,
 				R.drawable.title_btn_selector, this);
 
 		spinner_channel = (Spinner) findViewById(R.id.spinner_channel);
 		spinner_type = (Spinner) findViewById(R.id.spinner_type);
 		cb_enable = (ThingzdoCheckBox) findViewById(R.id.cb_enable);
 		tv_peroid = (TextView) findViewById(R.id.tv_peroid);
+		rl_function_control = (RelativeLayout) findViewById(R.id.rl_function_control);
+
+		if (Activity_Operator_Mode == OPERATOR_DEL) {
+			rl_function_control.setVisibility(View.GONE);
+		} else {
+			rl_function_control.setVisibility(View.VISIBLE);
+		}
 
 		tv_peroid.setOnClickListener(this);
 
@@ -428,8 +647,7 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		irlist_type.add(res.getString(R.string.smartplug_growlight_type_2));
 
 		ArrayAdapter<String> adapter_type = new ArrayAdapter<String>(this,
-				R.layout.activity_detail_aircon2item, R.id.tv_item,
-				irlist_channel);
+				R.layout.activity_detail_aircon2item, R.id.tv_item, irlist_type);
 		spinner_type.setAdapter(adapter_type);
 		spinner_type.setPrompt("测试");
 		spinner_type.setOnItemSelectedListener(new spinnerTypeListener());
@@ -572,6 +790,11 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		}
 	}
 
+	private void set_seekbar(SeekBar sb, TextView tv_light, int value) {
+		sb.setProgress(value);
+		tv_light.setText(String.valueOf(value));
+	}
+
 	private void initParameter() {
 		cb_enable.setChecked(true);
 		if (irlist_channel.size() > 0) {
@@ -586,16 +809,188 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		}
 		initPeriod(mSelDays);
 
+		tv_light_01.setText(value_light_01_time);
+		tv_light_02.setText(value_light_02_time);
+		tv_light_03.setText(value_light_03_time);
+		tv_light_04.setText(value_light_04_time);
+		tv_light_05.setText(value_light_05_time);
+		tv_light_06.setText(value_light_06_time);
+		tv_light_07.setText(value_light_07_time);
+		tv_light_08.setText(value_light_08_time);
+		tv_light_09.setText(value_light_09_time);
+		tv_light_10.setText(value_light_10_time);
+		tv_light_11.setText(value_light_11_time);
+		tv_light_12.setText(value_light_12_time);
+		tv_light_13.setText(value_light_13_time);
+		tv_light_14.setText(value_light_14_time);
+		tv_light_15.setText(value_light_15_time);
+		tv_light_16.setText(value_light_16_time);
+		tv_light_17.setText(value_light_17_time);
+		tv_light_18.setText(value_light_18_time);
+		tv_light_19.setText(value_light_19_time);
+		tv_light_20.setText(value_light_20_time);
+		tv_light_21.setText(value_light_21_time);
+		tv_light_22.setText(value_light_22_time);
+		tv_light_23.setText(value_light_23_time);
+		tv_light_24.setText(value_light_24_time);
+
+		set_seekbar(sb_light_01, tv_light_right_01, value_light_01_pos);
+		set_seekbar(sb_light_02, tv_light_right_02, value_light_02_pos);
+		set_seekbar(sb_light_03, tv_light_right_03, value_light_03_pos);
+		set_seekbar(sb_light_04, tv_light_right_04, value_light_04_pos);
+		set_seekbar(sb_light_05, tv_light_right_05, value_light_05_pos);
+		set_seekbar(sb_light_06, tv_light_right_06, value_light_06_pos);
+		set_seekbar(sb_light_07, tv_light_right_07, value_light_07_pos);
+		set_seekbar(sb_light_08, tv_light_right_08, value_light_08_pos);
+		set_seekbar(sb_light_09, tv_light_right_09, value_light_09_pos);
+		set_seekbar(sb_light_10, tv_light_right_10, value_light_10_pos);
+		set_seekbar(sb_light_11, tv_light_right_11, value_light_11_pos);
+		set_seekbar(sb_light_12, tv_light_right_12, value_light_12_pos);
+		set_seekbar(sb_light_13, tv_light_right_13, value_light_13_pos);
+		set_seekbar(sb_light_14, tv_light_right_14, value_light_14_pos);
+		set_seekbar(sb_light_15, tv_light_right_15, value_light_15_pos);
+		set_seekbar(sb_light_16, tv_light_right_16, value_light_16_pos);
+		set_seekbar(sb_light_17, tv_light_right_17, value_light_17_pos);
+		set_seekbar(sb_light_18, tv_light_right_18, value_light_18_pos);
+		set_seekbar(sb_light_19, tv_light_right_19, value_light_19_pos);
+		set_seekbar(sb_light_20, tv_light_right_20, value_light_20_pos);
+		set_seekbar(sb_light_21, tv_light_right_21, value_light_21_pos);
+		set_seekbar(sb_light_22, tv_light_right_22, value_light_22_pos);
+		set_seekbar(sb_light_23, tv_light_right_23, value_light_23_pos);
+		set_seekbar(sb_light_24, tv_light_right_24, value_light_24_pos);
+
 	}
 
+	private void restoreParameter() {
+		mTimer.clear();
+		mTimer = mTimerHelper.getAllTimer(mPlugId, i_Current_Channel);
+		if (mTimer.size() > 0) {
+			i_Current_Type = mTimer.get(0).mType;
+			String period = mTimer.get(0).mPeriod;
+			for (int i = 0; i < 7; i++) {
+				mSelDays[i] = period.substring(i, i + 1);
+			}
+
+			value_light_01_time = mTimer.get(0).mPowerOnTime;
+			value_light_02_time = mTimer.get(1).mPowerOnTime;
+			value_light_03_time = mTimer.get(2).mPowerOnTime;
+			value_light_04_time = mTimer.get(3).mPowerOnTime;
+			value_light_05_time = mTimer.get(4).mPowerOnTime;
+			value_light_06_time = mTimer.get(5).mPowerOnTime;
+			value_light_07_time = mTimer.get(6).mPowerOnTime;
+			value_light_08_time = mTimer.get(7).mPowerOnTime;
+			value_light_09_time = mTimer.get(8).mPowerOnTime;
+			value_light_10_time = mTimer.get(9).mPowerOnTime;
+			value_light_11_time = mTimer.get(10).mPowerOnTime;
+			value_light_12_time = mTimer.get(11).mPowerOnTime;
+			value_light_13_time = mTimer.get(12).mPowerOnTime;
+			value_light_14_time = mTimer.get(13).mPowerOnTime;
+			value_light_15_time = mTimer.get(14).mPowerOnTime;
+			value_light_16_time = mTimer.get(15).mPowerOnTime;
+			value_light_17_time = mTimer.get(16).mPowerOnTime;
+			value_light_18_time = mTimer.get(17).mPowerOnTime;
+			value_light_19_time = mTimer.get(18).mPowerOnTime;
+			value_light_20_time = mTimer.get(19).mPowerOnTime;
+			value_light_21_time = mTimer.get(20).mPowerOnTime;
+			value_light_22_time = mTimer.get(21).mPowerOnTime;
+			value_light_23_time = mTimer.get(22).mPowerOnTime;
+			value_light_24_time = mTimer.get(23).mPowerOnTime;
+
+			value_light_01_pos = mTimer.get(0).light;
+			value_light_02_pos = mTimer.get(1).light;
+			value_light_03_pos = mTimer.get(2).light;
+			value_light_04_pos = mTimer.get(3).light;
+			value_light_05_pos = mTimer.get(4).light;
+			value_light_06_pos = mTimer.get(5).light;
+			value_light_07_pos = mTimer.get(6).light;
+			value_light_08_pos = mTimer.get(7).light;
+			value_light_09_pos = mTimer.get(8).light;
+			value_light_10_pos = mTimer.get(9).light;
+			value_light_11_pos = mTimer.get(10).light;
+			value_light_12_pos = mTimer.get(11).light;
+			value_light_13_pos = mTimer.get(12).light;
+			value_light_14_pos = mTimer.get(13).light;
+			value_light_15_pos = mTimer.get(14).light;
+			value_light_16_pos = mTimer.get(15).light;
+			value_light_17_pos = mTimer.get(16).light;
+			value_light_18_pos = mTimer.get(17).light;
+			value_light_19_pos = mTimer.get(18).light;
+			value_light_20_pos = mTimer.get(19).light;
+			value_light_21_pos = mTimer.get(20).light;
+			value_light_22_pos = mTimer.get(21).light;
+			value_light_23_pos = mTimer.get(22).light;
+			value_light_24_pos = mTimer.get(23).light;
+		}
+
+		cb_enable.setChecked(true);
+
+		// if (irlist_channel.size() > 0) {
+		// spinner_channel.setSelection(i_Current_Channel);
+		// }
+
+		if (irlist_type.size() > 0) {
+			spinner_type.setSelection(i_Current_Type);
+		}
+
+		// for (int i = 0; i < 7; i++) {
+		// mSelDays[i] = "1";
+		// }
+		initPeriod(mSelDays);
+
+		tv_light_01.setText(value_light_01_time);
+		tv_light_02.setText(value_light_02_time);
+		tv_light_03.setText(value_light_03_time);
+		tv_light_04.setText(value_light_04_time);
+		tv_light_05.setText(value_light_05_time);
+		tv_light_06.setText(value_light_06_time);
+		tv_light_07.setText(value_light_07_time);
+		tv_light_08.setText(value_light_08_time);
+		tv_light_09.setText(value_light_09_time);
+		tv_light_10.setText(value_light_10_time);
+		tv_light_11.setText(value_light_11_time);
+		tv_light_12.setText(value_light_12_time);
+		tv_light_13.setText(value_light_13_time);
+		tv_light_14.setText(value_light_14_time);
+		tv_light_15.setText(value_light_15_time);
+		tv_light_16.setText(value_light_16_time);
+		tv_light_17.setText(value_light_17_time);
+		tv_light_18.setText(value_light_18_time);
+		tv_light_19.setText(value_light_19_time);
+		tv_light_20.setText(value_light_20_time);
+		tv_light_21.setText(value_light_21_time);
+		tv_light_22.setText(value_light_22_time);
+		tv_light_23.setText(value_light_23_time);
+		tv_light_24.setText(value_light_24_time);
+
+		set_seekbar(sb_light_01, tv_light_right_01, value_light_01_pos);
+		set_seekbar(sb_light_02, tv_light_right_02, value_light_02_pos);
+		set_seekbar(sb_light_03, tv_light_right_03, value_light_03_pos);
+		set_seekbar(sb_light_04, tv_light_right_04, value_light_04_pos);
+		set_seekbar(sb_light_05, tv_light_right_05, value_light_05_pos);
+		set_seekbar(sb_light_06, tv_light_right_06, value_light_06_pos);
+		set_seekbar(sb_light_07, tv_light_right_07, value_light_07_pos);
+		set_seekbar(sb_light_08, tv_light_right_08, value_light_08_pos);
+		set_seekbar(sb_light_09, tv_light_right_09, value_light_09_pos);
+		set_seekbar(sb_light_10, tv_light_right_10, value_light_10_pos);
+		set_seekbar(sb_light_11, tv_light_right_11, value_light_11_pos);
+		set_seekbar(sb_light_12, tv_light_right_12, value_light_12_pos);
+		set_seekbar(sb_light_13, tv_light_right_13, value_light_13_pos);
+		set_seekbar(sb_light_14, tv_light_right_14, value_light_14_pos);
+		set_seekbar(sb_light_15, tv_light_right_15, value_light_15_pos);
+		set_seekbar(sb_light_16, tv_light_right_16, value_light_16_pos);
+		set_seekbar(sb_light_17, tv_light_right_17, value_light_17_pos);
+		set_seekbar(sb_light_18, tv_light_right_18, value_light_18_pos);
+		set_seekbar(sb_light_19, tv_light_right_19, value_light_19_pos);
+		set_seekbar(sb_light_20, tv_light_right_20, value_light_20_pos);
+		set_seekbar(sb_light_21, tv_light_right_21, value_light_21_pos);
+		set_seekbar(sb_light_22, tv_light_right_22, value_light_22_pos);
+		set_seekbar(sb_light_23, tv_light_right_23, value_light_23_pos);
+		set_seekbar(sb_light_24, tv_light_right_24, value_light_24_pos);
+	}
 	public void initPeriod(String[] selDays) {
 		mDays = getResources().getStringArray(R.array.current_week);
 		tv_peroid.setTag(getPeriodValue());
 		tv_peroid.setText(getPeriodText());
-	}
-
-	private void restoreParameter() {
-		cb_enable.setChecked(true);
 	}
 
 	@Override
@@ -814,8 +1209,15 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				int position, long id) {
 			i_Current_Type = position;
 			String str_type = parent.getItemAtPosition(position).toString();
-		}
 
+			if (Activity_Operator_Mode == OPERATOR_ADD) {
+				initParameter();
+			} else if (Activity_Operator_Mode == OPERATOR_DEL) {
+				// do nothing...
+			} else if (Activity_Operator_Mode == OPERATOR_MODIFY) {
+				restoreParameter();
+			}
+		}
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
 

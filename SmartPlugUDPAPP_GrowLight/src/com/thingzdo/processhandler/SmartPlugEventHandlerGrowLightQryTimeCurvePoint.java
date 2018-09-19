@@ -25,9 +25,11 @@ public class SmartPlugEventHandlerGrowLightQryTimeCurvePoint
 
 		if (0 == ret) {
 			String moduleID = buffer[3];
+			int channel = Integer.parseInt(buffer[5]);
 
 			mIntent.putExtra("RESULT", 0);
 			mIntent.putExtra("MODULEID", moduleID);
+			mIntent.putExtra("CHANNEL", channel);
 
 			String value = "";
 			for (int i = 5; i < buffer.length; i++) {
@@ -67,30 +69,27 @@ public class SmartPlugEventHandlerGrowLightQryTimeCurvePoint
 
 		String[] infors = command.split(",");
 		if (infors.length > 0) {
-			int channel = Integer.parseInt((infors[0]));
+			int type = Integer.parseInt((infors[0]));
+			int channel = Integer.parseInt((infors[1]));
+			String peroid = infors[2];
+			int enable = Integer.parseInt((infors[3]));
+			int count = Integer.parseInt((infors[4]));
+
 			mTimerHelper.clearTimer(moduleID, channel);
 
-			int count = Integer.parseInt((infors[1]));
-
-			int baseIdx = 2;
-			int BLOCK_SIZE = 5;
+			int baseIdx = 4;
+			int BLOCK_SIZE = 2;
 			for (int j = 0; j < count; j++) {
 				GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();
 
-				// ti.mTimerId = Integer.parseInt(infors[baseIdx + j *
-				// BLOCK_SIZE
-				// + 0]);
 				ti.mPlugId = moduleID;
-				ti.mType = Integer
+				ti.mType = type;
+				ti.mPeriod = peroid;
+				ti.light_channel = channel;
+				ti.mEnable = (enable == 1) ? true : false;
+				ti.light = Integer
 						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 0]);
 				ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 1];
-				ti.mPeriod = infors[baseIdx + j * BLOCK_SIZE + 2];
-				ti.mEnable = infors[baseIdx + j * BLOCK_SIZE + 3].equals("1")
-						? true
-						: false;
-				ti.light = Integer
-						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 4]);
-				ti.light_channel = channel;
 
 				mTimerHelper.addTimer(ti);
 			}

@@ -1,25 +1,33 @@
 package com.thingzdo.ui.control;
 
+import java.util.ArrayList;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurvePointHelper;
 import com.thingzdo.dataprovider.SmartPlugHelper;
 import com.thingzdo.internet.RevCmdFromSocketThread;
 import com.thingzdo.internet.UDPClient;
+import com.thingzdo.processhandler.SmartPlugMessage;
 import com.thingzdo.smartplug_udp.R;
+import com.thingzdo.ui.GrowLightTimerCurvePointDefine;
 import com.thingzdo.ui.SmartPlugDefine;
 import com.thingzdo.ui.common.PubDefine;
+import com.thingzdo.ui.common.StringUtils;
 import com.thingzdo.ui.common.TitledActivity;
 import com.thingzdo.ui.manage.AddSocketActivity2;
+import com.thingzdo.ui.smartplug.PubStatus;
 import com.thingzdo.ui.smartplug.SmartPlugApplication;
 
 public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
@@ -36,6 +44,12 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	private SmartPlugDefine mPlug = null;
 	private String mPlugId = "0";
 	private String mPlugIp = "0.0.0.0";
+
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_01 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_02 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_03 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_04 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_05 = new ArrayList<GrowLightTimerCurvePointDefine>();
 
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
@@ -64,6 +78,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_QRY_TIMECURVEPOINT_ACTION)) {
 				String moduleID = intent.getStringExtra("MODULEID");
+				int channel = intent.getIntExtra("CHANNEL", 0);
 
 				refreshView();
 
@@ -73,14 +88,54 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 				String moduleID = intent.getStringExtra("MODULEID");
 				int channel = intent.getIntExtra("CHANNEL", 0);
 
-				refreshView();
+				queryTimeCurvePoint(channel);
 			}
 		}
 	};
 
-	// 刷新界面信息
+	// 重新获取数据&刷新界面信息
 	private void refreshView() {
+		// 重新获取数据
+		mTimer_01.clear();
+		mTimer_01 = mTimerHelper.getAllTimer(mPlugId, 1);
+		mTimer_02.clear();
+		mTimer_02 = mTimerHelper.getAllTimer(mPlugId, 2);
+		mTimer_03.clear();
+		mTimer_03 = mTimerHelper.getAllTimer(mPlugId, 3);
+		mTimer_04.clear();
+		mTimer_04 = mTimerHelper.getAllTimer(mPlugId, 4);
+		mTimer_05.clear();
+		mTimer_05 = mTimerHelper.getAllTimer(mPlugId, 5);
 
+		// 根据数据重新画图
+		DrawView();
+	}
+
+	private void DrawView() {
+		Toast.makeText(this, "Now is drawing...", Toast.LENGTH_SHORT).show();
+	}
+
+	private void queryAllTimeCurvePoint() {
+		for (int i = 1; i <= 5; i++) {
+			queryTimeCurvePoint(i);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void queryTimeCurvePoint(int channel) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVEPOINT)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(channel);
+
+		sendMsg(true, sb.toString(), true);
 	}
 
 	@Override
@@ -99,6 +154,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		registerReceiver(mDetailRev, filter);
 
 		mPlugHelper = new SmartPlugHelper(this);
+		mTimerHelper = new SmartPlugGrowLightTimerCurvePointHelper(this);
 		Intent intent = getIntent();
 		mPlugId = intent.getStringExtra("PLUGID");
 		if (TextUtils.isEmpty(mPlugId)) {
@@ -114,6 +170,12 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 			mTcpSocketThread = new RevCmdFromSocketThread();
 			mTcpSocketThread.start();
 		}
+
+		new Handler().postDelayed(new Runnable() {
+			public void run() {
+				queryAllTimeCurvePoint();
+			}
+		}, 1000);
 	}
 
 	@Override
