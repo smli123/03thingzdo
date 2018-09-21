@@ -19,20 +19,26 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurvePointHelper;
 import com.thingzdo.dataprovider.SmartPlugHelper;
 import com.thingzdo.internet.RevCmdFromSocketThread;
 import com.thingzdo.internet.UDPClient;
+import com.thingzdo.processhandler.SmartPlugMessage;
 import com.thingzdo.smartplug_udp.R;
+import com.thingzdo.ui.GrowLightTimerCurvePointDefine;
 import com.thingzdo.ui.SmartPlugDefine;
 import com.thingzdo.ui.common.PubDefine;
+import com.thingzdo.ui.common.StringUtils;
 import com.thingzdo.ui.common.TitledActivity;
 import com.thingzdo.ui.manage.AddSocketActivity2;
+import com.thingzdo.ui.smartplug.PubStatus;
 import com.thingzdo.ui.smartplug.SmartPlugApplication;
 
 public class DetailGrowLightTimeCurveActivity extends TitledActivity
@@ -43,21 +49,32 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 	private LineChart mLineChart;
 
 	private SmartPlugHelper mPlugHelper = null;
+	private SmartPlugGrowLightTimerCurvePointHelper mTimerHelper = null;
 	private SmartPlugDefine mPlug = null;
 	private String mPlugId = "0";
 	private String mPlugIp = "0.0.0.0";
 
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
-	private List<Integer> lists = new ArrayList<Integer>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_01 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_02 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_03 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_04 = new ArrayList<GrowLightTimerCurvePointDefine>();
+	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_05 = new ArrayList<GrowLightTimerCurvePointDefine>();
 
-	private void setLists() {
-		lists.clear();
-		for (int i = 1; i < 20; i++) {
-			int value = ((int) (Math.random() * 100));
-			lists.add(value);
-		}
-	}
+	private ArrayList<Integer> yList_01 = new ArrayList<Integer>();
+	private ArrayList<Integer> yList_02 = new ArrayList<Integer>();
+	private ArrayList<Integer> yList_03 = new ArrayList<Integer>();
+	private ArrayList<Integer> yList_04 = new ArrayList<Integer>();
+	private ArrayList<Integer> yList_05 = new ArrayList<Integer>();
+
+	private ArrayList<String> xList_01 = new ArrayList<String>();
+	private ArrayList<String> xList_02 = new ArrayList<String>();
+	private ArrayList<String> xList_03 = new ArrayList<String>();
+	private ArrayList<String> xList_04 = new ArrayList<String>();
+	private ArrayList<String> xList_05 = new ArrayList<String>();
+
+	private List<Integer> lists = new ArrayList<Integer>();
 
 	private BroadcastReceiver mDetailRev = new BroadcastReceiver() {
 		@Override
@@ -70,15 +87,20 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 				}
 			}
 
-			if (intent.getAction().equals(PubDefine.PLUG_NOTIFY_POWER)) {
-				if (true == NotifyProcessor.powerNotify(
-						DetailGrowLightTimeCurveActivity.this, intent)) {
-					updateUI();
-				}
-			}
+			if (intent.getAction().equals(
+					PubDefine.PLUG_GROWLIGHT_QRY_TIMECURVEPOINT_ACTION)) {
+				String moduleID = intent.getStringExtra("MODULEID");
+				int channel = intent.getIntExtra("CHANNEL", 0);
 
-			if (intent.getAction().equals(PubDefine.PLUG_POWER_ACTION)) {
-				// nothing to do;
+				refreshView();
+
+			}
+			if (intent.getAction().equals(
+					PubDefine.PLUG_GROWLIGHT_SET_TIMECURVEPOINT_ACTION)) {
+				String moduleID = intent.getStringExtra("MODULEID");
+				int channel = intent.getIntExtra("CHANNEL", 0);
+
+				queryTimeCurvePoint(channel);
 			}
 		}
 	};
@@ -91,12 +113,14 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 		SmartPlugApplication.getInstance().addActivity(this);
 
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.PLUG_POWER_ACTION);
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
-		filter.addAction(PubDefine.PLUG_NOTIFY_POWER);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_QRY_TIMECURVEPOINT_ACTION);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_TIMECURVEPOINT_ACTION);
 		registerReceiver(mDetailRev, filter);
 
 		mPlugHelper = new SmartPlugHelper(this);
+		mTimerHelper = new SmartPlugGrowLightTimerCurvePointHelper(this);
+
 		Intent intent = getIntent();
 		mPlugId = intent.getStringExtra("PLUGID");
 		if (TextUtils.isEmpty(mPlugId)) {
@@ -113,7 +137,84 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 
+		// drawTheChart();
+
+		new Handler().postDelayed(new Runnable() {
+			public void run() {
+				queryAllTimeCurvePoint();
+			}
+		}, 1000);
+	}
+
+	private void queryAllTimeCurvePoint() {
+		for (int i = 1; i <= 5; i++) {
+			queryTimeCurvePoint(i);
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void queryTimeCurvePoint(int channel) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVEPOINT)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(channel);
+
+		sendMsg(true, sb.toString(), true);
+	}
+
+	// 重新获取数据&刷新界面信息
+	private void refreshView() {
+		// 重新获取数据
+		mTimer_01.clear();
+		mTimer_01 = mTimerHelper.getAllTimer(mPlugId, 1);
+		mTimer_02.clear();
+		mTimer_02 = mTimerHelper.getAllTimer(mPlugId, 2);
+		mTimer_03.clear();
+		mTimer_03 = mTimerHelper.getAllTimer(mPlugId, 3);
+		mTimer_04.clear();
+		mTimer_04 = mTimerHelper.getAllTimer(mPlugId, 4);
+		mTimer_05.clear();
+		mTimer_05 = mTimerHelper.getAllTimer(mPlugId, 5);
+
+		copyData(mTimer_01, xList_01, yList_01);
+		copyData(mTimer_02, xList_02, yList_02);
+		copyData(mTimer_03, xList_03, yList_03);
+		copyData(mTimer_04, xList_04, yList_04);
+		copyData(mTimer_05, xList_05, yList_05);
+
+		// 根据数据重新画图
 		drawTheChart();
+	}
+
+	private void copyData(ArrayList<GrowLightTimerCurvePointDefine> mTimer,
+			ArrayList<String> xList, ArrayList<Integer> yList) {
+		xList.clear();
+		yList.clear();
+
+		for (int i = 0; i < mTimer.size(); i++) {
+			GrowLightTimerCurvePointDefine ti = mTimer.get(i);
+			xList.add(ti.mPowerOnTime);
+			yList.add((Integer) ti.light);
+		}
+	}
+
+	private void setLists() {
+		lists.clear();
+		for (int i = 0; i < yList_01.size(); i++) {
+			lists.add(yList_01.get(i));
+		}
+
+		// for (int i = 1; i < 3; i++) {
+		// int value = ((int) (Math.random() * 100));
+		// lists.add(value);
+		// }
 	}
 
 	public void drawTheChart() {
@@ -172,15 +273,15 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 		renderer.setBackgroundColor(Color.WHITE);
 
 		// 设置Title的内容和大小
-		renderer.setChartTitle("访问量统计");
+		renderer.setChartTitle("亮度时间曲线");
 		renderer.setChartTitleTextSize(50);
 
 		// 图表与四周的边距
 		renderer.setMargins(new int[]{80, 80, 50, 50});
 
 		// 设置X,Y轴title的内容和大小
-		renderer.setXTitle("日期");
-		renderer.setYTitle("访问数");
+		renderer.setXTitle("时间");
+		renderer.setYTitle("亮度");
 		renderer.setAxisTitleTextSize(30);
 		// renderer.setAxesColor(Color.WHITE);
 		renderer.setLabelsColor(Color.BLACK);
@@ -210,7 +311,7 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 		renderer.setXAxisMax(20);
 		// 设置Y轴的最小数字和最大数字
 		renderer.setYAxisMin(0);
-		renderer.setYAxisMax(100);
+		renderer.setYAxisMax(255);
 
 		// 设置渲染器显示缩放按钮
 		renderer.setZoomButtonsVisible(true);

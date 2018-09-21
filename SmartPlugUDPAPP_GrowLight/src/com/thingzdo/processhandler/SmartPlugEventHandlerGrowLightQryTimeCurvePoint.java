@@ -77,7 +77,7 @@ public class SmartPlugEventHandlerGrowLightQryTimeCurvePoint
 
 			mTimerHelper.clearTimer(moduleID, channel);
 
-			int baseIdx = 4;
+			int baseIdx = 5;
 			int BLOCK_SIZE = 2;
 			for (int j = 0; j < count; j++) {
 				GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();
