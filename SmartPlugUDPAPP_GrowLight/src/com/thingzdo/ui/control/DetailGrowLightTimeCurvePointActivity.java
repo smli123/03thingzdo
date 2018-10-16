@@ -339,11 +339,14 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		}
 
 		setTitle(SmartPlugApplication.getInstance().getResources()
-				.getString(R.string.smartplug_growlight_timecurve));
+				.getString(R.string.smartplug_growlight_timecurve)
+				+ "New");
 		setTitleLeftButton(R.string.smartplug_goback,
 				R.drawable.title_btn_selector, this);
 
 		view_show = (LineGraphicView) findViewById(R.id.view_show);
+		view_show.setVisibility(View.GONE);
+
 		tv_add = (TextView) findViewById(R.id.tv_add);
 		tv_del = (TextView) findViewById(R.id.tv_del);
 		tv_modify = (TextView) findViewById(R.id.tv_modify);
