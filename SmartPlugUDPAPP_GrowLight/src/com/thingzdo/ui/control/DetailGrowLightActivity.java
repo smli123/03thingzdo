@@ -118,12 +118,12 @@ public class DetailGrowLightActivity extends TitledActivity
 
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION)) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				loadData();
+				i_light_01 = intent.getIntExtra("LIGHT01", 0);
+				i_light_02 = intent.getIntExtra("LIGHT02", 0);
+				i_light_03 = intent.getIntExtra("LIGHT03", 0);
+				i_light_04 = intent.getIntExtra("LIGHT04", 0);
+				i_light_05 = intent.getIntExtra("LIGHT05", 0);
+
 				updateUI();
 			}
 		}
