@@ -111,9 +111,8 @@ public class DetailGrowLightManualActivity extends TitledActivity
 
 		UDPClient.getInstance().setIPAddress(mPlugIp);
 
-		init();
-
 		loadData();
+		init();
 
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
 			mTcpSocketThread = new RevCmdFromSocketThread();
@@ -311,7 +310,7 @@ public class DetailGrowLightManualActivity extends TitledActivity
 	}
 
 	private void LightPos() {
-		String data = String.valueOf(value_light_01_pos) + ","
+		String data = "0," + String.valueOf(value_light_01_pos) + ","
 				+ String.valueOf(value_light_02_pos) + ","
 				+ String.valueOf(value_light_03_pos) + ","
 				+ String.valueOf(value_light_04_pos) + ","

@@ -24,15 +24,15 @@ public class SmartPlugEventHandlerGrowLightSetBright
 			mIntent.putExtra("RESULT", 0);
 
 			mIntent.putExtra("LIGHT01",
-					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 1])));
-			mIntent.putExtra("LIGHT02",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 2])));
-			mIntent.putExtra("LIGHT03",
+			mIntent.putExtra("LIGHT02",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 3])));
-			mIntent.putExtra("LIGHT04",
+			mIntent.putExtra("LIGHT03",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 4])));
-			mIntent.putExtra("LIGHT05",
+			mIntent.putExtra("LIGHT04",
 					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 5])));
+			mIntent.putExtra("LIGHT05",
+					Integer.parseInt((buffer[EVENT_MESSAGE_HEADER + 6])));
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

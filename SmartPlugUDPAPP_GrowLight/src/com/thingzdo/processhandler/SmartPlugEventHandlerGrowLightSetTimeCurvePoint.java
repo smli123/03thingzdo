@@ -66,15 +66,15 @@ public class SmartPlugEventHandlerGrowLightSetTimeCurvePoint
 
 		String[] infors = command.split(",");
 		if (infors.length >= 5) {
-			int type = Integer.parseInt((infors[0]));
-			int channel = Integer.parseInt((infors[1]));
-			String peroid = infors[2];
-			int enable = Integer.parseInt((infors[3]));
+			int channel = Integer.parseInt((infors[0]));
+			String peroid = infors[1];
+			int enable = Integer.parseInt((infors[2]));
+			int type = Integer.parseInt((infors[3]));
 			int count = Integer.parseInt((infors[4]));
 
 			mTimerHelper.clearTimer(moduleID, channel);
 
-			int baseIdx = 4;
+			int baseIdx = 5;
 			int BLOCK_SIZE = 2;
 			for (int j = 0; j < count; j++) {
 				GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();

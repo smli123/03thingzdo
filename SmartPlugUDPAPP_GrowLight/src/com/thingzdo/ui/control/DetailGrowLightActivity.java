@@ -115,6 +115,17 @@ public class DetailGrowLightActivity extends TitledActivity
 
 				saveData();
 			}
+
+			if (intent.getAction().equals(
+					PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION)) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				loadData();
+				updateUI();
+			}
 		}
 	};
 
@@ -148,6 +159,7 @@ public class DetailGrowLightActivity extends TitledActivity
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
 		filter.addAction(PubDefine.PLUG_GROWLIGHT_QRY_STATUS_ACTION);
 		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_WORK_MODE_ACTION);
+		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_BRIGHT_ACTION);
 		registerReceiver(mDetailRev, filter);
 
 		mPlugHelper = new SmartPlugHelper(this);
@@ -267,7 +279,10 @@ public class DetailGrowLightActivity extends TitledActivity
 		// TODO Auto-generated method stub
 		super.onResume();
 		SmartPlugApplication.resetTask();
+		loadData();
 		init();
+
+		updateUI();
 	}
 
 	@Override
@@ -354,9 +369,9 @@ public class DetailGrowLightActivity extends TitledActivity
 	}
 
 	private void light_control(boolean isOpen) {
-		String data = "255,255,255,255,255";
+		String data = "0,100,100,100,100,100";
 		if (isOpen == false) {
-			data = "0,0,0,0,0";
+			data = "0,0,0,0,0,0";
 		}
 
 		StringBuffer sb = new StringBuffer();
@@ -494,6 +509,18 @@ public class DetailGrowLightActivity extends TitledActivity
 		setTitle(mPlug.mPlugName);
 
 		spinner_workmode.setSelection(i_Current_WorkMode);
+
+		if (i_light_01 == 0 && i_light_02 == 0 && i_light_03 == 0
+				&& i_light_04 == 0 && i_light_05 == 0) {
+			m_isOpen = false;
+		} else {
+			m_isOpen = true;
+		}
+
+		iv_light_control.setImageDrawable(getResources().getDrawable(
+				m_isOpen == true
+						? R.drawable.smp_light_on_big
+						: R.drawable.smp_light_off_big));
 
 		// // 使用定时器来 更新 时间
 		// new Timer("GrowLightTime").schedule(new TimerTask() {

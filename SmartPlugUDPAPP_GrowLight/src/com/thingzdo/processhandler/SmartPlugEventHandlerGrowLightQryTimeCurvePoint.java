@@ -69,10 +69,10 @@ public class SmartPlugEventHandlerGrowLightQryTimeCurvePoint
 
 		String[] infors = command.split(",");
 		if (infors.length > 0) {
-			int type = Integer.parseInt((infors[0]));
-			int channel = Integer.parseInt((infors[1]));
-			String peroid = infors[2];
-			int enable = Integer.parseInt((infors[3]));
+			int channel = Integer.parseInt((infors[0]));
+			String peroid = infors[1];
+			int enable = Integer.parseInt((infors[2]));
+			int type = Integer.parseInt((infors[3]));
 			int count = Integer.parseInt((infors[4]));
 
 			mTimerHelper.clearTimer(moduleID, channel);

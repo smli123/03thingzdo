@@ -181,7 +181,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 
 	private void queryTimeCurvePoint(int channel) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVEPOINT)
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVE)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)

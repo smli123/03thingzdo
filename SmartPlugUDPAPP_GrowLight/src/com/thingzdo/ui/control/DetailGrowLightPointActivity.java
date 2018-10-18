@@ -362,17 +362,17 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				+ value_light_24_time;
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_TIMECURVEPOINT)
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_TIMECURVE)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
-				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
-				.append(i_Current_Type)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(i_Current_Channel)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(tv_peroid.getTag())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(strEnable)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(i_Current_Type)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(String.valueOf(count))
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(points);
@@ -433,17 +433,17 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				+ value_light_24_time;
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_TIMECURVEPOINT)
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_TIMECURVE)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
-				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
-				.append(i_Current_Type)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(i_Current_Channel)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(tv_peroid.getTag())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(strEnable)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(i_Current_Type)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(String.valueOf(count))
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(points);
@@ -453,7 +453,7 @@ public class DetailGrowLightPointActivity extends TitledActivity
 
 	// private void queryTimeCurvePoint() {
 	// StringBuffer sb = new StringBuffer();
-	// sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVEPOINT)
+	// sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVE)
 	// .append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 	// .append(PubStatus.getUserName())
 	// .append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)

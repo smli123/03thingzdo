@@ -137,6 +137,7 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 
+		refreshView();
 		// drawTheChart();
 
 		new Handler().postDelayed(new Runnable() {
@@ -160,7 +161,7 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 
 	private void queryTimeCurvePoint(int channel) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVEPOINT)
+		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_QRY_TIMECURVE)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
@@ -173,15 +174,15 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 	private void refreshView() {
 		// 重新获取数据
 		mTimer_01.clear();
-		mTimer_01 = mTimerHelper.getAllTimer(mPlugId, 1);
+		mTimer_01 = mTimerHelper.getAllTimer(mPlugId, 0);
 		mTimer_02.clear();
-		mTimer_02 = mTimerHelper.getAllTimer(mPlugId, 2);
+		mTimer_02 = mTimerHelper.getAllTimer(mPlugId, 1);
 		mTimer_03.clear();
-		mTimer_03 = mTimerHelper.getAllTimer(mPlugId, 3);
+		mTimer_03 = mTimerHelper.getAllTimer(mPlugId, 2);
 		mTimer_04.clear();
-		mTimer_04 = mTimerHelper.getAllTimer(mPlugId, 4);
+		mTimer_04 = mTimerHelper.getAllTimer(mPlugId, 3);
 		mTimer_05.clear();
-		mTimer_05 = mTimerHelper.getAllTimer(mPlugId, 5);
+		mTimer_05 = mTimerHelper.getAllTimer(mPlugId, 4);
 
 		copyData(mTimer_01, xList_01, yList_01);
 		copyData(mTimer_02, xList_02, yList_02);

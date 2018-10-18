@@ -170,6 +170,85 @@
 		        android:background="@color/lightwhite"        
 		        android:contentDescription="@null" />
 		    
+		    
+			<RelativeLayout
+			    android:id="@+id/layout_period"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/image_sep_2"
+		        android:background="@color/white"
+			    android:layout_marginTop="10dp"
+			    android:layout_marginBottom="10dp"
+			    android:layout_marginLeft="10dp"
+			    android:layout_marginRight="10dp"> 		
+			    
+			<RelativeLayout
+				    android:id="@+id/layout_period_header"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+				    android:paddingTop="10dp" 	        
+				    android:paddingBottom="10dp"
+				    android:background="@drawable/common_list_selector"> 
+			        
+				    <ImageView
+				        android:id="@+id/image_icon_period"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:src="@drawable/smp_period"
+				        android:contentDescription="@null"
+				        android:layout_marginLeft="5dp"
+				        android:layout_centerVertical="true"
+				        android:visibility="visible"/>		    
+			    
+			    	<TextView
+				        android:id="@+id/tv_period"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginLeft="5dp"
+				        android:layout_centerVertical="true"
+				        android:text="@string/timer_task_peroid"
+				        android:textSize="@dimen/text_size_larsamll"
+				        android:layout_toRightOf="@+id/image_icon_period"
+				        android:textColor="@color/black" />
+			    	
+			    	<TextView
+				        android:id="@+id/tv_select_days"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginLeft="5dp"
+				        android:layout_centerVertical="true"
+				        android:text="@null"
+				        android:textSize="@dimen/text_size_norsamll"
+				        android:layout_toLeftOf="@+id/image_select_days"
+				        android:layout_marginRight="5dp"
+				        android:textColor="#037BFF" />	    	
+			    	
+				    <ImageView
+				        android:id="@+id/image_select_days"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_centerVertical="true"
+			            android:layout_alignParentRight="true"
+			            android:contentDescription="@null"
+			            android:scaleType="centerCrop"
+			            android:layout_marginRight="@dimen/listitem_user_icon_horizaontal_padding"
+			            android:src="@drawable/smp_more" />			    	
+			    </RelativeLayout>
+					
+		    </RelativeLayout>
+    
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_3"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/ll_function_control_1"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		    
 		</RelativeLayout>
 		   
 		<RelativeLayout

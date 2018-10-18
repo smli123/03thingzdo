@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.thingzdo.dataprovider.SmartPlugHelper;
@@ -39,10 +40,15 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 	private TextView tv_light_sunup_time;
 	private TextView tv_light_sundown_time;
+	private RelativeLayout layout_period_header;
+	private TextView tv_select_days;
 	private Button btn_submit;
 
 	private String str_sunup = "06:00:00";
 	private String str_sundown = "18:00:00";
+
+	private String[] mDays = null;
+	private String[] mSelDays = {"0", "0", "0", "0", "0", "0", "0"};
 
 	private SmartPlugHelper mPlugHelper = null;
 	private SmartPlugDefine mPlug = null;
@@ -106,6 +112,8 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 		init();
 
+		initNewTimer();
+
 		loadData();
 
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
@@ -113,7 +121,6 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 	}
-
 	private void saveData() {
 		editor = mSharedPreferences.edit();
 		editor.putString("SUNUPTIME" + mPlugId, str_sunup);
@@ -189,14 +196,70 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 			case R.id.btn_submit :
 				do_commit();
 				break;
+			case R.id.layout_period_header :
+				Intent intent = new Intent();
+				intent.setClass(this, SetPeriodActivity.class);
+				intent.putExtra("selected_days", mSelDays);
+				startActivityForResult(intent, 0);
+				break;
 			default :
 				break;
 		}
 	}
 
+	public void initPeriod(String[] selDays) {
+		mDays = getResources().getStringArray(R.array.current_week);
+		tv_select_days.setTag(getPeriodValue());
+		tv_select_days.setText(getPeriodText());
+	}
+
+	private String getPeriodValue() {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < mSelDays.length; i++) {
+			sb.append(mSelDays[i]);
+		}
+		return sb.toString();
+	}
+
+	private String getPeriodText() {
+		StringBuffer sbDay = new StringBuffer();
+		for (int i = 0; i < mSelDays.length; i++) {
+			if (mSelDays[i].equals("1")) {
+				if (i < mSelDays.length - 1) {
+					sbDay.append(mDays[i]).append(" ");
+				} else {
+					sbDay.append(mDays[i]);
+				}
+			}
+		}
+
+		return sbDay.toString();
+	}
+
+	private void initNewTimer() {
+		for (int i = 0; i < 7; i++) {
+			mSelDays[i] = "1";
+		}
+		initPeriod(mSelDays);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if (null == data) {
+			return;
+		}
+		if (0 == resultCode) {
+			mSelDays = data.getStringArrayExtra("selected_days");
+		}
+		tv_select_days.setTag(getPeriodValue());
+		tv_select_days.setText(getPeriodText());
+	}
+
 	private void do_commit() {
 		String data = tv_light_sunup_time.getText().toString() + ","
-				+ tv_light_sundown_time.getText().toString();
+				+ tv_light_sundown_time.getText().toString() + ","
+				+ tv_select_days.getTag();
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(SmartPlugMessage.CMD_SP_GROWLIGHT_SET_SUNTIME)
@@ -283,6 +346,10 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 		tv_light_sunup_time = (TextView) findViewById(R.id.tv_light_sunup_time);
 		tv_light_sundown_time = (TextView) findViewById(R.id.tv_light_sundown_time);
+		tv_select_days = (TextView) findViewById(R.id.tv_select_days);
+
+		layout_period_header = (RelativeLayout) findViewById(R.id.layout_period_header);
+		layout_period_header.setOnClickListener(this);
 
 		btn_submit = (Button) findViewById(R.id.btn_submit);
 

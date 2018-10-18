@@ -288,18 +288,22 @@ public class SmartPlugEventHandler extends Handler {
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_BRIGHT,
 				new SmartPlugEventHandlerGrowLightSetBright()));
+
+		// Curve
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_GROWLIGHT_QRY_TIMECURVE,
-				new SmartPlugEventHandlerGrowLightQryTimeCurve()));
+				new SmartPlugEventHandlerGrowLightQryTimeCurvePoint()));
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_TIMECURVE,
-				new SmartPlugEventHandlerGrowLightSetTimeCurve()));
+				new SmartPlugEventHandlerGrowLightSetTimeCurvePoint()));
+		// New Curve
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_GROWLIGHT_QRY_TIMECURVEPOINT,
 				new SmartPlugEventHandlerGrowLightQryTimeCurvePoint()));
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_TIMECURVEPOINT,
 				new SmartPlugEventHandlerGrowLightSetTimeCurvePoint()));
+
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_GROWLIGHT_SET_TEMPERATURE,
 				new SmartPlugEventHandlerGrowLightSetTemperature()));
