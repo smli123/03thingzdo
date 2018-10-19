@@ -41,7 +41,7 @@ public class LineGraphicView extends View {
 	/**
 	 * data
 	 */
-	private Linestyle mStyle = Linestyle.Curve;
+	private Linestyle mStyle = Linestyle.Line;
 
 	private int canvasHeight;
 	private int canvasWidth;

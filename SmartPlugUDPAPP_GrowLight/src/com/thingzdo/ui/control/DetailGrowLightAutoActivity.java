@@ -144,6 +144,7 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 		editor = mSharedPreferences.edit();
 		editor.putString("SUNUPTIME" + mPlugId, str_sunup);
 		editor.putString("SUNDOWNTIME" + mPlugId, str_sundown);
+		editor.putString("SUNPEROID" + mPlugId, mPeroid);
 
 		editor.commit();
 	}
@@ -153,6 +154,8 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 				"06:00:00");
 		str_sundown = mSharedPreferences.getString("SUNDOWNTIME" + mPlugId,
 				"18:00:00");
+		mPeroid = mSharedPreferences.getString("SUNPEROID" + mPlugId,
+				"0000000");
 	}
 
 	@Override

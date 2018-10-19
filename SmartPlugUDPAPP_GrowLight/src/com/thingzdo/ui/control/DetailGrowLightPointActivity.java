@@ -3,10 +3,12 @@ package com.thingzdo.ui.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,6 +49,7 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	private static int OPERATOR_ADD = 0;
 	private static int OPERATOR_DEL = 1;
 	private static int OPERATOR_MODIFY = 2;
+	private static int OPERATOR_SELF_ADAPTER = 3;
 
 	private int Activity_Operator_Mode = OPERATOR_ADD;
 	private Context mContext;
@@ -200,6 +203,11 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	private String mPlugIp = "0.0.0.0";
 	private ArrayList<GrowLightTimerCurvePointDefine> mTimer = new ArrayList<GrowLightTimerCurvePointDefine>();
 
+	private int i_Current_lushu = 5;
+
+	private SharedPreferences mSharedPreferences;
+	private SharedPreferences.Editor editor;
+
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
 	private BroadcastReceiver mDetailRev = new BroadcastReceiver() {
@@ -231,6 +239,9 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		SmartPlugApplication.getInstance().addActivity(this);
 		mContext = this;
 
+		mSharedPreferences = getSharedPreferences("GROWLIGHT"
+				+ PubStatus.g_CurUserName, Activity.MODE_PRIVATE);
+
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
 		filter.addAction(PubDefine.PLUG_GROWLIGHT_SET_TIMECURVEPOINT_ACTION);
@@ -245,6 +256,8 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		}
 		mPlugIp = intent.getStringExtra("PLUGIP");
 
+		loadData();
+
 		String operator_mode = intent.getStringExtra("OPERATE");
 		if (operator_mode.equals("ADD") == true) {
 			Activity_Operator_Mode = OPERATOR_ADD;
@@ -252,6 +265,8 @@ public class DetailGrowLightPointActivity extends TitledActivity
 			Activity_Operator_Mode = OPERATOR_DEL;
 		} else if (operator_mode.equals("MODIFY") == true) {
 			Activity_Operator_Mode = OPERATOR_MODIFY;
+		} else if (operator_mode.equals("SELF_ADAPTER") == true) {
+			Activity_Operator_Mode = OPERATOR_SELF_ADAPTER;
 		}
 
 		UDPClient.getInstance().setIPAddress(mPlugIp);
@@ -262,6 +277,10 @@ public class DetailGrowLightPointActivity extends TitledActivity
 			mTcpSocketThread = new RevCmdFromSocketThread();
 			mTcpSocketThread.start();
 		}
+	}
+
+	private void loadData() {
+		i_Current_lushu = mSharedPreferences.getInt("SETROUTES" + mPlugId, 5);
 	}
 
 	@Override
@@ -297,6 +316,8 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				} else if (Activity_Operator_Mode == OPERATOR_DEL) {
 					delTimeCurvePoint();
 				} else if (Activity_Operator_Mode == OPERATOR_MODIFY) {
+					addTimeCurvePoint();
+				} else if (Activity_Operator_Mode == OPERATOR_SELF_ADAPTER) {
 					addTimeCurvePoint();
 				}
 
@@ -623,16 +644,49 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		// init spinner Channel data
 		irlist_channel.clear();
 		Resources res = SmartPlugApplication.getInstance().getResources();
-		irlist_channel.add(res
-				.getString(R.string.smartplug_growlight_lushu_control_1));
-		irlist_channel.add(res
-				.getString(R.string.smartplug_growlight_lushu_control_2));
-		irlist_channel.add(res
-				.getString(R.string.smartplug_growlight_lushu_control_3));
-		irlist_channel.add(res
-				.getString(R.string.smartplug_growlight_lushu_control_4));
-		irlist_channel.add(res
-				.getString(R.string.smartplug_growlight_lushu_control_5));
+
+		switch (i_Current_lushu) {
+			case 1 :
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_1));
+				break;
+			case 2 :
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_1));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_2));
+				break;
+			case 3 :
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_1));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_2));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_3));
+				break;
+			case 4 :
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_1));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_2));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_3));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_4));
+				break;
+			case 5 :
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_1));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_2));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_3));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_4));
+				irlist_channel
+						.add(res.getString(R.string.smartplug_growlight_lushu_control_5));
+				break;
+		}
 
 		ArrayAdapter<String> adapter_channel = new ArrayAdapter<String>(this,
 				R.layout.activity_detail_aircon2item, R.id.tv_item,
@@ -791,9 +845,17 @@ public class DetailGrowLightPointActivity extends TitledActivity
 			restoreParameter();
 		} else if (Activity_Operator_Mode == OPERATOR_MODIFY) {
 			restoreParameter();
+		} else if (Activity_Operator_Mode == OPERATOR_SELF_ADAPTER) {
+			// if i_Current_Channel exist, must be resore. Or init
+			ArrayList<GrowLightTimerCurvePointDefine> items = mTimerHelper
+					.getAllTimer(mPlugId, i_Current_Channel);
+			if (items.size() <= 0) {
+				initParameter();
+			} else {
+				restoreParameter();
+			}
 		}
 	}
-
 	private void set_seekbar(SeekBar sb, TextView tv_light, int value) {
 		sb.setProgress(value);
 		tv_light.setText(String.valueOf(value));
@@ -801,6 +863,7 @@ public class DetailGrowLightPointActivity extends TitledActivity
 
 	private void initParameter() {
 		cb_enable.setChecked(true);
+		i_Current_Type = 0;
 		if (irlist_channel.size() > 0) {
 			spinner_channel.setSelection(i_Current_Channel);
 		}
@@ -837,6 +900,31 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		tv_light_22.setText(value_light_22_time);
 		tv_light_23.setText(value_light_23_time);
 		tv_light_24.setText(value_light_24_time);
+
+		value_light_01_pos = 0;
+		value_light_02_pos = 0;
+		value_light_03_pos = 0;
+		value_light_04_pos = 0;
+		value_light_05_pos = 0;
+		value_light_06_pos = 0;
+		value_light_07_pos = 0;
+		value_light_08_pos = 0;
+		value_light_09_pos = 0;
+		value_light_10_pos = 0;
+		value_light_11_pos = 0;
+		value_light_12_pos = 0;
+		value_light_13_pos = 0;
+		value_light_14_pos = 0;
+		value_light_15_pos = 0;
+		value_light_16_pos = 0;
+		value_light_17_pos = 0;
+		value_light_18_pos = 0;
+		value_light_19_pos = 0;
+		value_light_20_pos = 0;
+		value_light_21_pos = 0;
+		value_light_22_pos = 0;
+		value_light_23_pos = 0;
+		value_light_24_pos = 0;
 
 		set_seekbar(sb_light_01, tv_light_right_01, value_light_01_pos);
 		set_seekbar(sb_light_02, tv_light_right_02, value_light_02_pos);
@@ -1196,6 +1284,8 @@ public class DetailGrowLightPointActivity extends TitledActivity
 				int position, long id) {
 			i_Current_Channel = position;
 			String str_Channel = parent.getItemAtPosition(position).toString();
+
+			updateALL();
 		}
 
 		@Override
@@ -1214,17 +1304,30 @@ public class DetailGrowLightPointActivity extends TitledActivity
 			i_Current_Type = position;
 			String str_type = parent.getItemAtPosition(position).toString();
 
-			if (Activity_Operator_Mode == OPERATOR_ADD) {
-				initParameter();
-			} else if (Activity_Operator_Mode == OPERATOR_DEL) {
-				// do nothing...
-			} else if (Activity_Operator_Mode == OPERATOR_MODIFY) {
-				restoreParameter();
-			}
+			// updateALL();
 		}
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
 
+		}
+	}
+
+	private void updateALL() {
+		if (Activity_Operator_Mode == OPERATOR_ADD) {
+			initParameter();
+		} else if (Activity_Operator_Mode == OPERATOR_DEL) {
+			// do nothing...
+		} else if (Activity_Operator_Mode == OPERATOR_MODIFY) {
+			restoreParameter();
+		} else if (Activity_Operator_Mode == OPERATOR_SELF_ADAPTER) {
+			// if i_Current_Channel exist, must be resore. Or init
+			ArrayList<GrowLightTimerCurvePointDefine> items = mTimerHelper
+					.getAllTimer(mPlugId, i_Current_Channel);
+			if (items.size() <= 0) {
+				initParameter();
+			} else {
+				restoreParameter();
+			}
 		}
 	}
 

@@ -108,7 +108,7 @@
 	  	<RelativeLayout
 		    android:id="@+id/rl_function_view"
 		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content" 	               
+		    android:layout_height="match_parent" 	               
 	        android:layout_above="@+id/iv_sep_01"	     
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginRight="10dp"	
@@ -120,7 +120,7 @@
 	  	    <LinearLayout
 			    android:id="@+id/ll_chart"
 			    android:layout_width="match_parent"
-			    android:layout_height="150dp"
+			    android:layout_height="match_parent"
 			    android:orientation="vertical">
 			</LinearLayout>
 	  	    

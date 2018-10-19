@@ -62,11 +62,14 @@ public class DetailGrowLightActivity extends TitledActivity
 	private String str_curtime_simple = "00:00:00";
 	private String str_sunup = "06:00:00";
 	private String str_sundown = "18:00:00";
+	private String sun_peroid = "0000000";
 	private int i_light_01 = 0;
 	private int i_light_02 = 0;
 	private int i_light_03 = 0;
 	private int i_light_04 = 0;
 	private int i_light_05 = 0;
+
+	private int i_Current_lushu = 5;
 
 	private SmartPlugHelper mPlugHelper = null;
 	private SmartPlugDefine mPlug = null;
@@ -97,6 +100,7 @@ public class DetailGrowLightActivity extends TitledActivity
 				str_curtime = intent.getStringExtra("CURTIME");
 				str_sunup = intent.getStringExtra("SUNUPTIME");
 				str_sundown = intent.getStringExtra("SUNDOWNTIME");
+				sun_peroid = intent.getStringExtra("SUNPEROID");
 
 				i_light_01 = intent.getIntExtra("LIGHT01", 0);
 				i_light_02 = intent.getIntExtra("LIGHT02", 0);
@@ -181,7 +185,7 @@ public class DetailGrowLightActivity extends TitledActivity
 
 		loadData();
 
-		getStatus();
+		// getStatus();
 
 		updateUI();
 	}
@@ -192,6 +196,7 @@ public class DetailGrowLightActivity extends TitledActivity
 		editor.putInt("SETTEMPERATURE" + mPlugId, i_Set_Temperature);
 		editor.putString("SUNUPTIME" + mPlugId, str_sunup);
 		editor.putString("SUNDOWNTIME" + mPlugId, str_sundown);
+		editor.putString("SUNPEROID" + mPlugId, sun_peroid);
 		editor.putInt("LIGHT01" + mPlugId, i_light_01);
 		editor.putInt("LIGHT02" + mPlugId, i_light_02);
 		editor.putInt("LIGHT03" + mPlugId, i_light_03);
@@ -211,12 +216,16 @@ public class DetailGrowLightActivity extends TitledActivity
 				"06:00:00");
 		str_sundown = mSharedPreferences.getString("SUNDOWNTIME" + mPlugId,
 				"18:00:00");
+		sun_peroid = mSharedPreferences.getString("SUNPEROID" + mPlugId,
+				"0000000");
 
 		i_light_01 = mSharedPreferences.getInt("LIGHT01" + mPlugId, 0);
 		i_light_02 = mSharedPreferences.getInt("LIGHT02" + mPlugId, 0);
 		i_light_03 = mSharedPreferences.getInt("LIGHT03" + mPlugId, 0);
 		i_light_04 = mSharedPreferences.getInt("LIGHT04" + mPlugId, 0);
 		i_light_05 = mSharedPreferences.getInt("LIGHT05" + mPlugId, 0);
+
+		i_Current_lushu = mSharedPreferences.getInt("SETROUTES" + mPlugId, 5);
 	}
 
 	private Handler mHandler = new Handler() {
@@ -345,7 +354,7 @@ public class DetailGrowLightActivity extends TitledActivity
 				light_control_timetask();
 				break;
 			case R.id.iv_light_control_timecurve :
-				light_control_timecurve();
+				light_control_timecurve_new();
 				break;
 			case R.id.iv_light_control_timecurve_new :
 				light_control_timecurve_new();
@@ -370,6 +379,24 @@ public class DetailGrowLightActivity extends TitledActivity
 
 	private void light_control(boolean isOpen) {
 		String data = "0,100,100,100,100,100";
+		switch (i_Current_lushu) {
+			case 1 :
+				data = "0,100,0,0,0,0";
+				break;
+			case 2 :
+				data = "0,100,100,0,0,0";
+				break;
+			case 3 :
+				data = "0,100,100,100,0,0";
+				break;
+			case 4 :
+				data = "0,100,100,100,100,0";
+				break;
+			case 5 :
+				data = "0,100,100,100,100,100";
+				break;
+		}
+
 		if (isOpen == false) {
 			data = "0,0,0,0,0,0";
 		}

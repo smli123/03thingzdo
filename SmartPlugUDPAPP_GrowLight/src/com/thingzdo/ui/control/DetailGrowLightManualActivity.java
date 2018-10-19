@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -32,6 +33,12 @@ public class DetailGrowLightManualActivity extends TitledActivity
 			OnClickListener,
 			SeekBar.OnSeekBarChangeListener {
 
+	private RelativeLayout ll_function_control_1;
+	private RelativeLayout ll_function_control_2;
+	private RelativeLayout ll_function_control_3;
+	private RelativeLayout ll_function_control_4;
+	private RelativeLayout ll_function_control_5;
+
 	private SeekBar sb_light_01;
 	private SeekBar sb_light_02;
 	private SeekBar sb_light_03;
@@ -49,6 +56,8 @@ public class DetailGrowLightManualActivity extends TitledActivity
 	private int value_light_03_pos = 0;
 	private int value_light_04_pos = 0;
 	private int value_light_05_pos = 0;
+
+	private int i_Current_lushu = 5;
 
 	private SmartPlugHelper mPlugHelper = null;
 	private SmartPlugDefine mPlug = null;
@@ -136,6 +145,8 @@ public class DetailGrowLightManualActivity extends TitledActivity
 		value_light_03_pos = mSharedPreferences.getInt("LIGHT03" + mPlugId, 0);
 		value_light_04_pos = mSharedPreferences.getInt("LIGHT04" + mPlugId, 0);
 		value_light_05_pos = mSharedPreferences.getInt("LIGHT05" + mPlugId, 0);
+
+		i_Current_lushu = mSharedPreferences.getInt("SETROUTES" + mPlugId, 5);
 	}
 
 	@Override
@@ -214,6 +225,50 @@ public class DetailGrowLightManualActivity extends TitledActivity
 		tv_light_right_03 = (TextView) findViewById(R.id.tv_light_right_03);
 		tv_light_right_04 = (TextView) findViewById(R.id.tv_light_right_04);
 		tv_light_right_05 = (TextView) findViewById(R.id.tv_light_right_05);
+
+		ll_function_control_1 = (RelativeLayout) findViewById(R.id.ll_function_control_1);
+		ll_function_control_2 = (RelativeLayout) findViewById(R.id.ll_function_control_2);
+		ll_function_control_3 = (RelativeLayout) findViewById(R.id.ll_function_control_3);
+		ll_function_control_4 = (RelativeLayout) findViewById(R.id.ll_function_control_4);
+		ll_function_control_5 = (RelativeLayout) findViewById(R.id.ll_function_control_5);
+
+		switch (i_Current_lushu) {
+			case 1 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.GONE);
+				ll_function_control_3.setVisibility(View.GONE);
+				ll_function_control_4.setVisibility(View.GONE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 2 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.GONE);
+				ll_function_control_4.setVisibility(View.GONE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 3 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.VISIBLE);
+				ll_function_control_4.setVisibility(View.GONE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 4 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.VISIBLE);
+				ll_function_control_4.setVisibility(View.VISIBLE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 5 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.VISIBLE);
+				ll_function_control_4.setVisibility(View.VISIBLE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+		}
 
 		if (null != sb_light_01) {
 			sb_light_01.setProgress(value_light_01_pos);

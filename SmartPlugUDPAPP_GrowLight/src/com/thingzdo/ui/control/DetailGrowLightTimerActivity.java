@@ -11,10 +11,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -130,6 +132,12 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 	private int i_current_no = 0;
 	private int i_count = 1;
 
+	private RelativeLayout ll_function_control_1;
+	private RelativeLayout ll_function_control_2;
+	private RelativeLayout ll_function_control_3;
+	private RelativeLayout ll_function_control_4;
+	private RelativeLayout ll_function_control_5;
+
 	private SeekBar sb_light_01;
 	private SeekBar sb_light_02;
 	private SeekBar sb_light_03;
@@ -153,6 +161,11 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 	private int i_light_03 = 0;
 	private int i_light_04 = 0;
 	private int i_light_05 = 0;
+
+	private int i_Current_lushu = 5;
+
+	private SharedPreferences mSharedPreferences;
+	private SharedPreferences.Editor editor;
 
 	private BroadcastReceiver mTimerTaskReceiver = new BroadcastReceiver() {
 
@@ -276,6 +289,10 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 
 	}
 
+	private void loadData() {
+		i_Current_lushu = mSharedPreferences.getInt("SETROUTES" + mPlugId, 5);
+	}
+
 	private void modifyTimer() {
 		mTimertask = mTimerHelper.getTimer(mPlugId, mTimerId);
 		mTimertask.mPeriod = mPeriod;
@@ -304,6 +321,10 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 		setTitleRightButton(R.string.smartplug_ok,
 				R.drawable.title_btn_selector, this);
 		mContext = this;
+
+		mSharedPreferences = getSharedPreferences("GROWLIGHT"
+				+ PubStatus.g_CurUserName, Activity.MODE_PRIVATE);
+
 		String plugIp = getIntent().getStringExtra("PLUGIP");
 
 		UDPClient.getInstance().setIPAddress(plugIp);
@@ -363,6 +384,8 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 		}
 
 		mPlug = mPlugHelper.getSmartPlug(mPlugId);
+
+		loadData();
 
 		initView();
 
@@ -544,6 +567,50 @@ public class DetailGrowLightTimerActivity extends TitledActivity
 		tv_light_right_03 = (TextView) findViewById(R.id.tv_light_right_03);
 		tv_light_right_04 = (TextView) findViewById(R.id.tv_light_right_04);
 		tv_light_right_05 = (TextView) findViewById(R.id.tv_light_right_05);
+
+		ll_function_control_1 = (RelativeLayout) findViewById(R.id.ll_function_control_1);
+		ll_function_control_2 = (RelativeLayout) findViewById(R.id.ll_function_control_2);
+		ll_function_control_3 = (RelativeLayout) findViewById(R.id.ll_function_control_3);
+		ll_function_control_4 = (RelativeLayout) findViewById(R.id.ll_function_control_4);
+		ll_function_control_5 = (RelativeLayout) findViewById(R.id.ll_function_control_5);
+
+		switch (i_Current_lushu) {
+			case 1 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.GONE);
+				ll_function_control_3.setVisibility(View.GONE);
+				ll_function_control_4.setVisibility(View.GONE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 2 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.GONE);
+				ll_function_control_4.setVisibility(View.GONE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 3 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.VISIBLE);
+				ll_function_control_4.setVisibility(View.GONE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 4 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.VISIBLE);
+				ll_function_control_4.setVisibility(View.VISIBLE);
+				ll_function_control_5.setVisibility(View.GONE);
+				break;
+			case 5 :
+				ll_function_control_1.setVisibility(View.VISIBLE);
+				ll_function_control_2.setVisibility(View.VISIBLE);
+				ll_function_control_3.setVisibility(View.VISIBLE);
+				ll_function_control_4.setVisibility(View.VISIBLE);
+				ll_function_control_5.setVisibility(View.VISIBLE);
+				break;
+		}
 
 		if (null != sb_light_01) {
 			sb_light_01.setProgress(value_light_01_pos);

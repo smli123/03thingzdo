@@ -469,7 +469,7 @@
 		<activity
             android:configChanges="orientation|keyboardHidden"
             android:name="com.thingzdo.ui.control.DetailGrowLightTimeCurvePointActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" >
 		</activity>

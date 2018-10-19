@@ -38,7 +38,8 @@
 		        android:layout_marginLeft="10dp"
 		        android:layout_marginRight="10dp"
 		        android:background="@color/white"
-		        android:orientation="horizontal" >
+		        android:orientation="horizontal" 
+		        android:visibility="gone">
 		        
 		        <TextView
 		            android:id="@+id/tv_light_curtime_memo"
@@ -70,7 +71,8 @@
 		        android:layout_marginLeft="0dp"
 		        android:layout_marginRight="0dp"
 		        android:background="@color/lightwhite"        
-		        android:contentDescription="@null" />
+		        android:contentDescription="@null" 
+		        android:visibility="gone"/>
 		     
 		    <RelativeLayout
 		        android:id="@+id/ll_temperature_control"
@@ -82,7 +84,8 @@
 		        android:layout_marginLeft="10dp"
 		        android:layout_marginRight="10dp"
 		        android:background="@color/white"
-		        android:orientation="horizontal" >
+		        android:orientation="horizontal" 
+		        android:visibility="gone">
 		        
 		        <TextView
 		            android:id="@+id/tv_light_temperature_control_memo"
@@ -114,7 +117,8 @@
 		        android:layout_marginLeft="0dp"
 		        android:layout_marginRight="0dp"
 		        android:background="@color/lightwhite"        
-		        android:contentDescription="@null" />
+		        android:contentDescription="@null" 
+		        android:visibility="gone"/>
 		          
 		    <RelativeLayout
 		        android:id="@+id/ll_lushu_control"

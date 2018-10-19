@@ -78,7 +78,8 @@
 		       	    android:gravity="center"
 		            android:textColor="@color/black"
 			        android:textSize="@dimen/text_size_minisamll"
-		            android:text="@string/growlight_timecurve_modify" />
+		            android:text="@string/growlight_timecurve_modify" 
+		            android:visibility="gone"/>
 		        
 		        <TextView
 		            android:id="@+id/tv_clear"
@@ -108,7 +109,7 @@
 	  	<RelativeLayout
 		    android:id="@+id/rl_function_view"
 		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content" 	               
+		    android:layout_height="match_parent" 	               
 	        android:layout_above="@+id/iv_sep_01"	     
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginRight="10dp"	
@@ -117,11 +118,13 @@
 	        android:background="@color/white"
 	        android:orientation="vertical" > 	
 	        
-	        <com.thingzdo.util.LineGraphicView 
-			    android:id="@+id/view_show"
+	  	    <LinearLayout
+			    android:id="@+id/ll_chart"
 			    android:layout_width="match_parent"
-			    android:layout_height="300dp" />
-	            
+			    android:layout_height="match_parent"
+			    android:orientation="vertical">
+			</LinearLayout>
+			
 		</RelativeLayout>
 	    
 	</RelativeLayout>    

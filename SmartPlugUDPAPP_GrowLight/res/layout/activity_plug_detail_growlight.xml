@@ -312,7 +312,7 @@
 			        android:background="@color/white"
 		            android:gravity="center"
 		            android:layout_weight="1"
-		            android:visibility="visible"> 	
+		            android:visibility="gone"> 	
 			        
 			        <ImageView
 			            android:id="@+id/iv_light_control_timecurve_new"

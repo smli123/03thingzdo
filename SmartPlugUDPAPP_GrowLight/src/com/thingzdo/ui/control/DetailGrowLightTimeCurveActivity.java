@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
-import org.achartengine.chart.LineChart;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
@@ -45,7 +44,6 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 			OnClickListener {
 
 	private LinearLayout ll_chart;
-	private LineChart mLineChart;
 
 	private SmartPlugHelper mPlugHelper = null;
 	private SmartPlugGrowLightTimerCurvePointHelper mTimerHelper = null;
@@ -136,8 +134,7 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 
-		// refreshView();
-		drawTheChart();
+		refreshView();
 
 		// new Handler().postDelayed(new Runnable() {
 		// public void run() {
@@ -205,18 +202,6 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 		}
 	}
 
-	private void setLists() {
-		lists.clear();
-		for (int i = 0; i < yList_01.size(); i++) {
-			lists.add(yList_01.get(i));
-		}
-
-		// for (int i = 1; i < 3; i++) {
-		// int value = ((int) (Math.random() * 100));
-		// lists.add(value);
-		// }
-	}
-
 	public void drawTheChart() {
 		XYMultipleSeriesRenderer mRenderer = getXYMulSeriesRenderer();
 
@@ -232,6 +217,13 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 				mRenderer);
 
 		ll_chart.addView(chartView, 0);
+	}
+
+	private void setLists() {
+		lists.clear();
+		for (int i = 0; i < yList_01.size(); i++) {
+			lists.add(yList_01.get(i));
+		}
 	}
 
 	public XYSeriesRenderer getXYSeriesRenderer() {
