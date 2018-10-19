@@ -84,9 +84,9 @@ public class SmartPlugEventHandlerGrowLightSetTimeCurvePoint
 				ti.mPeriod = peroid;
 				ti.light_channel = channel;
 				ti.mEnable = (enable == 1) ? true : false;
+				ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 0];
 				ti.light = Integer
-						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 0]);
-				ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 1];
+						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 1]);
 
 				mTimerHelper.addTimer(ti);
 			}

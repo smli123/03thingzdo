@@ -653,4 +653,7 @@
     <string name="growlight_timecurve_modify">Modify</string>
     <string name="growlight_timecurve_clear">Clear</string>
     <string name="growlight_timecurve_enable">Enabled</string>
+    
+    <string name="app_modify_succeed">"Modify Succeed"</string>
+    <string name="app_modify_failed">"Modify Failed"</string>
 </resources>

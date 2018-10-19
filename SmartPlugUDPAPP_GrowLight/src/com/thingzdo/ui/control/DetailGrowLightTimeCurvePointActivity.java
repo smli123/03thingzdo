@@ -168,7 +168,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	}
 
 	private void queryAllTimeCurvePoint() {
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 0; i < 5; i++) {
 			queryTimeCurvePoint(i);
 
 			try {

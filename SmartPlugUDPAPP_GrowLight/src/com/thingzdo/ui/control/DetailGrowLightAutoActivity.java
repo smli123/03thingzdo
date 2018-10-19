@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.thingzdo.processhandler.SmartPlugMessage;
 import com.thingzdo.smartplug_udp.R;
 import com.thingzdo.ui.SmartPlugDefine;
 import com.thingzdo.ui.common.PubDefine;
+import com.thingzdo.ui.common.PubFunc;
 import com.thingzdo.ui.common.StringUtils;
 import com.thingzdo.ui.common.TitledActivity;
 import com.thingzdo.ui.manage.AddSocketActivity2;
@@ -49,6 +52,7 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 	private String[] mDays = null;
 	private String[] mSelDays = {"0", "0", "0", "0", "0", "0", "0"};
+	private String mPeroid = "1111111";
 
 	private SmartPlugHelper mPlugHelper = null;
 	private SmartPlugDefine mPlug = null;
@@ -76,9 +80,24 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 				str_sunup = intent.getStringExtra("SUNUP");
 				str_sundown = intent.getStringExtra("SUNDOWN");
+				mPeroid = intent.getStringExtra("PEROID");
 
 				saveData();
 				updateUI();
+
+				mHandler.sendEmptyMessage(0);
+			}
+		}
+	};
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			if (0 == msg.what) { // Succeed for modify Sun time
+				PubFunc.thinzdoToast(mContext, SmartPlugApplication
+						.getInstance().getString(R.string.app_modify_succeed));
+			} else if (1 == msg.what) { // Failed for modify Sun time
+				PubFunc.thinzdoToast(mContext, SmartPlugApplication
+						.getInstance().getString(R.string.app_modify_failed));
 			}
 		}
 	};

@@ -19,7 +19,6 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -137,18 +136,18 @@ public class DetailGrowLightTimeCurveActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 
-		refreshView();
-		// drawTheChart();
+		// refreshView();
+		drawTheChart();
 
-		new Handler().postDelayed(new Runnable() {
-			public void run() {
-				queryAllTimeCurvePoint();
-			}
-		}, 1000);
+		// new Handler().postDelayed(new Runnable() {
+		// public void run() {
+		// queryAllTimeCurvePoint();
+		// }
+		// }, 1000);
 	}
 
 	private void queryAllTimeCurvePoint() {
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 0; i < 5; i++) {
 			queryTimeCurvePoint(i);
 
 			try {
