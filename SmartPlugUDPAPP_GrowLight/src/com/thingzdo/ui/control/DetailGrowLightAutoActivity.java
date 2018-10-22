@@ -95,6 +95,7 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 			if (0 == msg.what) { // Succeed for modify Sun time
 				PubFunc.thinzdoToast(mContext, SmartPlugApplication
 						.getInstance().getString(R.string.app_modify_succeed));
+				finish();
 			} else if (1 == msg.what) { // Failed for modify Sun time
 				PubFunc.thinzdoToast(mContext, SmartPlugApplication
 						.getInstance().getString(R.string.app_modify_failed));
@@ -129,11 +130,11 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 		UDPClient.getInstance().setIPAddress(mPlugIp);
 
+		loadData();
+
 		init();
 
 		initNewTimer();
-
-		loadData();
 
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
 			mTcpSocketThread = new RevCmdFromSocketThread();
@@ -150,12 +151,12 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 	}
 
 	private void loadData() {
-		str_sundown = mSharedPreferences.getString("SUNUPTIME" + mPlugId,
+		str_sunup = mSharedPreferences.getString("SUNUPTIME" + mPlugId,
 				"06:00:00");
 		str_sundown = mSharedPreferences.getString("SUNDOWNTIME" + mPlugId,
 				"18:00:00");
-		mPeroid = mSharedPreferences.getString("SUNPEROID" + mPlugId,
-				"0000000");
+		mPeroid = mSharedPreferences
+				.getString("SUNPEROID" + mPlugId, "0000000");
 	}
 
 	@Override
@@ -259,8 +260,11 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 	}
 
 	private void initNewTimer() {
+		// for (int i = 0; i < 7; i++) {
+		// mSelDays[i] = "1";
+		// }
 		for (int i = 0; i < 7; i++) {
-			mSelDays[i] = "1";
+			mSelDays[i] = mPeroid.substring(i, i + 1);
 		}
 		initPeriod(mSelDays);
 	}
@@ -369,6 +373,9 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 		tv_light_sunup_time = (TextView) findViewById(R.id.tv_light_sunup_time);
 		tv_light_sundown_time = (TextView) findViewById(R.id.tv_light_sundown_time);
 		tv_select_days = (TextView) findViewById(R.id.tv_select_days);
+
+		tv_light_sunup_time.setText(str_sunup);
+		tv_light_sundown_time.setText(str_sundown);
 
 		layout_period_header = (RelativeLayout) findViewById(R.id.layout_period_header);
 		layout_period_header.setOnClickListener(this);

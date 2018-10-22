@@ -40,7 +40,7 @@ public class SmartPlugEventHandlerGrowLightQryStatus
 			mIntent.putExtra("CURTIME", buffer[EVENT_MESSAGE_HEADER + 8]);
 			mIntent.putExtra("SUNUPTIME", buffer[EVENT_MESSAGE_HEADER + 9]);
 			mIntent.putExtra("SUNDOWNTIME", buffer[EVENT_MESSAGE_HEADER + 10]);
-			mIntent.putExtra("PEROID", buffer[EVENT_MESSAGE_HEADER + 11]);
+			mIntent.putExtra("SUNPEROID", buffer[EVENT_MESSAGE_HEADER + 11]);
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

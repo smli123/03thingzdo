@@ -76,6 +76,8 @@ public class DetailGrowLightActivity extends TitledActivity
 	private String mPlugId = "0";
 	private String mPlugIp = "0.0.0.0";
 
+	private boolean mOnline = false;
+
 	private boolean m_isOpen = false;
 
 	private SharedPreferences mSharedPreferences;
@@ -128,6 +130,8 @@ public class DetailGrowLightActivity extends TitledActivity
 				i_light_04 = intent.getIntExtra("LIGHT04", 0);
 				i_light_05 = intent.getIntExtra("LIGHT05", 0);
 
+				saveData();
+
 				updateUI();
 			}
 		}
@@ -173,6 +177,7 @@ public class DetailGrowLightActivity extends TitledActivity
 			mPlugId = "0";
 		}
 		mPlugIp = intent.getStringExtra("PLUGIP");
+		mOnline = intent.getBooleanExtra("ONLINE", false);
 
 		UDPClient.getInstance().setIPAddress(mPlugIp);
 
@@ -185,7 +190,7 @@ public class DetailGrowLightActivity extends TitledActivity
 
 		loadData();
 
-		// getStatus();
+		getStatus();
 
 		updateUI();
 	}
@@ -319,6 +324,7 @@ public class DetailGrowLightActivity extends TitledActivity
 						getString(R.string.smartplug_title_plug_detail))) {
 					Intent intent = new Intent();
 					intent.putExtra("PLUGID", mPlugId);
+					intent.putExtra("ONLINE", mOnline);
 					intent.setClass(DetailGrowLightActivity.this,
 							PlugDetailInfoActivity.class);
 					startActivity(intent);
