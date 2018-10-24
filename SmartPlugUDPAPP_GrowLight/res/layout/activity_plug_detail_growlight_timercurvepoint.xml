@@ -93,6 +93,36 @@
 		            android:textColor="@color/black"
 			        android:textSize="@dimen/text_size_minisamll"
 		            android:text="@string/growlight_timecurve_clear" />
+		        
+		        
+	        <RelativeLayout 
+			    android:id="@+id/rl_function_base_channel"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content" 
+		        android:layout_toRightOf="@id/tv_clear"
+		        android:layout_gravity="center">
+
+	            <TextView
+	                android:id="@+id/tv_channel"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_centerVertical="true"
+	                android:layout_marginLeft="10dp"
+	                android:layout_marginRight="20dp"
+	                android:gravity="center"
+	                android:text="@string/smartplug_growlight_lushu_number"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_larsamll" />
+				    
+		        <Spinner
+		            android:id="@+id/spinner_channel"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_toRightOf="@id/tv_channel" />
+		        
+	        </RelativeLayout>
+	         
 		    </RelativeLayout>
 		</RelativeLayout>    
         

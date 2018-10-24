@@ -622,7 +622,7 @@
     <!-- 植物生长灯 -->
     <string name="smartplug_growlight_unknown">Unknown</string>
     <string name="smartplug_growlight_manual">Manual</string>
-    <string name="smartplug_growlight_auto">Automatic</string>
+    <string name="smartplug_growlight_auto">Sunset</string>
     <string name="smartplug_growlight_timetask">Timing</string>
     <string name="smartplug_growlight_timecurve">"Time Curve"</string>
     <string name="smartplug_growlight_setting">Setting</string>
@@ -643,8 +643,15 @@
     <string name="smartplug_growlight_lushu_control_4">"4 Route"</string>
     <string name="smartplug_growlight_lushu_control_5">"5 Route"</string>
     
+    <string name="smartplug_growlight_lushu_number">"Route Number"</string>
+    
+    <string name="smartplug_growlight_modify_sunset">"Modify SunSet Time..."</string>
+    
+    <string name="smartplug_growlight_type">"Mode"</string>
     <string name="smartplug_growlight_type_1">"Gradual Change"</string>
     <string name="smartplug_growlight_type_2">"Jump Change"</string>
+
+    <string name="smartplug_growlight_peroid">"Period"</string>
     
     <string name="smartplug_growlight_timetask_count">Count:</string>
     

@@ -167,7 +167,7 @@ public class PubDefine {
 																							// 1:wifi
 																							// 2:shake
 
-	public static boolean RELEASE_VERSION = false;
+	public static boolean RELEASE_VERSION = true;
 
 	public static Socket global_tcp_socket = null;
 	public static String global_local_ip = "";

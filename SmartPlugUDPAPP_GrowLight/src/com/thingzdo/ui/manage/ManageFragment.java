@@ -89,9 +89,11 @@ public class ManageFragment extends SmartPlugFragment
 		RelativeLayout lay_scene_management = (RelativeLayout) mFragmentView
 				.findViewById(R.id.lay_scene_management);
 		lay_scene_management.setOnClickListener(this);
-		if (PubDefine.RELEASE_VERSION == true && false) {
-			lay_scene_management.setVisibility(View.GONE);
-		}
+		lay_scene_management.setVisibility(View.GONE);
+
+		// if (PubDefine.RELEASE_VERSION == true && false) {
+		// lay_scene_management.setVisibility(View.GONE);
+		// }
 
 		RelativeLayout lay_update_debug = (RelativeLayout) mFragmentView
 				.findViewById(R.id.lay_update_debug);

@@ -89,7 +89,7 @@ public class DetailGrowLightManualActivity extends TitledActivity
 				value_light_05_pos = intent.getIntExtra("LIGHT05", 0);
 
 				saveData();
-				updateUI();
+				// updateUI();
 			}
 
 		}
@@ -266,7 +266,7 @@ public class DetailGrowLightManualActivity extends TitledActivity
 				ll_function_control_2.setVisibility(View.VISIBLE);
 				ll_function_control_3.setVisibility(View.VISIBLE);
 				ll_function_control_4.setVisibility(View.VISIBLE);
-				ll_function_control_5.setVisibility(View.GONE);
+				ll_function_control_5.setVisibility(View.VISIBLE);
 				break;
 		}
 

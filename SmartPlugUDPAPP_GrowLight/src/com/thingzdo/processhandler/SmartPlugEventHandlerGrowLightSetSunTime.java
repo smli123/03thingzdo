@@ -25,6 +25,7 @@ public class SmartPlugEventHandlerGrowLightSetSunTime
 
 			mIntent.putExtra("SUNUP", buffer[EVENT_MESSAGE_HEADER + 1]);
 			mIntent.putExtra("SUNDOWN", buffer[EVENT_MESSAGE_HEADER + 2]);
+			mIntent.putExtra("SUNPEROID", buffer[EVENT_MESSAGE_HEADER + 3]);
 
 			SmartPlugApplication.getContext().sendBroadcast(mIntent);
 		} else {

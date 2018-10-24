@@ -59,6 +59,8 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 	private String mPlugId = "0";
 	private String mPlugIp = "0.0.0.0";
 
+	private String mErrorMsg = "";
+
 	private SharedPreferences mSharedPreferences;
 	private SharedPreferences.Editor editor;
 
@@ -77,10 +79,13 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_SET_SUNTIME_ACTION)) {
+				if (mProgress != null) {
+					mProgress.dismiss();
+				}
 
 				str_sunup = intent.getStringExtra("SUNUP");
 				str_sundown = intent.getStringExtra("SUNDOWN");
-				mPeroid = intent.getStringExtra("PEROID");
+				mPeroid = intent.getStringExtra("SUNPEROID");
 
 				saveData();
 				updateUI();
@@ -283,6 +288,12 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 	}
 
 	private void do_commit() {
+		mErrorMsg = getString(R.string.oper_error);
+		mProgress = PubFunc.createProgressDialog(
+				DetailGrowLightAutoActivity.this,
+				getString(R.string.smartplug_growlight_modify_sunset), false);
+		mProgress.show();
+
 		String data = tv_light_sunup_time.getText().toString() + ","
 				+ tv_light_sundown_time.getText().toString() + ","
 				+ tv_select_days.getTag();

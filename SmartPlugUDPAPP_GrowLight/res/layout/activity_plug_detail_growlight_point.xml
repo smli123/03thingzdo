@@ -22,7 +22,6 @@
 	    <ScrollView 
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent" >
-		    
 			
 	    <RelativeLayout
 		    android:id="@+id/rl_whole_sub"
@@ -40,40 +39,107 @@
 	        android:background="@color/white"
 	        android:orientation="vertical" >
 	        
-	        <Spinner 
-	            android:id="@+id/spinner_channel"
+	        <RelativeLayout 
+			    android:id="@+id/rl_function_base_channel"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content" >
+
+	            <TextView
+	                android:id="@+id/tv_channel"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_centerVertical="true"
+	                android:layout_marginLeft="10dp"
+	                android:layout_marginRight="20dp"
+	                android:text="@string/smartplug_growlight_lushu_number"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_larsamll" />
+				    
+		        <Spinner
+		            android:id="@+id/spinner_channel"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_toRightOf="@id/tv_channel"
+		            android:gravity="right" />
+		        
+	        </RelativeLayout>
+	         
+	        <RelativeLayout 
+			    android:id="@+id/rl_function_base_enable"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content" 
+			    android:layout_below="@id/rl_function_base_channel"
+			    android:visibility="gone" >
+	            
+		        <com.thingzdo.util.ThingzdoCheckBox
+		            android:id="@+id/cb_enable"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_larsamll"
+				    android:text="@string/growlight_timecurve_enable"
+				    android:layout_alignParentLeft="true"
+				    android:visibility="gone" />
+		        
+	        </RelativeLayout>
+	         
+	        <RelativeLayout 
+			    android:id="@+id/rl_function_base_type"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content" 
+			    android:layout_below="@id/rl_function_base_enable">
+
+	            <TextView
+	                android:id="@+id/tv_type"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_centerVertical="true"
+	                android:layout_marginLeft="10dp"
+	                android:layout_marginRight="20dp"
+	                android:text="@string/smartplug_growlight_type"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_larsamll" />
+				    
+		        <Spinner
+		            android:id="@+id/spinner_type"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_toRightOf="@id/tv_type"
+		            android:gravity="right" />
+		        
+	        </RelativeLayout>
+	         
+	        <RelativeLayout 
+			    android:id="@+id/rl_function_base_peroid"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
-			    android:layout_alignParentLeft="true" />
-	        
-	        <com.thingzdo.util.ThingzdoCheckBox
-	            android:id="@+id/cb_enable"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-        		android:layout_below="@+id/spinner_channel"
-	            android:textColor="@color/black"
-		        android:textSize="@dimen/text_size_larsamll"
-			    android:text="@string/growlight_timecurve_enable"
-			    android:layout_alignParentLeft="true"
-			    android:visibility="gone" />
-	        
-	        <Spinner 
-	            android:id="@+id/spinner_type"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-        		android:layout_below="@+id/cb_enable"
-			    android:layout_alignParentLeft="true" />
-	        
-	        <TextView 
-	            android:id="@+id/tv_peroid"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-        		android:layout_below="@+id/spinner_type"
-			    android:layout_alignParentLeft="true" 
-	            android:textColor="@color/black"
-		        android:textSize="@dimen/text_size_larsamll"
-	            android:text="@null"/>
-	        
+			    android:layout_below="@id/rl_function_base_type">
+
+	            <TextView
+	                android:id="@+id/tv_peroid_memo"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_centerVertical="true"
+	                android:layout_marginLeft="10dp"
+	                android:layout_marginRight="20dp"
+	                android:text="@string/smartplug_growlight_peroid"
+	                android:textColor="@color/black"
+	                android:textSize="@dimen/text_size_larsamll" />
+				    
+		        <TextView
+		            android:id="@+id/tv_peroid"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_toRightOf="@id/tv_peroid_memo"
+		            android:gravity="right"
+		            android:text="@null"
+		            android:textColor="@color/black"
+		            android:textSize="@dimen/text_size_larsamll" />
+		        
+	        </RelativeLayout>
 	        
 	    </RelativeLayout>
 	    

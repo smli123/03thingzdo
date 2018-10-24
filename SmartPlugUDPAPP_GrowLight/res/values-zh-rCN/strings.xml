@@ -644,8 +644,15 @@
     <string name="smartplug_growlight_lushu_control_4">四路</string>
     <string name="smartplug_growlight_lushu_control_5">五路</string>
     
+    <string name="smartplug_growlight_lushu_number">路数</string>
+    
+    <string name="smartplug_growlight_modify_sunset">修改日出日落时间</string>
+    
+    <string name="smartplug_growlight_type">模式</string>
     <string name="smartplug_growlight_type_1">渐变</string>
     <string name="smartplug_growlight_type_2">跳变</string>
+    
+    <string name="smartplug_growlight_peroid">周期</string>
     
     <string name="smartplug_growlight_timetask_count">总计:</string>
     

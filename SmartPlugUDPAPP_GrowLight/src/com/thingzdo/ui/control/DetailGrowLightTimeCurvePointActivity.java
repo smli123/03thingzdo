@@ -15,14 +15,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.thingzdo.dataprovider.SmartPlugGrowLightTimerCurvePointHelper;
@@ -49,6 +53,10 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	private TextView tv_del;
 	private TextView tv_modify;
 	private TextView tv_clear;
+	private Spinner spinner_channel;
+
+	private List<String> irlist_channel = new ArrayList<String>();
+	private int i_Current_channel = 0;
 
 	private SmartPlugHelper mPlugHelper = null;
 	private SmartPlugGrowLightTimerCurvePointHelper mTimerHelper = null;
@@ -73,6 +81,9 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	private ArrayList<String> xList_03 = new ArrayList<String>();
 	private ArrayList<String> xList_04 = new ArrayList<String>();
 	private ArrayList<String> xList_05 = new ArrayList<String>();
+
+	private ArrayList<Integer> yList_all = new ArrayList<Integer>();
+	private ArrayList<String> xList_all = new ArrayList<String>();
 
 	private List<Integer> lists = new ArrayList<Integer>();
 
@@ -138,6 +149,24 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		copyData(mTimer_04, xList_04, yList_04);
 		copyData(mTimer_05, xList_05, yList_05);
 
+		switch (i_Current_channel) {
+			case 0 :
+				copyData(mTimer_01, xList_all, yList_all);
+				break;
+			case 1 :
+				copyData(mTimer_02, xList_all, yList_all);
+				break;
+			case 2 :
+				copyData(mTimer_03, xList_all, yList_all);
+				break;
+			case 3 :
+				copyData(mTimer_04, xList_all, yList_all);
+				break;
+			case 4 :
+				copyData(mTimer_05, xList_all, yList_all);
+				break;
+		}
+
 		// 根据数据重新画图
 		drawTheChart();
 	}
@@ -174,8 +203,8 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 
 	private void setLists() {
 		lists.clear();
-		for (int i = 0; i < yList_01.size(); i++) {
-			lists.add(yList_01.get(i));
+		for (int i = 0; i < yList_all.size(); i++) {
+			lists.add(yList_all.get(i));
 		}
 	}
 
@@ -332,7 +361,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 
-		refreshView();
+		// refreshView();
 
 		// new Handler().postDelayed(new Runnable() {
 		// public void run() {
@@ -459,10 +488,55 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		tv_modify = (TextView) findViewById(R.id.tv_modify);
 		tv_clear = (TextView) findViewById(R.id.tv_clear);
 
+		spinner_channel = (Spinner) findViewById(R.id.spinner_channel);
+
+		// init spinner Channel data
+		irlist_channel.clear();
+		Resources res = SmartPlugApplication.getInstance().getResources();
+		irlist_channel.add(res
+				.getString(R.string.smartplug_growlight_lushu_control_1));
+		irlist_channel.add(res
+				.getString(R.string.smartplug_growlight_lushu_control_2));
+		irlist_channel.add(res
+				.getString(R.string.smartplug_growlight_lushu_control_3));
+		irlist_channel.add(res
+				.getString(R.string.smartplug_growlight_lushu_control_4));
+		irlist_channel.add(res
+				.getString(R.string.smartplug_growlight_lushu_control_5));
+
+		ArrayAdapter<String> adapter_channel = new ArrayAdapter<String>(this,
+				R.layout.activity_detail_aircon2item, R.id.tv_item,
+				irlist_channel);
+		spinner_channel.setAdapter(adapter_channel);
+		spinner_channel.setPrompt("测试");
+		spinner_channel.setOnItemSelectedListener(new spinnerChannelListener());
+
+		if (irlist_channel.size() > 0) {
+			spinner_channel.setSelection(i_Current_channel);
+		}
+
 		tv_add.setOnClickListener(this);
 		tv_del.setOnClickListener(this);
 		tv_modify.setOnClickListener(this);
 		tv_clear.setOnClickListener(this);
+	}
+
+	class spinnerChannelListener
+			implements
+				android.widget.AdapterView.OnItemSelectedListener {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view,
+				int position, long id) {
+			i_Current_channel = position;
+			String str_Channel = parent.getItemAtPosition(position).toString();
+
+			refreshView();
+		}
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+
+		}
 	}
 
 	private void disconnectSocket() {

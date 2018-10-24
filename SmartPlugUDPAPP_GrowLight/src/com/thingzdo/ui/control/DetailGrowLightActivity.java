@@ -117,9 +117,10 @@ public class DetailGrowLightActivity extends TitledActivity
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_SET_WORK_MODE_ACTION)) {
 				i_Current_WorkMode = intent.getIntExtra("WORKMODE", 0);
-				spinner_workmode.setSelection(i_Current_WorkMode);
+				// spinner_workmode.setSelection(i_Current_WorkMode);
 
 				saveData();
+				updateUI();
 			}
 
 			if (intent.getAction().equals(
@@ -347,23 +348,33 @@ public class DetailGrowLightActivity extends TitledActivity
 
 				iv_light_control.setImageDrawable(getResources().getDrawable(
 						m_isOpen == true
-								? R.drawable.smp_light_on_big
-								: R.drawable.smp_light_off_big));
+								? R.drawable.smp_growlight_on_big
+								: R.drawable.smp_growlight_off_big));
 				break;
 			case R.id.iv_light_control_manual :
+				i_Current_WorkMode = 1;
+				setWorkMode(i_Current_WorkMode);
 				light_control_manual();
 				break;
 			case R.id.iv_light_control_auto :
+				i_Current_WorkMode = 2;
+				setWorkMode(i_Current_WorkMode);
 				light_control_auto();
 				break;
-			case R.id.iv_light_control_timetask :
-				light_control_timetask();
-				break;
 			case R.id.iv_light_control_timecurve :
+				i_Current_WorkMode = 3;
+				setWorkMode(i_Current_WorkMode);
 				light_control_timecurve_new();
 				break;
 			case R.id.iv_light_control_timecurve_new :
+				i_Current_WorkMode = 3;
+				setWorkMode(i_Current_WorkMode);
 				light_control_timecurve_new();
+				break;
+			case R.id.iv_light_control_timetask :
+				i_Current_WorkMode = 4;
+				setWorkMode(i_Current_WorkMode);
+				light_control_timetask();
 				break;
 			case R.id.iv_light_control_setting :
 				light_control_setting();
@@ -491,8 +502,8 @@ public class DetailGrowLightActivity extends TitledActivity
 		iv_light_control_setting = (ImageView) findViewById(R.id.iv_light_control_setting);
 
 		iv_light_control.setImageResource(m_isOpen
-				? R.drawable.smp_light_on_big
-				: R.drawable.smp_light_off_big);
+				? R.drawable.smp_growlight_on_big
+				: R.drawable.smp_growlight_off_big);
 
 		spinner_workmode = (Spinner) findViewById(R.id.spinner_workmode);
 
@@ -520,7 +531,7 @@ public class DetailGrowLightActivity extends TitledActivity
 		spinner_workmode.setOnItemSelectedListener(new spinnerIRListener());
 
 		if (irlist.size() > 0) {
-			spinner_workmode.setSelection(i_Current_WorkMode);
+			// spinner_workmode.setSelection(i_Current_WorkMode);
 		}
 	}
 	private void disconnectSocket() {
@@ -541,7 +552,51 @@ public class DetailGrowLightActivity extends TitledActivity
 		}
 		setTitle(mPlug.mPlugName);
 
-		spinner_workmode.setSelection(i_Current_WorkMode);
+		// spinner_workmode.setSelection(i_Current_WorkMode);
+		switch (i_Current_WorkMode) {
+			case 1 :
+				iv_light_control_manual
+						.setImageResource(R.drawable.smp_growlight_hand_enable);
+				iv_light_control_auto
+						.setImageResource(R.drawable.smp_growlight_sun_disable);
+				iv_light_control_timecurve
+						.setImageResource(R.drawable.smp_growlight_time_curves_disable);
+				iv_light_control_timetask
+						.setImageResource(R.drawable.smp_growlight_timetask_disable);
+				break;
+			case 2 :
+				iv_light_control_manual
+						.setImageResource(R.drawable.smp_growlight_hand_disable);
+				iv_light_control_auto
+						.setImageResource(R.drawable.smp_growlight_sun_enable);
+				iv_light_control_timecurve
+						.setImageResource(R.drawable.smp_growlight_time_curves_disable);
+				iv_light_control_timetask
+						.setImageResource(R.drawable.smp_growlight_timetask_disable);
+				break;
+			case 3 :
+				iv_light_control_manual
+						.setImageResource(R.drawable.smp_growlight_hand_disable);
+				iv_light_control_auto
+						.setImageResource(R.drawable.smp_growlight_sun_disable);
+				iv_light_control_timecurve
+						.setImageResource(R.drawable.smp_growlight_time_curves_enable);
+				iv_light_control_timetask
+						.setImageResource(R.drawable.smp_growlight_timetask_disable);
+				break;
+			case 4 :
+				iv_light_control_manual
+						.setImageResource(R.drawable.smp_growlight_hand_disable);
+				iv_light_control_auto
+						.setImageResource(R.drawable.smp_growlight_sun_disable);
+				iv_light_control_timecurve
+						.setImageResource(R.drawable.smp_growlight_time_curves_disable);
+				iv_light_control_timetask
+						.setImageResource(R.drawable.smp_growlight_timetask_enable);
+				break;
+			default :
+				break;
+		}
 
 		if (i_light_01 == 0 && i_light_02 == 0 && i_light_03 == 0
 				&& i_light_04 == 0 && i_light_05 == 0) {
@@ -552,8 +607,8 @@ public class DetailGrowLightActivity extends TitledActivity
 
 		iv_light_control.setImageDrawable(getResources().getDrawable(
 				m_isOpen == true
-						? R.drawable.smp_light_on_big
-						: R.drawable.smp_light_off_big));
+						? R.drawable.smp_growlight_on_big
+						: R.drawable.smp_growlight_off_big));
 
 		// // 使用定时器来 更新 时间
 		// new Timer("GrowLightTime").schedule(new TimerTask() {
