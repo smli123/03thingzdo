@@ -58,7 +58,7 @@
 		            android:id="@+id/tv_del"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		        	android:layout_marginLeft="10dp"
+		        	android:layout_marginLeft="20dp"
 		            android:layout_toRightOf="@id/tv_add"
 		            android:layout_centerVertical="true"
 		            android:drawableTop="@drawable/growlight_del"
@@ -71,7 +71,7 @@
 		            android:id="@+id/tv_modify"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		        	android:layout_marginLeft="10dp"
+		        	android:layout_marginLeft="20dp"
 		            android:layout_toRightOf="@id/tv_del"
 		            android:layout_centerVertical="true"
 		       	    android:drawableTop="@drawable/growlight_modify"
@@ -85,7 +85,7 @@
 		            android:id="@+id/tv_clear"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		        	android:layout_marginLeft="10dp"
+		        	android:layout_marginLeft="20dp"
 		            android:layout_toRightOf="@id/tv_modify"
 		            android:layout_centerVertical="true"
 		       	    android:drawableTop="@drawable/growlight_clear"
@@ -107,19 +107,19 @@
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:layout_centerVertical="true"
-	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="20dp"
+	                android:layout_toLeftOf="@id/spinner_channel"
 	                android:gravity="center"
 	                android:text="@string/smartplug_growlight_lushu_number"
 	                android:textColor="@color/black"
 	                android:textSize="@dimen/text_size_larsamll" />
-				    
+
 		        <Spinner
 		            android:id="@+id/spinner_channel"
-		            android:layout_width="match_parent"
+		            android:layout_width="100dp"
 		            android:layout_height="wrap_content"
-		            android:layout_centerVertical="true"
-		            android:layout_toRightOf="@id/tv_channel" />
+		            android:layout_alignParentRight="true"
+		            android:layout_alignParentTop="true" />
 		        
 	        </RelativeLayout>
 	         

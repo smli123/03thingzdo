@@ -20,7 +20,7 @@
     <string name="smartplug_esc">退出</string>
     <string name="smartplug_yes">是</string>
     <string name="smartplug_no">否</string>  
-    <string name="week">周</string>  
+    <string name="week">周</string>
     <string name="Sunday">日</string>
     <string name="Monday">一</string>
     <string name="Tuesday">二</string>
@@ -49,7 +49,7 @@
     <string name="smartplug_serverip_debug">调试服务器</string>
     
     <string name="tabhost_favorite">常用</string>
-    <string name="tabhost_control">插座</string>
+    <string name="tabhost_control">设备</string>
     <string name="tabhost_query">查询</string>
     <string name="tabhost_manage">管理</string>
     <string name="tabhost_settings">设置</string>
@@ -123,7 +123,7 @@
     <string name="register_register_now">正在注册...</string>
     
 
-    <string name="smartplug_title_control">插座</string>
+    <string name="smartplug_title_control">设备</string>
     <string name="smartplug_title_query">查询</string>
     <string name="smartplug_title_manage">管理</string>
     <string name="smartplug_title_settings">设置</string>
@@ -638,11 +638,11 @@
     <string name="smartplug_growlight_settemperature">设置风扇的预警温度</string>
     <string name="smartplug_growlight_lushu_control_memo">控制管理的总路数</string>
 	<string name="smartplug_growlight_lushu_control_danwei">" 路"</string>
-    <string name="smartplug_growlight_lushu_control_1">一路</string>
-    <string name="smartplug_growlight_lushu_control_2">二路</string>
-    <string name="smartplug_growlight_lushu_control_3">三路</string>
-    <string name="smartplug_growlight_lushu_control_4">四路</string>
-    <string name="smartplug_growlight_lushu_control_5">五路</string>
+    <string name="smartplug_growlight_lushu_control_1">第一路</string>
+    <string name="smartplug_growlight_lushu_control_2">第二路</string>
+    <string name="smartplug_growlight_lushu_control_3">第三路</string>
+    <string name="smartplug_growlight_lushu_control_4">第四路</string>
+    <string name="smartplug_growlight_lushu_control_5">第五路</string>
     
     <string name="smartplug_growlight_lushu_number">路数</string>
     

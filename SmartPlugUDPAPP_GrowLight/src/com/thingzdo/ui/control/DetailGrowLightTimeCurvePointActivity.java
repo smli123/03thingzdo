@@ -281,16 +281,16 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		renderer.setYLabels(10);
 
 		// 设置X轴的最小数字和最大数字
-		renderer.setXAxisMin(1);
+		renderer.setXAxisMin(0);
 		renderer.setXAxisMax(24);
 		// 设置Y轴的最小数字和最大数字
 		renderer.setYAxisMin(0);
 		renderer.setYAxisMax(100);
 
 		// 设置渲染器显示缩放按钮
-		renderer.setZoomButtonsVisible(true);
+		renderer.setZoomButtonsVisible(false);
 		// 设置渲染器允许放大缩小
-		renderer.setZoomEnabled(true);
+		renderer.setZoomEnabled(false, false);
 		// 消除锯齿
 		renderer.setAntialiasing(true);
 

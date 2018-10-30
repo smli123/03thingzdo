@@ -44,7 +44,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"        
         android:layout_below="@+id/rlPlugCtrl"
-        android:background="@color/commom_bg_color">  
+        android:background="@color/commom_bg_color">
         
 	    <RelativeLayout
 		    android:id="@+id/layout_light_setting"
@@ -53,7 +53,7 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="0dp"
 	        android:layout_marginRight="0dp"	         
-	        android:background="@color/white"> 
+	        android:background="@color/white">
 	                
 		    <RelativeLayout
 		        android:id="@+id/layout_light_header"
