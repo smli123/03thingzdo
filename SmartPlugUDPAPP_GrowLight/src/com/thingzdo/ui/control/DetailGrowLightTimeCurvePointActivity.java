@@ -193,6 +193,12 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 
 		setLists();
 
+		// test code： Show X Label
+		mRenderer.clearXTextLabels();
+		for (int i = 0; i < xList_all.size(); i++) {
+			mRenderer.addXTextLabel(i + 1, xList_all.get(i));;
+		}
+
 		XYMultipleSeriesDataset dataset = getDataSet();
 
 		GraphicalView chartView = ChartFactory.getLineChartView(this, dataset,
@@ -223,6 +229,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		renderer.setChartValuesTextSize(30);
 		// 显示数值
 		renderer.setDisplayChartValues(true);
+
 		return renderer;
 	}
 
@@ -233,8 +240,8 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		for (int i = 0; i < lists.size(); i++) {
 			barSeries.add(lists.get(i));
 		}
-
 		barDataset.addSeries(barSeries.toXYSeries());
+
 		return barDataset;
 	}
 
@@ -277,7 +284,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		renderer.setShowGrid(true);
 
 		// X,Y轴上的数字数量
-		renderer.setXLabels(10);
+		renderer.setXLabels(0);
 		renderer.setYLabels(10);
 
 		// 设置X轴的最小数字和最大数字
@@ -290,6 +297,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		// 设置渲染器显示缩放按钮
 		renderer.setZoomButtonsVisible(false);
 		// 设置渲染器允许放大缩小
+		// renderer.setZoomEnabled(true);
 		renderer.setZoomEnabled(false, false);
 		// 消除锯齿
 		renderer.setAntialiasing(true);
