@@ -645,6 +645,9 @@
     
     <string name="smartplug_growlight_lushu_number">"Route Number"</string>
     
+    <string name="smartplug_growlight_time">"Time"</string>
+    <string name="smartplug_growlight_bright">"Bright"</string>
+    
     <string name="smartplug_growlight_modify_sunset">"Modify SunSet Time..."</string>
     
     <string name="smartplug_growlight_type">"Mode"</string>

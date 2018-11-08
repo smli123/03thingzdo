@@ -117,18 +117,10 @@
 	        android:background="@color/white"
 	        android:orientation="vertical" > 	
 	        
-	  	    <LinearLayout
-			    android:id="@+id/ll_chart"
-			    android:layout_width="match_parent"
-			    android:layout_height="match_parent"
-			    android:orientation="vertical">
-			</LinearLayout>
-	  	    
-	        <View 
-			    android:id="@+id/view_show"
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content" 
-			    android:visibility="gone"/>
+	  	    <lecho.lib.hellocharts.view.LineChartView
+            	android:id="@+id/line_chart"
+             	android:layout_width="match_parent"
+             	android:layout_height="match_parent"/>
 	            
 		</RelativeLayout>
 	    

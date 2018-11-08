@@ -646,6 +646,9 @@
     
     <string name="smartplug_growlight_lushu_number">路数</string>
     
+    <string name="smartplug_growlight_time">"时间"</string>
+    <string name="smartplug_growlight_bright">"亮度值"</string>
+    
     <string name="smartplug_growlight_modify_sunset">修改日出日落时间</string>
     
     <string name="smartplug_growlight_type">模式</string>

@@ -100,7 +100,8 @@
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content" 
 		        android:layout_toRightOf="@id/tv_clear"
-		        android:layout_gravity="center">
+		        android:layout_gravity="center"
+		        android:visibility="gone">
 
 	            <TextView
 	                android:id="@+id/tv_channel"
@@ -148,12 +149,10 @@
 	        android:background="@color/white"
 	        android:orientation="vertical" > 	
 	        
-	  	    <LinearLayout
-			    android:id="@+id/ll_chart"
-			    android:layout_width="match_parent"
-			    android:layout_height="match_parent"
-			    android:orientation="vertical">
-			</LinearLayout>
+	  	    <lecho.lib.hellocharts.view.LineChartView
+            	android:id="@+id/line_chart"
+             	android:layout_width="match_parent"
+             	android:layout_height="match_parent"/>
 			
 		</RelativeLayout>
 	    

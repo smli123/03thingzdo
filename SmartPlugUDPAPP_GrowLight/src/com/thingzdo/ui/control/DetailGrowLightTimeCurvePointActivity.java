@@ -3,21 +3,22 @@ package com.thingzdo.ui.control;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.chart.PointStyle;
-import org.achartengine.model.CategorySeries;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer;
-
+import lecho.lib.hellocharts.gesture.ContainerScrollType;
+import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.ValueShape;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.view.LineChartView;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,7 +26,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -48,7 +48,6 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		implements
 			OnClickListener {
 
-	private LinearLayout ll_chart;
 	private TextView tv_add;
 	private TextView tv_del;
 	private TextView tv_modify;
@@ -70,22 +69,41 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_04 = new ArrayList<GrowLightTimerCurvePointDefine>();
 	private ArrayList<GrowLightTimerCurvePointDefine> mTimer_05 = new ArrayList<GrowLightTimerCurvePointDefine>();
 
-	private ArrayList<Integer> yList_01 = new ArrayList<Integer>();
-	private ArrayList<Integer> yList_02 = new ArrayList<Integer>();
-	private ArrayList<Integer> yList_03 = new ArrayList<Integer>();
-	private ArrayList<Integer> yList_04 = new ArrayList<Integer>();
-	private ArrayList<Integer> yList_05 = new ArrayList<Integer>();
+	// 另外一种曲线显示方法
+	private LineChartView lineChart;
 
-	private ArrayList<String> xList_01 = new ArrayList<String>();
-	private ArrayList<String> xList_02 = new ArrayList<String>();
-	private ArrayList<String> xList_03 = new ArrayList<String>();
-	private ArrayList<String> xList_04 = new ArrayList<String>();
-	private ArrayList<String> xList_05 = new ArrayList<String>();
+	private List<AxisValue> mAxisXValues_01 = new ArrayList<AxisValue>();
+	private List<AxisValue> mAxisXValues_02 = new ArrayList<AxisValue>();
+	private List<AxisValue> mAxisXValues_03 = new ArrayList<AxisValue>();
+	private List<AxisValue> mAxisXValues_04 = new ArrayList<AxisValue>();
+	private List<AxisValue> mAxisXValues_05 = new ArrayList<AxisValue>();
 
-	private ArrayList<Integer> yList_all = new ArrayList<Integer>();
-	private ArrayList<String> xList_all = new ArrayList<String>();
+	private List<PointValue> mPointValues_01 = new ArrayList<PointValue>();
+	private List<PointValue> mPointValues_02 = new ArrayList<PointValue>();
+	private List<PointValue> mPointValues_03 = new ArrayList<PointValue>();
+	private List<PointValue> mPointValues_04 = new ArrayList<PointValue>();
+	private List<PointValue> mPointValues_05 = new ArrayList<PointValue>();
 
-	private List<Integer> lists = new ArrayList<Integer>();
+	private String mLineColor_01 = "#bf360c";
+	private String mLineColor_02 = "#37474f";
+	private String mLineColor_03 = "#4a148c";
+	private String mLineColor_04 = "#2196f3";
+	private String mLineColor_05 = "#64dd17";
+
+	// Line的样式
+	private ValueShape mLineShape = ValueShape.CIRCLE; // 折线图数据点的形状;圆形
+														// （三种：ValueShape.SQUARE
+														// ValueShape.CIRCLE
+														// ValueShape.DIAMOND）
+	private boolean mLineCubic = false; // 曲线是否平滑，即是曲线还是折线
+	private boolean mLineFilled = false; // 是否填充曲线的面积
+	private boolean mLineHasLabels = false; // 曲线的数据坐标是否加上备注
+	private boolean mLineHasLabelsOnlyForSelected = true;// 点击数据坐标提示数据（设置了这个line.setHasLabels(true);就无效）
+	private boolean mLineHasLines = true; // 是否用线显示。如果为false 则没有曲线只有点显示
+	private boolean mLineHasPoints = true; // 是否显示圆点 如果为false
+											// 则没有原点只有点显示（每个数据点都是个大的圆点）
+	private int mLinePointRadius = 4; // 设置线上节点的大小
+	private int mLineStrokeWidth = 2; // 设置线的粗细
 
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
@@ -143,174 +161,26 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		mTimer_05.clear();
 		mTimer_05 = mTimerHelper.getAllTimer(mPlugId, 4);
 
-		copyData(mTimer_01, xList_01, yList_01);
-		copyData(mTimer_02, xList_02, yList_02);
-		copyData(mTimer_03, xList_03, yList_03);
-		copyData(mTimer_04, xList_04, yList_04);
-		copyData(mTimer_05, xList_05, yList_05);
+		// 使用另外一种方法绘制曲线
+		getData(mTimer_01, mAxisXValues_01, mPointValues_01);
+		getData(mTimer_02, mAxisXValues_02, mPointValues_02);
+		getData(mTimer_03, mAxisXValues_03, mPointValues_03);
+		getData(mTimer_04, mAxisXValues_04, mPointValues_04);
+		getData(mTimer_05, mAxisXValues_05, mPointValues_05);
 
-		switch (i_Current_channel) {
-			case 0 :
-				copyData(mTimer_01, xList_all, yList_all);
-				break;
-			case 1 :
-				copyData(mTimer_02, xList_all, yList_all);
-				break;
-			case 2 :
-				copyData(mTimer_03, xList_all, yList_all);
-				break;
-			case 3 :
-				copyData(mTimer_04, xList_all, yList_all);
-				break;
-			case 4 :
-				copyData(mTimer_05, xList_all, yList_all);
-				break;
-		}
-
-		// 根据数据重新画图
-		drawTheChart();
+		initLineChart();
 	}
 
-	// Draw The Chart New
-	private void copyData(ArrayList<GrowLightTimerCurvePointDefine> mTimer,
-			ArrayList<String> xList, ArrayList<Integer> yList) {
+	private void getData(ArrayList<GrowLightTimerCurvePointDefine> mTimer,
+			List<AxisValue> xList, List<PointValue> yList) {
 		xList.clear();
 		yList.clear();
 
 		for (int i = 0; i < mTimer.size(); i++) {
 			GrowLightTimerCurvePointDefine ti = mTimer.get(i);
-			xList.add(ti.mPowerOnTime);
-			yList.add((Integer) ti.light);
+			xList.add((new AxisValue(i).setLabel(ti.mPowerOnTime)));
+			yList.add(new PointValue(i, ti.light));
 		}
-	}
-
-	public void drawTheChart() {
-		XYMultipleSeriesRenderer mRenderer = getXYMulSeriesRenderer();
-
-		XYSeriesRenderer renderer = getXYSeriesRenderer();
-
-		mRenderer.addSeriesRenderer(renderer);
-
-		setLists();
-
-		// test code： Show X Label
-		mRenderer.clearXTextLabels();
-		for (int i = 0; i < xList_all.size(); i++) {
-			mRenderer.addXTextLabel(i + 1, xList_all.get(i));;
-		}
-
-		XYMultipleSeriesDataset dataset = getDataSet();
-
-		GraphicalView chartView = ChartFactory.getLineChartView(this, dataset,
-				mRenderer);
-
-		ll_chart.addView(chartView, 0);
-	}
-
-	private void setLists() {
-		lists.clear();
-		for (int i = 0; i < yList_all.size(); i++) {
-			lists.add(yList_all.get(i));
-		}
-	}
-
-	public XYSeriesRenderer getXYSeriesRenderer() {
-		XYSeriesRenderer renderer = new XYSeriesRenderer();
-		// 设置折线宽度
-		renderer.setLineWidth(2);
-		// 设置折线颜色
-		renderer.setColor(Color.GRAY);
-		renderer.setDisplayBoundingPoints(true);
-		// 点的样式
-		renderer.setPointStyle(PointStyle.CIRCLE);
-		// 设置点的大小
-		renderer.setPointStrokeWidth(3);
-		// 设置数值显示的字体大小
-		renderer.setChartValuesTextSize(30);
-		// 显示数值
-		renderer.setDisplayChartValues(true);
-
-		return renderer;
-	}
-
-	public XYMultipleSeriesDataset getDataSet() {
-		XYMultipleSeriesDataset barDataset = new XYMultipleSeriesDataset();
-		CategorySeries barSeries = new CategorySeries("模拟日光照射");
-
-		for (int i = 0; i < lists.size(); i++) {
-			barSeries.add(lists.get(i));
-		}
-		barDataset.addSeries(barSeries.toXYSeries());
-
-		return barDataset;
-	}
-
-	public XYMultipleSeriesRenderer getXYMulSeriesRenderer() {
-		XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
-		renderer.setMarginsColor(Color.argb(0x00, 0xF3, 0xF3, 0xF3));
-
-		// 设置背景颜色
-		renderer.setApplyBackgroundColor(true);
-		renderer.setBackgroundColor(Color.WHITE);
-
-		// 设置Title的内容和大小
-		renderer.setChartTitle("");
-		renderer.setChartTitleTextSize(50);
-
-		// 图表与四周的边距
-		renderer.setMargins(new int[]{80, 80, 50, 50});
-
-		// 设置X,Y轴title的内容和大小
-		renderer.setXTitle("时间");
-		renderer.setYTitle("亮度");
-		renderer.setAxisTitleTextSize(30);
-		// renderer.setAxesColor(Color.WHITE);
-		renderer.setLabelsColor(Color.BLACK);
-
-		// 图例文字的大小
-		renderer.setLegendTextSize(20);
-
-		// x、y轴上刻度颜色和大小
-		renderer.setXLabelsColor(Color.BLACK);
-		renderer.setYLabelsColor(0, Color.BLACK);
-		renderer.setLabelsTextSize(20);
-		renderer.setYLabelsPadding(30);
-
-		// 设置X轴的最小数字和最大数字，由于我们的数据是从1开始，所以设置为0.5就可以在1之前让出一部分
-		// 有兴趣的童鞋可以删除下面两行代码看一下效果
-		renderer.setPanEnabled(false, false);
-
-		// 显示网格
-		renderer.setShowGrid(true);
-
-		// X,Y轴上的数字数量
-		renderer.setXLabels(0);
-		renderer.setYLabels(10);
-
-		// 设置X轴的最小数字和最大数字
-		renderer.setXAxisMin(0);
-		renderer.setXAxisMax(24);
-		// 设置Y轴的最小数字和最大数字
-		renderer.setYAxisMin(0);
-		renderer.setYAxisMax(100);
-
-		// 设置渲染器显示缩放按钮
-		renderer.setZoomButtonsVisible(false);
-		// 设置渲染器允许放大缩小
-		// renderer.setZoomEnabled(true);
-		renderer.setZoomEnabled(false, false);
-		// 消除锯齿
-		renderer.setAntialiasing(true);
-
-		// 刻度线与X轴坐标文字左侧对齐
-		renderer.setXLabelsAlign(Paint.Align.LEFT);
-		// Y轴与Y轴坐标文字左对齐
-		renderer.setYLabelsAlign(Paint.Align.LEFT);
-
-		// 允许左右拖动,但不允许上下拖动.
-		renderer.setPanEnabled(true, false);
-
-		return renderer;
 	}
 
 	private void queryAllTimeCurvePoint() {
@@ -489,7 +359,9 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		setTitleLeftButton(R.string.smartplug_goback,
 				R.drawable.title_btn_selector, this);
 
-		ll_chart = (LinearLayout) findViewById(R.id.ll_chart);
+		// 设置曲线的各种数据
+		lineChart = (LineChartView) findViewById(R.id.line_chart);
+		refreshView();
 
 		tv_add = (TextView) findViewById(R.id.tv_add);
 		tv_del = (TextView) findViewById(R.id.tv_del);
@@ -527,6 +399,158 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		tv_del.setOnClickListener(this);
 		tv_modify.setOnClickListener(this);
 		tv_clear.setOnClickListener(this);
+	}
+
+	private Line getLine_01() {
+		Line line = new Line(mPointValues_01).setColor(Color
+				.parseColor(mLineColor_01));
+		line.setShape(mLineShape);
+		line.setCubic(mLineCubic);
+		line.setFilled(mLineFilled);
+		line.setHasLabels(mLineHasLabels);
+		if (mLineHasLabels == false) {
+			line.setHasLabelsOnlyForSelected(mLineHasLabelsOnlyForSelected);
+		}
+		line.setHasLines(mLineHasLines);
+		line.setHasPoints(mLineHasPoints);
+		line.setPointRadius(mLinePointRadius);
+		line.setStrokeWidth(mLineStrokeWidth);
+
+		return line;
+	}
+
+	private Line getLine_02() {
+		Line line = new Line(mPointValues_02).setColor(Color
+				.parseColor(mLineColor_02)); // 折线的颜色（橙色）
+		line.setShape(mLineShape);
+		line.setCubic(mLineCubic);
+		line.setFilled(mLineFilled);
+		line.setHasLabels(mLineHasLabels);
+		if (mLineHasLabels == false) {
+			line.setHasLabelsOnlyForSelected(mLineHasLabelsOnlyForSelected);
+		}
+		line.setHasLines(mLineHasLines);
+		line.setHasPoints(mLineHasPoints);
+		line.setPointRadius(mLinePointRadius);
+		line.setStrokeWidth(mLineStrokeWidth);
+
+		return line;
+	}
+
+	private Line getLine_03() {
+		Line line = new Line(mPointValues_03).setColor(Color
+				.parseColor(mLineColor_03)); // 折线的颜色（橙色）
+		line.setShape(mLineShape);
+		line.setCubic(mLineCubic);
+		line.setFilled(mLineFilled);
+		line.setHasLabels(mLineHasLabels);
+		if (mLineHasLabels == false) {
+			line.setHasLabelsOnlyForSelected(mLineHasLabelsOnlyForSelected);
+		}
+		line.setHasLines(mLineHasLines);
+		line.setHasPoints(mLineHasPoints);
+		line.setPointRadius(mLinePointRadius);
+		line.setStrokeWidth(mLineStrokeWidth);
+
+		return line;
+	}
+
+	private Line getLine_04() {
+		Line line = new Line(mPointValues_04).setColor(Color
+				.parseColor(mLineColor_04)); // 折线的颜色（橙色）
+		line.setShape(mLineShape);
+		line.setCubic(mLineCubic);
+		line.setFilled(mLineFilled);
+		line.setHasLabels(mLineHasLabels);
+		if (mLineHasLabels == false) {
+			line.setHasLabelsOnlyForSelected(mLineHasLabelsOnlyForSelected);
+		}
+		line.setHasLines(mLineHasLines);
+		line.setHasPoints(mLineHasPoints);
+		line.setPointRadius(mLinePointRadius);
+		line.setStrokeWidth(mLineStrokeWidth);
+
+		return line;
+	}
+
+	private Line getLine_05() {
+		Line line = new Line(mPointValues_05).setColor(Color
+				.parseColor(mLineColor_05)); // 折线的颜色（橙色）
+		line.setShape(mLineShape);
+		line.setCubic(mLineCubic);
+		line.setFilled(mLineFilled);
+		line.setHasLabels(mLineHasLabels);
+		if (mLineHasLabels == false) {
+			line.setHasLabelsOnlyForSelected(mLineHasLabelsOnlyForSelected);
+		}
+		line.setHasLines(mLineHasLines);
+		line.setHasPoints(mLineHasPoints);
+		line.setPointRadius(mLinePointRadius);
+		line.setStrokeWidth(mLineStrokeWidth);
+
+		return line;
+	}
+	private void initLineChart() {
+		Line line_01 = getLine_01();
+		Line line_02 = getLine_02();
+		Line line_03 = getLine_03();
+		Line line_04 = getLine_04();
+		Line line_05 = getLine_05();
+
+		List<Line> lines = new ArrayList<Line>();
+		lines.add(line_01);
+		lines.add(line_02);
+		lines.add(line_03);
+		lines.add(line_04);
+		lines.add(line_05);
+		LineChartData data = new LineChartData();
+		data.setLines(lines);
+
+		String xLabel = SmartPlugApplication.getInstance().getString(
+				R.string.smartplug_growlight_time);
+		String yLabel = SmartPlugApplication.getInstance().getString(
+				R.string.smartplug_growlight_bright);
+
+		// X坐标轴
+		Axis axisX = new Axis(); // X轴
+		axisX.setHasTiltedLabels(false); // X坐标轴字体是斜的显示还是直的，true是斜的显示
+		axisX.setTextColor(Color.GRAY); // 设置字体颜色
+		axisX.setName(xLabel); // 表格名称
+		axisX.setTextSize(10);// 设置字体大小
+		axisX.setMaxLabelChars(8); // 最多几个X轴坐标，意思就是你的缩放让X轴上数据的个数7<=x<=mAxisXValues.length
+		axisX.setValues(mAxisXValues_01); // 填充X轴的坐标名称
+		data.setAxisXBottom(axisX); // x 轴在底部
+		// data.setAxisXTop(axisX); //x 轴在顶部
+		axisX.setHasLines(true); // x 轴分割线
+
+		// Y坐标轴: 根据数据的大小自动设置Y轴上限(在下面我会给出固定Y轴数据个数的解决方案)
+		Axis axisY = new Axis(); // Y轴
+		axisY.setTextColor(Color.GRAY);
+		axisY.setName(yLabel);// y轴标注
+		axisY.setTextSize(10);// 设置字体大小
+		data.setAxisYLeft(axisY); // Y轴设置在左边
+		// data.setAxisYRight(axisY); //y轴设置在右边
+
+		// 设置行为属性，支持缩放、滑动以及平移
+		lineChart.setInteractive(true);
+		lineChart.setZoomType(ZoomType.HORIZONTAL);
+		lineChart.setMaxZoom((float) 2);// 最大方法比例
+		lineChart.setContainerScrollEnabled(true,
+				ContainerScrollType.HORIZONTAL);
+		lineChart.setLineChartData(data);
+		lineChart.setVisibility(View.VISIBLE);
+
+		/**
+		 * 注：下面的7，10只是代表一个数字去类比而已
+		 * 当时是为了解决X轴固定数据个数。见（http://forum.xda-developers.com
+		 * /tools/programming/library
+		 * -hellocharts-charting-library-t2904456/page2）;
+		 */
+		// 总共 24个点，所以全景就是 0~23
+		Viewport v = new Viewport(lineChart.getMaximumViewport());
+		v.left = 0;
+		v.right = 23;
+		lineChart.setCurrentViewport(v);
 	}
 
 	class spinnerChannelListener
