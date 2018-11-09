@@ -1,5 +1,10 @@
 package com.thingzdo.ui.control;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -41,6 +46,7 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 	private Context mContext;
 	private WheelMain wheelMain;
 
+	private TextView tv_light_sun_cur_value;
 	private TextView tv_light_sunup_time;
 	private TextView tv_light_sundown_time;
 	private RelativeLayout layout_period_header;
@@ -65,6 +71,9 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 	private SharedPreferences.Editor editor;
 
 	private RevCmdFromSocketThread mTcpSocketThread = null;
+
+	private Timer valueTimer = null;
+	private TimerTask valueTimerTask = null;
 
 	private BroadcastReceiver mDetailRev = new BroadcastReceiver() {
 		@Override
@@ -104,6 +113,9 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 			} else if (1 == msg.what) { // Failed for modify Sun time
 				PubFunc.thinzdoToast(mContext, SmartPlugApplication
 						.getInstance().getString(R.string.app_modify_failed));
+			} else if (2 == msg.what) { // Show Bright Value
+				int value = msg.arg1;
+				tv_light_sun_cur_value.setText(String.valueOf(value));
 			}
 		}
 	};
@@ -381,6 +393,7 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 		setTitleLeftButton(R.string.smartplug_goback,
 				R.drawable.title_btn_selector, this);
 
+		tv_light_sun_cur_value = (TextView) findViewById(R.id.tv_light_sun_cur_value);
 		tv_light_sunup_time = (TextView) findViewById(R.id.tv_light_sunup_time);
 		tv_light_sundown_time = (TextView) findViewById(R.id.tv_light_sundown_time);
 		tv_select_days = (TextView) findViewById(R.id.tv_select_days);
@@ -396,6 +409,32 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 		tv_light_sunup_time.setOnClickListener(this);
 		tv_light_sundown_time.setOnClickListener(this);
 		btn_submit.setOnClickListener(this);
+
+		if (valueTimer != null) {
+			valueTimer.cancel();
+		}
+		if (valueTimerTask != null) {
+			valueTimerTask.cancel();
+		}
+		valueTimer = new Timer();
+		valueTimerTask = new TimerTask() {
+
+			@Override
+			public void run() {
+				int sunup = getMinutFromTime(str_sunup);
+				int sundown = getMinutFromTime(str_sundown);
+				int curTime = getCurrentMinut();
+				int value = getCurValue(sunup, sundown, curTime);
+
+				Message msg = new Message();
+				msg.what = 2;
+				msg.arg1 = value;
+				mHandler.sendMessage(msg);
+				// tv_light_sun_cur_value.setText(String.valueOf(value));
+			}
+
+		};
+		valueTimer.schedule(valueTimerTask, 500, 60 * 1000);
 
 	}
 	private void disconnectSocket() {
@@ -419,5 +458,49 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 		tv_light_sunup_time.setText(str_sunup);
 		tv_light_sundown_time.setText(str_sundown);
 
+	}
+
+	/*
+	 * 日出日落函数抛物线模式： f(x) = -1 * k * (x - (sunup+sunup)/2) * (x -
+	 * (sunup+sunup)/2) + 100;
+	 * 
+	 * 解出来 a的值为：
+	 * 
+	 * k = 400 / ((sunup - sundown) * (sunup - sundown))
+	 */
+	private int getCurValue(int sunupTime, int sundownTime, int curTime) {
+		double k = 400 * 1.0 / ((sunupTime - sundownTime) * (sunupTime - sundownTime));
+		double value = -1.0 * k * (curTime - ((sunupTime + sundownTime) / 2.0))
+				* (curTime - ((sunupTime + sundownTime) / 2.0)) + 100;
+
+		if (value < 0) {
+			value = 0;
+		}
+
+		return (int) value;
+	}
+
+	private int getMinutFromTime(String sunTime) {
+		String[] buffer = sunTime.split(":");
+		if (buffer.length < 2) {
+			return 0;
+		}
+		try {
+			int hours = Integer.valueOf(buffer[0]);
+			int minuts = Integer.valueOf(buffer[1]);
+
+			int value = hours * 60 + minuts;
+			return value;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+	private int getCurrentMinut() {
+		SimpleDateFormat df = new SimpleDateFormat("HH:mm");// 设置日期格式
+		String strTemp = df.format(new Date());
+		int temp = getMinutFromTime(strTemp);
+		return temp;
 	}
 }
