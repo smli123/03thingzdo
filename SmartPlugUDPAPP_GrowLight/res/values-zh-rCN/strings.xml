@@ -481,6 +481,9 @@
     <string name="str_btn_aircon_scene_9h">九小时后</string>
     <string name="str_btn_aircon_scene_10h">十小时后</string>
     
+    <string name="str_btn_aircon">空调遥控器</string>
+    <string name="str_btn_tv">电视遥控器</string>
+    
     <!-- 智能灯光 -->
     <string name="str_wireless_controller">无线控制器: </string>
     <string name="str_btn_all_poweron">全部打开</string>
@@ -495,6 +498,8 @@
     <string name="str_btn_group_4">四组</string>
     <string name="str_btn_group_poweron">打开</string>
     <string name="str_btn_group_poweroff">关闭</string>
+    
+    <string name="str_ariconstudy_info">请选择使用红外要操作的对象：</string>
 
     <!-- 智能电池 -->
     <string name="str_battery_charge">"剩余电量: "</string>

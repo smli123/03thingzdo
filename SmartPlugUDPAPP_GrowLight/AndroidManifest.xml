@@ -350,6 +350,13 @@
         </activity>
 		<activity
             android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.control.DetailAirConStudyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
             android:name="com.thingzdo.ui.control.DetailIRSceneActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar"

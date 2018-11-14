@@ -281,6 +281,13 @@ public class PluglistAdapter extends BaseAdapter {
 			} else if (FavoriteItem.mSubDeviceType == PubDefine.DEVICE_SMART_KETTLE) { // 6_1
 				holder.imgPlug.setImageResource(R.drawable.smp_kettle_small);
 				holder.imgPower2.setVisibility(View.GONE);
+			} else if (FavoriteItem.mSubDeviceType == PubDefine.DEVICE_SMART_AIRCONSTUDY) { // 9_1
+				holder.imgPlug
+						.setImageResource(R.drawable.smp_airconstudy_small);
+				holder.imgPower.setVisibility(View.GONE);
+				holder.imgLight.setVisibility(View.GONE);
+				holder.imgUsb.setVisibility(View.GONE);
+				holder.imgPower2.setVisibility(View.GONE);
 			} else if (FavoriteItem.mSubDeviceType == PubDefine.DEVICE_SMART_CURTAIN) { // 3_1
 				holder.imgPlug.setImageResource(R.drawable.smp_curtain_small);
 				// holder.imgPower.setVisibility(View.GONE);
@@ -378,6 +385,8 @@ public class PluglistAdapter extends BaseAdapter {
 			} else if (mPlug.mSubDeviceType == PubDefine.DEVICE_SMART_BATTERY
 					&& mPlug.mSubProductType == PubDefine.PRODUCT_PLUG) { // 8_1
 				intent.setClass(mContext, DetailBattery2Activity.class);
+			} else if (mPlug.mSubDeviceType == PubDefine.DEVICE_SMART_AIRCONSTUDY) { // 9_1
+				intent.setClass(mContext, DetailAirConStudyActivity.class);
 			} else if (mPlug.mSubDeviceType == PubDefine.DEVICE_SMART_STEELYARD
 					&& mPlug.mSubProductType == PubDefine.PRODUCT_PLUG) { // 10_1
 				intent.setClass(mContext, DetailSmartSteelyardActivity.class);

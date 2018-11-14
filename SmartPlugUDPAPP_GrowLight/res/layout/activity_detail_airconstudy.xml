@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/commom_bg_color">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true"/>   
+          
+    <RelativeLayout
+        android:id="@+id/rl_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/commontitlebar"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"	         
+        android:background="@color/commom_bg_color"
+        android:layout_gravity="center">
+            
+	    <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:orientation="vertical">
+		    
+		    <LinearLayout
+			    android:id="@+id/ll_route_tip"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal" >
+			
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="15sp"
+				    android:text="@string/str_ariconstudy_info"
+				    android:textColor="@color/black"/>
+				
+			</LinearLayout>
+		</LinearLayout>    
+	    
+	    <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:orientation="vertical" >
+		    
+	        <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:layout_marginTop="20dp"
+	            android:layout_marginBottom="20dp"
+	            android:layout_marginLeft="50dp"
+	            android:layout_marginRight="50dp"
+	            android:orientation="vertical" >
+			 
+				<Button
+			        android:id="@+id/btn_aircon"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="20dp"
+			        android:background="@drawable/btn_selector" 
+			        android:textColor="@color/white"
+	       			android:textSize="@dimen/text_size_larsamll"
+	       			android:layout_centerInParent="true"
+			        android:text="@string/str_btn_aircon" />
+				
+				<Button
+			        android:id="@+id/btn_tv"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="20dp"
+			        android:background="@drawable/btn_selector"  
+			        android:textColor="@color/white"
+	       			android:textSize="@dimen/text_size_larsamll"
+	       			android:layout_centerInParent="true"
+			        android:text="@string/str_btn_tv" />
+				
+		    </LinearLayout>
+		    
+	    </LinearLayout>
+	    
+	</RelativeLayout>
+</RelativeLayout>

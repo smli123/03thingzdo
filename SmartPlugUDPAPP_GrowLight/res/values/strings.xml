@@ -480,6 +480,9 @@
     <string name="str_btn_aircon_scene_8h">" 8 hours"</string>
     <string name="str_btn_aircon_scene_9h">" 9 hours"</string>
     <string name="str_btn_aircon_scene_10h">"10 hours"</string>
+    
+    <string name="str_btn_aircon">Air Conditioner</string>
+    <string name="str_btn_tv">TV Controller</string>
         
     <!-- 智能灯光 -->
     <string name="str_wireless_controller">WiFi Controller: </string>
@@ -495,6 +498,8 @@
     <string name="str_btn_group_4">Group Four</string>
     <string name="str_btn_group_poweron">Open</string>
     <string name="str_btn_group_poweroff">Close</string>
+    
+    <string name="str_ariconstudy_info">"Please select object"</string>
     
     <!-- 智能电池 -->
     <string name="str_battery_charge">"Charge Left: "</string>
