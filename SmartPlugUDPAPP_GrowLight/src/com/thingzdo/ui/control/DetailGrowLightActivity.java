@@ -62,7 +62,7 @@ public class DetailGrowLightActivity extends TitledActivity
 	private String str_curtime_simple = "00:00:00";
 	private String str_sunup = "06:00:00";
 	private String str_sundown = "18:00:00";
-	private String sun_peroid = "0000000";
+	private String sun_peroid = "1111111";
 	private int i_light_01 = 0;
 	private int i_light_02 = 0;
 	private int i_light_03 = 0;
@@ -223,7 +223,7 @@ public class DetailGrowLightActivity extends TitledActivity
 		str_sundown = mSharedPreferences.getString("SUNDOWNTIME" + mPlugId,
 				"18:00:00");
 		sun_peroid = mSharedPreferences.getString("SUNPEROID" + mPlugId,
-				"0000000");
+				"1111111");
 
 		i_light_01 = mSharedPreferences.getInt("LIGHT01" + mPlugId, 0);
 		i_light_02 = mSharedPreferences.getInt("LIGHT02" + mPlugId, 0);

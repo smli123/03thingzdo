@@ -13,10 +13,12 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -84,6 +86,13 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	private List<PointValue> mPointValues_04 = new ArrayList<PointValue>();
 	private List<PointValue> mPointValues_05 = new ArrayList<PointValue>();
 
+	// 0，渐变 1，跳变
+	private int iShowMode_01 = 0;
+	private int iShowMode_02 = 0;
+	private int iShowMode_03 = 0;
+	private int iShowMode_04 = 0;
+	private int iShowMode_05 = 0;
+
 	private String mLineColor_01 = "#bf360c";
 	private String mLineColor_02 = "#37474f";
 	private String mLineColor_03 = "#4a148c";
@@ -102,8 +111,13 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 	private boolean mLineHasLines = true; // 是否用线显示。如果为false 则没有曲线只有点显示
 	private boolean mLineHasPoints = true; // 是否显示圆点 如果为false
 											// 则没有原点只有点显示（每个数据点都是个大的圆点）
-	private int mLinePointRadius = 4; // 设置线上节点的大小
+	private int mLinePointRadius = 3; // 设置线上节点的大小
 	private int mLineStrokeWidth = 2; // 设置线的粗细
+
+	private SharedPreferences mSharedPreferences;
+	private SharedPreferences.Editor editor;
+
+	private int i_Current_lushu = 5;
 
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
@@ -161,28 +175,61 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		mTimer_05.clear();
 		mTimer_05 = mTimerHelper.getAllTimer(mPlugId, 4);
 
+		iShowMode_01 = getMode(mTimer_01);
+		iShowMode_02 = getMode(mTimer_02);
+		iShowMode_03 = getMode(mTimer_03);
+		iShowMode_04 = getMode(mTimer_04);
+		iShowMode_05 = getMode(mTimer_05);
+
 		// 使用另外一种方法绘制曲线
-		getData(mTimer_01, mAxisXValues_01, mPointValues_01);
-		getData(mTimer_02, mAxisXValues_02, mPointValues_02);
-		getData(mTimer_03, mAxisXValues_03, mPointValues_03);
-		getData(mTimer_04, mAxisXValues_04, mPointValues_04);
-		getData(mTimer_05, mAxisXValues_05, mPointValues_05);
+		if (i_Current_lushu >= 1) {
+			getData(iShowMode_01, mTimer_01, mAxisXValues_01, mPointValues_01);
+		}
+		if (i_Current_lushu >= 2) {
+			getData(iShowMode_02, mTimer_02, mAxisXValues_02, mPointValues_02);
+		}
+		if (i_Current_lushu >= 3) {
+			getData(iShowMode_03, mTimer_03, mAxisXValues_03, mPointValues_03);
+		}
+		if (i_Current_lushu >= 4) {
+			getData(iShowMode_04, mTimer_04, mAxisXValues_04, mPointValues_04);
+		}
+		if (i_Current_lushu >= 5) {
+			getData(iShowMode_05, mTimer_05, mAxisXValues_05, mPointValues_05);
+		}
 
 		initLineChart();
 	}
 
-	private void getData(ArrayList<GrowLightTimerCurvePointDefine> mTimer,
+	private int getMode(ArrayList<GrowLightTimerCurvePointDefine> mTimer) {
+		int iMode = 0;
+		if (mTimer != null) {
+			if (mTimer.size() > 0)
+				iMode = mTimer.get(0).mType; // 0，渐变 1，跳变
+		}
+		return iMode;
+	}
+	private void getData(int iShowMode,
+			ArrayList<GrowLightTimerCurvePointDefine> mTimer,
 			List<AxisValue> xList, List<PointValue> yList) {
 		xList.clear();
 		yList.clear();
 
-		for (int i = 0; i < mTimer.size(); i++) {
-			GrowLightTimerCurvePointDefine ti = mTimer.get(i);
-			xList.add((new AxisValue(i).setLabel(ti.mPowerOnTime)));
-			yList.add(new PointValue(i, ti.light));
+		if (mTimer != null) {
+			for (int i = 0; i < mTimer.size(); i++) {
+				GrowLightTimerCurvePointDefine ti = mTimer.get(i);
+				xList.add((new AxisValue(i).setLabel(ti.mPowerOnTime)));
+				if (iShowMode == 1) { // 0: 渐变，1：跳变
+					if (i > 0 && i < mTimer.size()) {
+						GrowLightTimerCurvePointDefine old_ti = mTimer
+								.get(i - 1);
+						yList.add(new PointValue(i, old_ti.light));
+					}
+				}
+				yList.add(new PointValue(i, ti.light));
+			}
 		}
 	}
-
 	private void queryAllTimeCurvePoint() {
 		for (int i = 0; i < 5; i++) {
 			queryTimeCurvePoint(i);
@@ -213,6 +260,9 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		SmartPlugApplication.resetTask();
 		SmartPlugApplication.getInstance().addActivity(this);
 
+		mSharedPreferences = getSharedPreferences("GROWLIGHT"
+				+ PubStatus.g_CurUserName, Activity.MODE_PRIVATE);
+
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.PLUG_POWER_ACTION);
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
@@ -231,6 +281,8 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		mPlugIp = intent.getStringExtra("PLUGIP");
 
 		UDPClient.getInstance().setIPAddress(mPlugIp);
+
+		loadData();
 
 		init();
 
@@ -263,6 +315,10 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
 			mTcpSocketThread.setRunning(false);
 		}
+	}
+
+	private void loadData() {
+		i_Current_lushu = mSharedPreferences.getInt("SETROUTES" + mPlugId, 5);
 	}
 
 	@Override
