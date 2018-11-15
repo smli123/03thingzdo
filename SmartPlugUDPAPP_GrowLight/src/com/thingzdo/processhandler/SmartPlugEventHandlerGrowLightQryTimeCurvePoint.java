@@ -77,21 +77,23 @@ public class SmartPlugEventHandlerGrowLightQryTimeCurvePoint
 
 			mTimerHelper.clearTimer(moduleID, channel);
 
-			int baseIdx = 5;
-			int BLOCK_SIZE = 2;
-			for (int j = 0; j < count; j++) {
-				GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();
+			if (enable == 1) {
+				int baseIdx = 5;
+				int BLOCK_SIZE = 2;
+				for (int j = 0; j < count; j++) {
+					GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();
 
-				ti.mPlugId = moduleID;
-				ti.mType = type;
-				ti.mPeriod = peroid;
-				ti.light_channel = channel;
-				ti.mEnable = (enable == 1) ? true : false;
-				ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 0];
-				ti.light = Integer
-						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 1]);
+					ti.mPlugId = moduleID;
+					ti.mType = type;
+					ti.mPeriod = peroid;
+					ti.light_channel = channel;
+					ti.mEnable = (enable == 1) ? true : false;
+					ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 0];
+					ti.light = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+							+ 1]);
 
-				mTimerHelper.addTimer(ti);
+					mTimerHelper.addTimer(ti);
+				}
 			}
 		}
 

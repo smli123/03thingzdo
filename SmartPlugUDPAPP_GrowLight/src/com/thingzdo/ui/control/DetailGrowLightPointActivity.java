@@ -63,6 +63,9 @@ public class DetailGrowLightPointActivity extends TitledActivity
 	private ThingzdoCheckBox cb_enable;
 	private TextView tv_peroid;
 
+	private RelativeLayout rl_function_base_enable;
+	private RelativeLayout rl_function_base_type;
+	private RelativeLayout rl_function_base_peroid;
 	private RelativeLayout rl_function_control;
 
 	private TextView tv_light_01;
@@ -629,10 +632,14 @@ public class DetailGrowLightPointActivity extends TitledActivity
 		tv_peroid = (TextView) findViewById(R.id.tv_peroid);
 		rl_function_control = (RelativeLayout) findViewById(R.id.rl_function_control);
 
+		rl_function_base_enable = (RelativeLayout) findViewById(R.id.rl_function_base_enable);
+		rl_function_base_type = (RelativeLayout) findViewById(R.id.rl_function_base_type);
+		rl_function_base_peroid = (RelativeLayout) findViewById(R.id.rl_function_base_peroid);
+
 		if (Activity_Operator_Mode == OPERATOR_DEL) {
-			spinner_type.setVisibility(View.GONE);
-			cb_enable.setVisibility(View.GONE);
-			tv_peroid.setVisibility(View.GONE);
+			rl_function_base_enable.setVisibility(View.GONE);
+			rl_function_base_type.setVisibility(View.GONE);
+			rl_function_base_peroid.setVisibility(View.GONE);
 			rl_function_control.setVisibility(View.GONE);
 
 		} else {

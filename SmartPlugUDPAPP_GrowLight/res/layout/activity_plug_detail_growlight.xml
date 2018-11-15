@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/commontitlebar"
         android:layout_marginBottom="-10dp"
-        android:background="@drawable/smp_growight_background" >
+        android:background="@color/growlight_bg">
        
     <RelativeLayout
         android:id="@+id/rl_light_control"

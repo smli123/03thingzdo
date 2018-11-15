@@ -50,6 +50,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		implements
 			OnClickListener {
 
+	private TextView tv_query;
 	private TextView tv_add;
 	private TextView tv_del;
 	private TextView tv_modify;
@@ -235,7 +236,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 			queryTimeCurvePoint(i);
 
 			try {
-				Thread.sleep(500);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -291,7 +292,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 			mTcpSocketThread.start();
 		}
 
-		// refreshView();
+		refreshView();
 
 		// new Handler().postDelayed(new Runnable() {
 		// public void run() {
@@ -299,6 +300,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		// }
 		// }, 1000);
 	}
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -351,6 +353,9 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 						finish();
 					}
 				}
+				break;
+			case R.id.tv_query :
+				queryAllTimeCurvePoint();
 				break;
 			case R.id.tv_add :
 				timecurve_add();
@@ -419,6 +424,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		lineChart = (LineChartView) findViewById(R.id.line_chart);
 		refreshView();
 
+		tv_query = (TextView) findViewById(R.id.tv_query);
 		tv_add = (TextView) findViewById(R.id.tv_add);
 		tv_del = (TextView) findViewById(R.id.tv_del);
 		tv_modify = (TextView) findViewById(R.id.tv_modify);
@@ -451,6 +457,7 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 			spinner_channel.setSelection(i_Current_channel);
 		}
 
+		tv_query.setOnClickListener(this);
 		tv_add.setOnClickListener(this);
 		tv_del.setOnClickListener(this);
 		tv_modify.setOnClickListener(this);

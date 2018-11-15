@@ -60,7 +60,7 @@ public class SmartPlugEventHandlerGrowLightSetTimeCurvePoint
 
 	private void parseQryResult(String moduleID, String command) {
 		// Count, NO, Type, light01,
-		// light02,light03,light04,light05,time,peroid,eanble
+		// light02,light03,light04,light05,time,peroid,enable
 		SmartPlugGrowLightTimerCurvePointHelper mTimerHelper = new SmartPlugGrowLightTimerCurvePointHelper(
 				SmartPlugApplication.getContext());
 
@@ -74,21 +74,23 @@ public class SmartPlugEventHandlerGrowLightSetTimeCurvePoint
 
 			mTimerHelper.clearTimer(moduleID, channel);
 
-			int baseIdx = 5;
-			int BLOCK_SIZE = 2;
-			for (int j = 0; j < count; j++) {
-				GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();
+			if (enable == 1) { // 0： 表示设备已经删除，1：表示创建成功
+				int baseIdx = 5;
+				int BLOCK_SIZE = 2;
+				for (int j = 0; j < count; j++) {
+					GrowLightTimerCurvePointDefine ti = new GrowLightTimerCurvePointDefine();
 
-				ti.mPlugId = moduleID;
-				ti.mType = type;
-				ti.mPeriod = peroid;
-				ti.light_channel = channel;
-				ti.mEnable = (enable == 1) ? true : false;
-				ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 0];
-				ti.light = Integer
-						.parseInt(infors[baseIdx + j * BLOCK_SIZE + 1]);
+					ti.mPlugId = moduleID;
+					ti.mType = type;
+					ti.mPeriod = peroid;
+					ti.light_channel = channel;
+					ti.mEnable = (enable == 1) ? true : false;
+					ti.mPowerOnTime = infors[baseIdx + j * BLOCK_SIZE + 0];
+					ti.light = Integer.parseInt(infors[baseIdx + j * BLOCK_SIZE
+							+ 1]);
 
-				mTimerHelper.addTimer(ti);
+					mTimerHelper.addTimer(ti);
+				}
 			}
 		}
 

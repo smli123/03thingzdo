@@ -15,7 +15,9 @@
 	<!-- 灰色 -->
     <color name="gray">#929292</color>    
 	<!-- 绿色 -->
-    <color name="green">#4cbc60</color>   
+    <color name="green">#4cbc60</color>
+    
+    <color name="growlight_bg">#29b6f6</color>
     
     <!-- Listview 分割线颜色 -->
     <color name="listview_seperator_color">#CCCCCCAA</color>
