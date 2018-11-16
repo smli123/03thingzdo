@@ -669,7 +669,7 @@
     <string name="growlight_timecurve_add">增加</string>
     <string name="growlight_timecurve_delete">删除</string>
     <string name="growlight_timecurve_modify">修改</string>
-    <string name="growlight_timecurve_clear">清除</string>
+    <string name="growlight_timecurve_clear">清空</string>
     <string name="growlight_timecurve_enable">使能</string>
 
     <string name="app_modify_succeed">修改成功</string>
