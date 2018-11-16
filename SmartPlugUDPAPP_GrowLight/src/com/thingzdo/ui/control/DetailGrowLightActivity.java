@@ -190,11 +190,27 @@ public class DetailGrowLightActivity extends TitledActivity
 		}
 
 		loadData();
+		i_Current_WorkMode = 0; // Need Delete
 
 		getStatus();
 
 		updateUI();
 	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		SmartPlugApplication.resetTask();
+		// loadData(); // Need Delete Note
+		init();
+
+		// Need Delete
+		getStatus();
+
+		updateUI();
+	}
+
 	private void saveData() {
 		editor = mSharedPreferences.edit();
 		editor.putInt("WORKMODE" + mPlugId, i_Current_WorkMode);
@@ -213,7 +229,9 @@ public class DetailGrowLightActivity extends TitledActivity
 	}
 
 	private void loadData() {
+		// Must Be Modify
 		i_Current_WorkMode = mSharedPreferences.getInt("WORKMODE" + mPlugId, 0);
+
 		i_Current_Temperature = mSharedPreferences.getInt("CURTEMPERATURE"
 				+ mPlugId, 0);
 		i_Set_Temperature = mSharedPreferences.getInt("SETTEMPERATURE"
@@ -290,17 +308,6 @@ public class DetailGrowLightActivity extends TitledActivity
 	}
 
 	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		SmartPlugApplication.resetTask();
-		loadData();
-		init();
-
-		updateUI();
-	}
-
-	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
@@ -352,28 +359,33 @@ public class DetailGrowLightActivity extends TitledActivity
 								: R.drawable.smp_growlight_off_big));
 				break;
 			case R.id.iv_light_control_manual :
-				i_Current_WorkMode = 1;
-				setWorkMode(i_Current_WorkMode);
+				// i_Current_WorkMode = 1; // Need Delete Note
+				// setWorkMode(i_Current_WorkMode);
+				setWorkMode(1);
 				light_control_manual();
 				break;
 			case R.id.iv_light_control_auto :
-				i_Current_WorkMode = 2;
-				setWorkMode(i_Current_WorkMode);
+				// i_Current_WorkMode = 2; // Need Delete Note
+				// setWorkMode(i_Current_WorkMode);
+				setWorkMode(2);
 				light_control_auto();
 				break;
 			case R.id.iv_light_control_timecurve :
-				i_Current_WorkMode = 3;
-				setWorkMode(i_Current_WorkMode);
+				// i_Current_WorkMode = 3; // Need Delete Note
+				// setWorkMode(i_Current_WorkMode);
+				setWorkMode(3);
 				light_control_timecurve_new();
 				break;
 			case R.id.iv_light_control_timecurve_new :
-				i_Current_WorkMode = 3;
-				setWorkMode(i_Current_WorkMode);
+				// i_Current_WorkMode = 3; // Need Delete Note
+				// setWorkMode(i_Current_WorkMode);
+				setWorkMode(3);
 				light_control_timecurve_new();
 				break;
 			case R.id.iv_light_control_timetask :
-				i_Current_WorkMode = 4;
-				setWorkMode(i_Current_WorkMode);
+				// i_Current_WorkMode = 4; // Need Delete Note
+				// setWorkMode(i_Current_WorkMode);
+				setWorkMode(4);
 				light_control_timetask();
 				break;
 			case R.id.iv_light_control_setting :
@@ -595,6 +607,14 @@ public class DetailGrowLightActivity extends TitledActivity
 						.setImageResource(R.drawable.smp_growlight_timetask_enable);
 				break;
 			default :
+				iv_light_control_manual
+						.setImageResource(R.drawable.smp_growlight_hand_disable);
+				iv_light_control_auto
+						.setImageResource(R.drawable.smp_growlight_sun_disable);
+				iv_light_control_timecurve
+						.setImageResource(R.drawable.smp_growlight_time_curves_disable);
+				iv_light_control_timetask
+						.setImageResource(R.drawable.smp_growlight_timetask_disable);
 				break;
 		}
 

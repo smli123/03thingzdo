@@ -181,7 +181,7 @@ public class DetailGrowLightAutoActivity extends TitledActivity
 		// TODO Auto-generated method stub
 		super.onResume();
 		SmartPlugApplication.resetTask();
-		init();
+		// init();
 	}
 
 	@Override
