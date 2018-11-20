@@ -40,6 +40,7 @@ import com.thingzdo.smartplug_udp.R;
 import com.thingzdo.ui.GrowLightTimerCurvePointDefine;
 import com.thingzdo.ui.SmartPlugDefine;
 import com.thingzdo.ui.common.PubDefine;
+import com.thingzdo.ui.common.PubFunc;
 import com.thingzdo.ui.common.StringUtils;
 import com.thingzdo.ui.common.TitledActivity;
 import com.thingzdo.ui.manage.AddSocketActivity2;
@@ -49,6 +50,8 @@ import com.thingzdo.ui.smartplug.SmartPlugApplication;
 public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		implements
 			OnClickListener {
+
+	private Context mContext;
 
 	private TextView tv_query;
 	private TextView tv_add;
@@ -120,6 +123,8 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 
 	private int i_Current_lushu = 5;
 
+	private int i_count_query_channel = 0;
+
 	private RevCmdFromSocketThread mTcpSocketThread = null;
 
 	private BroadcastReceiver mDetailRev = new BroadcastReceiver() {
@@ -146,6 +151,17 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 
 			if (intent.getAction().equals(
 					PubDefine.PLUG_GROWLIGHT_QRY_TIMECURVEPOINT_ACTION)) {
+				// i_count_query_channel++;
+				// if (i_count_query_channel >= 5) {
+				//
+				// timeoutHandler.removeCallbacks(timeoutProcess);
+				// if (null != mProgress) {
+				// mProgress.dismiss();
+				// }
+				//
+				// i_count_query_channel = 0;
+				// }
+
 				String moduleID = intent.getStringExtra("MODULEID");
 				int channel = intent.getIntExtra("CHANNEL", 0);
 
@@ -232,15 +248,47 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 		}
 	}
 	private void queryAllTimeCurvePoint() {
-		for (int i = 0; i < 5; i++) {
-			queryTimeCurvePoint(i);
+		// String mErrorMsg =
+		// getString(R.string.smartplug_growlight_querytimecurve_fail);
+		//
+		// mProgress = PubFunc
+		// .createProgressDialog(
+		// mContext,
+		// DetailGrowLightTimeCurvePointActivity.this
+		// .getString(R.string.smartplug_growlight_querytimecurve_fail),
+		// true);
+		// mProgress.show();
 
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		Thread thread = new Thread(new QueryTimeCurvePoint());
+		thread.start();
+
+	}
+	class QueryTimeCurvePoint implements Runnable {
+
+		@Override
+		public void run() {
+			String mErrorMsg = getString(R.string.smartplug_growlight_querytimecurve_fail);
+			mProgress = PubFunc
+					.createProgressDialog(
+							mContext,
+							DetailGrowLightTimeCurvePointActivity.this
+									.getString(R.string.smartplug_growlight_querytimecurve_fail),
+							true);
+			mProgress.show();
+
+			timecurve_clear();
+
+			for (int i = 0; i < 5; i++) {
+				queryTimeCurvePoint(i);
+
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
+
 	}
 
 	private void queryTimeCurvePoint(int channel) {
@@ -260,6 +308,8 @@ public class DetailGrowLightTimeCurvePointActivity extends TitledActivity
 				R.layout.activity_plug_detail_growlight_timercurvepoint, false);
 		SmartPlugApplication.resetTask();
 		SmartPlugApplication.getInstance().addActivity(this);
+
+		mContext = this;
 
 		mSharedPreferences = getSharedPreferences("GROWLIGHT"
 				+ PubStatus.g_CurUserName, Activity.MODE_PRIVATE);
