@@ -108,6 +108,111 @@
 		            android:text="@string/growlight_timecurve_clear" />
 		        
 		        
+		        <TextView
+		            android:id="@+id/tv_light_color_05"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		        	android:layout_marginLeft="10dp"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_minisamll"
+		            android:text="@string/smartplug_growlight_lushu_control_5" />
+		        <ImageView
+			        android:id="@+id/img_light_color_05"
+			        android:layout_width="20dp"
+			        android:layout_height="5dp"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/tv_light_color_05"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+			        android:background="#64dd17" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_color_04"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/img_light_color_05"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_minisamll"
+		            android:text="@string/smartplug_growlight_lushu_control_4" />
+		        <ImageView
+			        android:id="@+id/img_light_color_04"
+			        android:layout_width="20dp"
+			        android:layout_height="5dp"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/tv_light_color_04"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+			        android:background="#2196f3" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_color_03"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/img_light_color_04"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_minisamll"
+		            android:text="@string/smartplug_growlight_lushu_control_3" />
+		        <ImageView
+			        android:id="@+id/img_light_color_03"
+			        android:layout_width="20dp"
+			        android:layout_height="5dp"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/tv_light_color_03"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+			        android:background="#4a148c" />
+		        
+		        <TextView
+		            android:id="@+id/tv_light_color_02"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/img_light_color_03"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_minisamll"
+		            android:text="@string/smartplug_growlight_lushu_control_2" />
+		        <ImageView
+			        android:id="@+id/img_light_color_02"
+			        android:layout_width="20dp"
+			        android:layout_height="5dp"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/tv_light_color_02"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+			        android:background="#37474f"/>
+		        
+		        <TextView
+		            android:id="@+id/tv_light_color_01"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/img_light_color_02"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+		            android:textColor="@color/black"
+			        android:textSize="@dimen/text_size_minisamll"
+		            android:text="@string/smartplug_growlight_lushu_control_1" />
+		        <ImageView
+			        android:id="@+id/img_light_color_01"
+			        android:layout_width="20dp"
+			        android:layout_height="5dp"
+			        android:layout_marginLeft="10dp"	
+		            android:layout_toLeftOf="@id/tv_light_color_01"
+		            android:layout_centerVertical="true"
+		       	    android:gravity="center"
+			        android:background="#bf360c" />
+		        
 	        <RelativeLayout 
 			    android:id="@+id/rl_function_base_channel"
 			    android:layout_width="wrap_content"

@@ -322,6 +322,8 @@
     <string name="smartplug_ctrl_samename_exist">"Same plug name exists"</string>
     <string name="smartplug_ctrl_mod_plugname_length_too_long">"New plug name is too long"</string>
     
+    <string name="smartplug_growlight_querytimecurve">"Query Grow Light Time Curve"</string>
+    
     <string name="smartplug_growlight_querystatus_fail">"Query Grow Light Status Fail"</string>
     <string name="smartplug_growlight_setbright_fail">"Set Grow Ligtht Bright Fail"</string>
     <string name="smartplug_growlight_querytimecurve_fail">"Query Grow Light Time Curve Fail"</string>

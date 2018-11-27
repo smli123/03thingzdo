@@ -346,7 +346,7 @@ public abstract class TitledActivity extends Activity {
 		SendMsgProxy.sendCtrlMsg(containCookie, msg, timeoutHandler);
 
 		if (true == needDelay) {
-			timeoutHandler.removeCallbacks(timeoutProcess);
+			// timeoutHandler.removeCallbacks(timeoutProcess);
 			timeoutHandler
 					.postDelayed(
 							timeoutProcess,

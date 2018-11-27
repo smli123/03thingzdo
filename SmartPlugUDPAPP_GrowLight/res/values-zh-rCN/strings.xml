@@ -321,6 +321,8 @@
     <string name="smartplug_ctrl_samename_exist">"同名插座已经存在"</string>
     <string name="smartplug_ctrl_mod_plugname_length_too_long">"插座名字长度超过20，请减少名字长度。1个汉字会占用多个字节"</string>
     
+    <string name="smartplug_growlight_querytimecurve">"正在查询时间曲线"</string>
+    
     <string name="smartplug_growlight_querystatus_fail">"查询模块状态失败"</string>
     <string name="smartplug_growlight_setbright_fail">"设置模块亮度失败"</string>
     <string name="smartplug_growlight_querytimecurve_fail">"查询时间曲线失败"</string>
