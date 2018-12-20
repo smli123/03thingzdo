@@ -62,6 +62,7 @@ import com.thingzdo.smartplug.udpserver.Function.ModuleAirConCtrlMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.ModuleBack2APCtrlMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.ModuleBellOnMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.ModuleCurtainCtrlMsgHandle;
+import com.thingzdo.smartplug.udpserver.Function.ModuleCurtainQueryPositionMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.ModuleDelTimerMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.ModuleEnableIRTimerMsgHandle;
 import com.thingzdo.smartplug.udpserver.Function.ModuleHeartBeatTask;
@@ -412,6 +413,7 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_STEELYARD_QUERY_MAOPI, new ModuleQueryMaopiCtrlMsgHandle());
 		
 		m_SendFuncMap.put(ServerCommDefine.APP_CURTAIN_CTRL_MSG_HEADER, new ModuleCurtainCtrlMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_CURTAIN_QUERYPOSITION_MSG_HEADER, new ModuleCurtainQueryPositionMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_WINDOW_CTRL_MSG_HEADER, new ModuleWindowCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_ALED_CTRL_MSG_HEADER, new ModuleALEDCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_AIRCON_CTRL_MSG_HEADER, new ModuleAirConCtrlMsgHandle());
@@ -466,6 +468,7 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_REEND_MSG_HEADER, new UpgradeReEndRspHandle());
 		
 		m_SendFuncMap.put(ServerCommDefine.CURTAIN_CTRL_MSG_HEADER, new ModuleCurtainCtrlMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.CURTAIN_QUERYPOSITION_MSG_HEADER, new ModuleCurtainQueryPositionMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.WINDOW_CTRL_MSG_HEADER, new ModuleWindowCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.ALED_CTRL_MSG_HEADER	, new ModuleALEDCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.AIRCON_CTRL_MSG_HEADER, new ModuleAirConCtrlMsgHandle());

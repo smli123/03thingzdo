@@ -295,6 +295,7 @@
     <string name="smartplug_oper_modify_scene_fail">"修改场景失败"</string>
     <string name="smartplug_oper_modify_delete_fail">"删除场景失败"</string>
 	<string name="smartplug_oper_curtain_fail">"操作窗帘失败"</string>
+	<string name="smartplug_oper_curtain_queryposition_fail">"查询窗帘位置失败"</string>
 	<string name="smartplug_enable_charge_fail">"使能电量统计功能失败"</string>
 	<string name="smartplug_query_energe_fail">"查询即时功率失败"</string>
 	<string name="smartplug_query_charge_fail">"查询电量失败"</string>   	

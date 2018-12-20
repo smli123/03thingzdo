@@ -296,6 +296,7 @@
     <string name="smartplug_oper_modify_scene_fail">"Modify Scene fail"</string>
     <string name="smartplug_oper_modify_delete_fail">"Delete Scene fail"</string>
    	<string name="smartplug_oper_curtain_fail">"Control curtain fail"</string>
+	<string name="smartplug_oper_curtain_queryposition_fail">"Query curtain position fail"</string>
 	<string name="smartplug_enable_charge_fail">"Enable energe fail"</string>
 	<string name="smartplug_query_energe_fail">"Query energe fail"</string>
 	<string name="smartplug_query_charge_fail">"Query charge fail"</string>   	

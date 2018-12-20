@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,6 +83,25 @@ public class DetailCurtainActivity extends TitledActivity
 				if (result == 0) {
 					// PubFunc.thinzdoToast(DetailCurtainActivity.this,
 					// getString(R.string.oper_success));
+				} else {
+					PubFunc.thinzdoToast(DetailCurtainActivity.this, message);
+				}
+
+			}
+
+			if (intent.getAction().equals(
+					PubDefine.PLUG_CURTAIN_QUERYPOSITION_ACTION)) {
+				timeoutHandler.removeCallbacks(timeoutProcess);
+				if (null != mProgress) {
+					mProgress.dismiss();
+				}
+
+				String plugid = intent.getStringExtra("PLUGID");
+				int result = intent.getIntExtra("RESULT", 0);
+				int pos = intent.getIntExtra("POSITION", 0);
+				String message = intent.getStringExtra("MESSAGE");
+				if (result == 0) {
+					updateUI();
 				} else {
 					PubFunc.thinzdoToast(DetailCurtainActivity.this, message);
 				}
@@ -175,6 +195,7 @@ public class DetailCurtainActivity extends TitledActivity
 
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.PLUG_CURTAIN_ACTION);
+		filter.addAction(PubDefine.PLUG_CURTAIN_QUERYPOSITION_ACTION);
 		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
 		filter.addAction(PubDefine.PLUG_NOTIFY_CURTAIN);
 		filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
@@ -218,8 +239,13 @@ public class DetailCurtainActivity extends TitledActivity
 
 		// 无线路由器
 		tv_wifiinfo = (TextView) findViewById(R.id.tv_wifiinfo);
-
 		setTitle(mPlug.mPlugName);
+
+		new Handler().postDelayed(new Runnable() {
+			public void run() {
+				queryPosition();
+			}
+		}, 100);
 	}
 
 	@Override
@@ -415,6 +441,17 @@ public class DetailCurtainActivity extends TitledActivity
 		// RevCmdFromSocketThread.getInstance().setRunning(true);
 		sendMsg(true, sb.toString(), true);
 
+	}
+
+	private void queryPosition() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartPlugMessage.CMD_SP_CURTAIN_QUERYPOSITION)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(mPlugId)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append("0");
+
+		sendMsg(true, sb.toString(), true);
 	}
 
 	/* --------------------------APPPASSTHROUGH模式------------------------------- */

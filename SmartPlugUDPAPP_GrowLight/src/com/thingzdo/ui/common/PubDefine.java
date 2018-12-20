@@ -41,6 +41,7 @@ public class PubDefine {
 	public static final String PLUG_ADD_TASK = "com.thingzdo.smartplug.plugaddone";
 
 	public static final String PLUG_CURTAIN_ACTION = "com.thingzdo.ctrl.plugcurtain";
+	public static final String PLUG_CURTAIN_QUERYPOSITION_ACTION = "com.thingzdo.ctrl.plugcurtain_querypostion";
 	public static final String PLUG_WINDOW_ACTION = "com.thingzdo.ctrl.plugwindow";
 	public static final String PLUG_ALED_ACTION = "com.thingzdo.ctrl.plugaled";
 	public static final String PLUG_AIRCON_ACTION = "com.thingzdo.ctrl.plugaircon";

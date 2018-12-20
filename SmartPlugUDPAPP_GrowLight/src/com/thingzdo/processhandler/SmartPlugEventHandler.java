@@ -153,6 +153,10 @@ public class SmartPlugEventHandler extends Handler {
 				new SmartPlugEventHandlerCurtain()));
 
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
+				SmartPlugMessage.EVT_SP_CURTAIN_QUERYPOSITION,
+				new SmartPlugEventHandlerCurtainQueryPosition()));
+
+		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_WINDOW,
 				new SmartPlugEventHandlerWindow()));
 

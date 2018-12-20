@@ -54,6 +54,7 @@ public class SmartPlugMessage {
 	public static final String CMD_SP_BACK2AP = "APPBACK2AP";
 
 	public static final String CMD_SP_CURTAIN = "APPCURTAIN_ACTION";
+	public static final String CMD_SP_CURTAIN_QUERYPOSITION = "APPCURTAIN_QRYPOSTION";
 	public static final String CMD_SP_WINDOW = "APPWINDOW_ACTION";
 	public static final String CMD_SP_ALED = "APPALED";
 	public static final String CMD_SP_AIRCON = "APPAIRCON";
@@ -143,6 +144,7 @@ public class SmartPlugMessage {
 	public static final int EVT_SP_ALED = 117;
 	public static final int EVT_SP_AIRCON = 118;
 	public static final int EVT_SP_BACK2AP = 119;
+	public static final int EVT_SP_CURTAIN_QUERYPOSITION = 120;
 
 	public static final int EVT_SP_NOTIFYONLINE = 200;
 	public static final int EVT_SP_NOTIFYPOWER = 201;
@@ -234,6 +236,8 @@ public class SmartPlugMessage {
 		mEventCommand.put(CMD_SP_NOTIFYUPGRADEAP, EVT_SP_NOTIFYUPGRADEAP);
 
 		mEventCommand.put(CMD_SP_CURTAIN, EVT_SP_CURTAIN);
+		mEventCommand.put(CMD_SP_CURTAIN_QUERYPOSITION,
+				EVT_SP_CURTAIN_QUERYPOSITION);
 		mEventCommand.put(CMD_SP_WINDOW, EVT_SP_WINDOW);
 		mEventCommand.put(CMD_SP_ALED, EVT_SP_ALED);
 		mEventCommand.put(CMD_SP_AIRCON, EVT_SP_AIRCON);
@@ -366,6 +370,8 @@ public class SmartPlugMessage {
 		mCommandAction.put(CMD_SP_NOTIFYTIMER, PubDefine.PLUG_NOTIFYTIMER);
 		// add new device type
 		mCommandAction.put(CMD_SP_CURTAIN, PubDefine.PLUG_CURTAIN_ACTION);
+		mCommandAction.put(CMD_SP_CURTAIN_QUERYPOSITION,
+				PubDefine.PLUG_CURTAIN_QUERYPOSITION_ACTION);
 		mCommandAction.put(CMD_QRY_IRDATA, PubDefine.PLUG_AIRCON_IRDATA_ACTION);
 		mCommandAction.put(CMD_SP_AIRCONSERVER,
 				PubDefine.PLUG_AIRCON_SERVER_ACTION);
