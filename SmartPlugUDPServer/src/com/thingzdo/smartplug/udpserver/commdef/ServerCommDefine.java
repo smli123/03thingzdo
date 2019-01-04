@@ -87,7 +87,7 @@ public class ServerCommDefine {
 	public final static String APP_APPLY_SCENE_MSG_HEADER		= "APPAPPLYSCENE";			//
 	
 	public final static String APP_CURTAIN_CTRL_MSG_HEADER		= "APPCURTAIN_ACTION";				//窗帘
-	public final static String APP_CURTAIN_QUERYPOSITION_MSG_HEADER		= "APPCURTAIN_QRYPOSTION";	//查询窗帘位置
+	public final static String APP_CURTAIN_QUERYPOSITION_MSG_HEADER		= "APPCURTAIN_QRYPOSITION";	//查询窗帘位置
 	public final static String APP_WINDOW_CTRL_MSG_HEADER		= "APPWINDOW_ACTION";				//窗户
 	public final static String APP_ALED_CTRL_MSG_HEADER			= "APPALED";				//智能灯
 	public final static String APP_AIRCON_CTRL_MSG_HEADER		= "APPAIRCON";				//空调红外遥控器接口1
@@ -136,7 +136,7 @@ public class ServerCommDefine {
 	public final static String BACK2AP_CTRL_MSG_HEADER		= "BACK2AP";				//继电器
 	
 	public final static String CURTAIN_CTRL_MSG_HEADER		= "CURTAIN_ACTION";			//窗帘
-	public final static String CURTAIN_QUERYPOSITION_MSG_HEADER		= "CURTAIN_QRYPOSTION";	//查询窗帘位置
+	public final static String CURTAIN_QUERYPOSITION_MSG_HEADER		= "CURTAIN_QRYPOSITION";	//查询窗帘位置
 	public final static String WINDOW_CTRL_MSG_HEADER		= "WINDOW_ACTION";				//窗户
 	public final static String ALED_CTRL_MSG_HEADER			= "ALED";				//智能灯
 	public final static String AIRCON_CTRL_MSG_HEADER		= "AIRCON";				//红外遥控器

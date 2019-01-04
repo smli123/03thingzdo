@@ -24,7 +24,7 @@
             
 	    <LinearLayout
 		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
+		    android:layout_height="wrap_content"
 		    android:orientation="vertical">
 		    
 		    <LinearLayout
@@ -53,14 +53,14 @@
 	    
 	    <LinearLayout
 		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
+		    android:layout_height="wrap_content"
 		    android:orientation="vertical" >
 		    
 	        <LinearLayout
 	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:layout_marginTop="20dp"
-	            android:layout_marginBottom="20dp"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp"
+	            android:layout_marginBottom="10dp"
 	            android:layout_marginLeft="50dp"
 	            android:layout_marginRight="50dp"
 	            android:orientation="vertical" >
@@ -69,7 +69,7 @@
 			        android:id="@+id/btn_windowopen"
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="10dp"
 			        android:background="@drawable/btn_selector" 
 			        android:textColor="@color/white"
 	       			android:textSize="@dimen/text_size_larsamll"
@@ -80,7 +80,7 @@
 			        android:id="@+id/btn_windowpause"
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="10dp"
 			        android:background="@drawable/btn_selector"  
 			        android:textColor="@color/white"
 	       			android:textSize="@dimen/text_size_larsamll"
@@ -91,7 +91,7 @@
 			        android:id="@+id/btn_windowclose"
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="10dp"
 			        android:background="@drawable/btn_selector"  
 			        android:textColor="@color/white"
 	       			android:textSize="@dimen/text_size_larsamll"
@@ -152,7 +152,7 @@
 			        android:id="@+id/btn_windowinit"
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
-			        android:layout_marginTop="20dp"
+			        android:layout_marginTop="10dp"
 			        android:background="@drawable/btn_selector"  
 			        android:textColor="@color/white"
 	       			android:textSize="@dimen/text_size_larsamll"
@@ -163,4 +163,162 @@
 	    </LinearLayout>
 	    
 	</RelativeLayout>
+	
+   	<RelativeLayout
+	    android:id="@+id/layout_timer_setting"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"	
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"	           
+        android:background="@color/white"
+        android:layout_below="@+id/rl_background"> 	
+        
+	    <RelativeLayout
+	        android:id="@+id/layout_timer_all"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="5dp"
+	        android:layout_marginTop="5dp"
+	        android:background="@color/white"
+	        android:orientation="horizontal" >
+	        
+		    <RelativeLayout
+		        android:id="@+id/layout_timer_left"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="0dp"
+		        android:layout_marginTop="0dp"
+		        android:background="@color/white"
+		        android:orientation="horizontal" >		        
+    
+			    <RelativeLayout
+			        android:id="@+id/layout_timer_header"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:background="@color/white"
+			        android:layout_marginTop="5dp"
+			        android:layout_marginBottom="5dp"		        
+			        android:orientation="horizontal"
+			        android:layout_alignParentLeft="true">
+				   
+			        <ImageView
+			            android:id="@+id/img_timerset"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:contentDescription="@null"
+			            android:scaleType="centerInside" 
+			            android:layout_alignParentLeft="true"
+			            android:layout_marginLeft="@dimen/margin_10dip"
+			            android:layout_centerVertical="true"
+			            android:src="@drawable/smp_timersetting"/>        
+			       	        
+			       	<TextView
+			       	    android:layout_width="wrap_content"
+			       	    android:layout_height="wrap_content"
+			       	    android:background="@null"
+			       	    android:layout_centerVertical="true"
+			       	    android:text="@string/timer"
+			       	    android:layout_marginLeft="@dimen/margin_10dip"
+			       	    android:textColor="@color/green"
+			       	    android:textSize="@dimen/text_size_larsamll" 
+			       	    android:layout_toRightOf="@+id/img_timerset"
+			       	    android:layout_centerInParent="true"/>
+			       	
+			    </RelativeLayout> 
+	    
+				<RelativeLayout
+			        android:id="@+id/layout_timer_static"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:background="@color/white"
+			        android:layout_marginTop="2dp"
+			        android:layout_marginBottom="5dp"
+			        android:layout_below="@+id/layout_timer_header"		        
+			        android:orientation="horizontal">
+				   
+					<RelativeLayout
+					    android:id="@+id/layout_power_static"
+			        	android:layout_width="wrap_content"
+			        	android:layout_height="wrap_content"
+			        	android:background="@color/transparent">			        		        
+				        <ImageView
+				            android:id="@+id/img_power_static"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:contentDescription="@null"
+				            android:scaleType="centerInside" 
+				            android:layout_alignParentLeft="true"
+				            android:layout_marginLeft="@dimen/margin_10dip"
+				            android:layout_centerVertical="true"
+				            android:src="@drawable/smp_curtain_on_small"/>        
+				       	        
+				       	<TextView
+				       	    android:id="@+id/txt_power_static"
+				       	    android:layout_width="wrap_content"
+				       	    android:layout_height="wrap_content"
+				       	    android:background="@null"
+				       	    android:layout_centerVertical="true"
+				       	    android:text="@null"
+							android:textColor="@color/black"
+					       	android:layout_marginLeft="2dp"
+					       	android:textSize="@dimen/text_size_midsamll"
+				       	    android:layout_toRightOf="@+id/img_power_static"
+				       	    android:layout_centerInParent="true"/>
+				    </RelativeLayout>		
+			    </RelativeLayout>
+			    
+			    </RelativeLayout>	
+			    
+		    <RelativeLayout
+		        android:id="@+id/layout_timer_right"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:background="@color/white" 
+		        android:layout_marginRight="10dp"
+		        android:layout_alignParentRight="true"
+		        android:layout_centerInParent="true">
+				<ImageView
+		            android:id="@+id/img_timeradd"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:contentDescription="@null"
+		            android:scaleType="centerInside" 
+		            android:layout_centerVertical="true"
+		            android:src="@drawable/smp_add_timer"/>						
+		    </RelativeLayout>			    	
+	    </RelativeLayout>
+	    
+	    <ImageView
+	        android:id="@+id/image_sep_2"
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:layout_marginLeft="@dimen/margin_10dip"
+	        android:layout_marginRight="@dimen/margin_10dip"		               
+	        android:layout_below="@+id/layout_timer_all"
+	        android:background="@color/lightwhite"        
+	        android:contentDescription="@null" />		    
+	    
+	    <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_below="@+id/image_sep_2" 
+	        android:background="@color/white">   
+	        
+			<com.thingzdo.SwipeMenuListView.SwipeMenuListView  
+		        android:id="@+id/timer_list"  
+		        android:layout_width="match_parent"  
+		        android:layout_height="match_parent"   
+		        android:listSelector="@android:color/transparent"  
+	          	android:background="@color/white"
+	          	android:dividerHeight="1px"
+	        	android:layout_marginLeft="@dimen/margin_10dip"
+	        	android:layout_marginRight="@dimen/margin_10dip"
+	          	android:divider="@drawable/list_item_diliver"
+		        android:cacheColorHint="@android:color/transparent">  
+			</com.thingzdo.SwipeMenuListView.SwipeMenuListView> 	        
+		</RelativeLayout> 
+	</RelativeLayout>
+	
 </RelativeLayout>

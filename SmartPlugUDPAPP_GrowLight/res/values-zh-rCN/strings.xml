@@ -42,6 +42,7 @@
     <string name="smartplug_commit">提交</string>
     <string name="smartplug_start_now">立即体验</string>
     <string name="smartplug_shake_shake">摇一摇</string>
+    <string name="smartplug_growlightble">蓝牙植物灯</string>
     <string name="smartplug_wifi_login">WiFi直连</string>
     <string name="smartplug_wifi_notopen">请先打开WiFi连接</string>
     <string name="smartplug_serverip_hangzhou">杭州服务器</string>

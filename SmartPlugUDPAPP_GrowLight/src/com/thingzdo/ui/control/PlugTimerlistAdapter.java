@@ -141,6 +141,11 @@ public class PlugTimerlistAdapter extends BaseAdapter {
 						imgTaskType
 								.setImageResource(R.drawable.smp_power2_on_small);
 						break;
+					case PubDefine.TIMER_TYPE_CURTAIN :
+						txtTaskEnd.setVisibility(View.VISIBLE);
+						imgTaskType
+								.setImageResource(R.drawable.smp_curtain_on_small);
+						break;
 					default :
 						txtTaskEnd.setVisibility(View.VISIBLE);
 						imgTaskType.setImageResource(R.drawable.smp_plug_small);

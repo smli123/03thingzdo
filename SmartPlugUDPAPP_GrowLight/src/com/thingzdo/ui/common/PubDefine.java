@@ -150,7 +150,7 @@ public class PubDefine {
 	};
 
 	public static enum SmartPlug_Connect_Mode {
-		Internet, WiFi, Shake
+		Internet, WiFi, Shake, GrowLightBLE
 	};
 
 	public static final int TIMER_TYPE_POWER = 0;
@@ -161,6 +161,7 @@ public class PubDefine {
 	public static final int TIMER_TYPE_CLOSEPC = 5;
 	public static final int TIMER_TYPE_POWER2 = 6;
 	public static final int TIMER_TYPE_GROWLIGHT = 7;
+	public static final int TIMER_TYPE_CURTAIN = 8;
 
 	public static final int CONNECT_MODE_INTERNET = 0;
 	public static final int CONNECT_MODE_WIFI = 1;

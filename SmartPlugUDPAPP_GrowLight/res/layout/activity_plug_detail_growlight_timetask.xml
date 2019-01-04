@@ -11,7 +11,7 @@
           layout="@layout/view_common_titlebar"
           android:layout_alignParentTop="true"/>   
        
-<RelativeLayout
+	<RelativeLayout
 		    android:id="@+id/layout_timer_setting"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content" 

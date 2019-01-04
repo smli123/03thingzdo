@@ -32,6 +32,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     
+    <!-- 蓝牙的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    
     <!-- 使用地图需要的权限 -->
 	<!--使用网络功能所需权限  -->  
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  
@@ -79,6 +84,8 @@
 	        android:name="com.umeng.update.net.DownloadingService"
 	        android:process=":DownloadingService" >
 		</service>
+		
+        <service android:name="com.thingzdo.ui.growlightble.Service_Bluetooth" android:enabled="true"></service>
 
         <!-- android 开机自动启动 -->		
 		<receiver android:name=".StartUpReceiver"
@@ -515,6 +522,21 @@
             android:label="@string/app_name" 
             android:screenOrientation="portrait">
         </activity> 
+        
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.Activity_GrowLightBle_Main"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.Activity_GrowLightBle_Control"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
         		
     </application>
 

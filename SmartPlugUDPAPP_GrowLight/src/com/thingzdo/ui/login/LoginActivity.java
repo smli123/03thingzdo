@@ -47,6 +47,7 @@ import com.thingzdo.ui.control.DetailSmartSteelyardActivity;
 import com.thingzdo.ui.control.DetailWindowActivity;
 import com.thingzdo.ui.control.InterConnect;
 import com.thingzdo.ui.control.PlugDetailActivity;
+import com.thingzdo.ui.growlightble.Activity_GrowLightBle_Main;
 import com.thingzdo.ui.manage.AddSocketActivity2;
 import com.thingzdo.ui.manage.WifiAdmin;
 import com.thingzdo.ui.shakeshake.ShakeShake;
@@ -100,6 +101,7 @@ public class LoginActivity extends TitledActivity {
 	private RadioButton mRdInternetLogin = null;
 	private RadioButton mRdWiFiLogin = null;
 	private RadioButton mRdShake = null;
+	private RadioButton rb_growlight_ble = null;
 
 	private RadioGroup rg_serverip;
 	private RadioButton rb_server_hz;
@@ -287,6 +289,8 @@ public class LoginActivity extends TitledActivity {
 		mRdWiFiLogin = (RadioButton) findViewById(R.id.rb_wifi);
 		mRdShake = (RadioButton) findViewById(R.id.rb_shake);
 		mRdShake.setVisibility(View.GONE);
+		rb_growlight_ble = (RadioButton) findViewById(R.id.rb_growlight_ble);
+
 		mRlLoginInput = (RelativeLayout) findViewById(R.id.rlLoginInput);
 
 		rg_serverip = (RadioGroup) findViewById(R.id.rg_serverip);
@@ -409,9 +413,14 @@ public class LoginActivity extends TitledActivity {
 		} else if (mUserInfo.mLoginMode == PubDefine.SmartPlug_Connect_Mode.WiFi
 				.ordinal()) {
 			id = R.id.rb_wifi;
-		} else {
+		} else if (mUserInfo.mLoginMode == PubDefine.SmartPlug_Connect_Mode.Shake
+				.ordinal()) {
 			id = R.id.rb_shake;
+		} else if (mUserInfo.mLoginMode == PubDefine.SmartPlug_Connect_Mode.GrowLightBLE
+				.ordinal()) {
+			id = R.id.rb_growlight_ble;
 		}
+
 		mRgLoginMode.check(id);
 	}
 
@@ -452,6 +461,17 @@ public class LoginActivity extends TitledActivity {
 					mFindPwd.setVisibility(View.INVISIBLE);
 					setTitleRightButtonVisible(false);
 					setTitle(R.string.smartplug_shake_shake);
+					break;
+				case R.id.rb_growlight_ble :
+					mEdtUser.setEnabled(false);
+					mEdtPwd.setEnabled(false);
+					mBtnLogin.setText(R.string.login_login);
+					mUserInfo.mLoginMode = PubDefine.SmartPlug_Connect_Mode.GrowLightBLE
+							.ordinal();
+					mRlLoginInput.setVisibility(View.INVISIBLE);
+					mFindPwd.setVisibility(View.INVISIBLE);
+					setTitleRightButtonVisible(false);
+					setTitle(R.string.smartplug_growlightble);
 					break;
 				default :
 					mEdtUser.setEnabled(true);
@@ -597,6 +617,9 @@ public class LoginActivity extends TitledActivity {
 				break;
 			case 2 :
 				mRdShake.setChecked(true);
+				break;
+			case 3 :
+				rb_growlight_ble.setChecked(true);
 				break;
 			default :
 				mRdInternetLogin.setChecked(true);
@@ -829,6 +852,10 @@ public class LoginActivity extends TitledActivity {
 			PubDefine.g_Connect_Mode = PubDefine.SmartPlug_Connect_Mode.Shake;
 			redId = R.string.login_pwd_wifi_notopen;
 		}
+		if (rb_growlight_ble.isChecked()) {
+			PubDefine.g_Connect_Mode = PubDefine.SmartPlug_Connect_Mode.GrowLightBLE;
+			redId = R.string.login_pwd_wifi_notopen;
+		}
 
 		saveUserInfo();
 
@@ -867,9 +894,16 @@ public class LoginActivity extends TitledActivity {
 						getString(R.string.login_logining), false);
 				mProgress.show();
 				new Thread(runnable).start();
-			} else {
+			} else if (mRdShake.isChecked() == true) {
 				// shake login
 				shakePlugLogin();
+			} else if (rb_growlight_ble.isChecked() == true) {
+				PubDefine.g_Connect_Mode = PubDefine.SmartPlug_Connect_Mode.GrowLightBLE;
+				Intent intent = new Intent();
+				intent.setClass(LoginActivity.this,
+						Activity_GrowLightBle_Main.class);
+				startActivity(intent);
+				finish();
 			}
 		}
 	};

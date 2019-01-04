@@ -54,7 +54,7 @@ public class SmartPlugMessage {
 	public static final String CMD_SP_BACK2AP = "APPBACK2AP";
 
 	public static final String CMD_SP_CURTAIN = "APPCURTAIN_ACTION";
-	public static final String CMD_SP_CURTAIN_QUERYPOSITION = "APPCURTAIN_QRYPOSTION";
+	public static final String CMD_SP_CURTAIN_QUERYPOSITION = "APPCURTAIN_QRYPOSITION";
 	public static final String CMD_SP_WINDOW = "APPWINDOW_ACTION";
 	public static final String CMD_SP_ALED = "APPALED";
 	public static final String CMD_SP_AIRCON = "APPAIRCON";

@@ -300,7 +300,15 @@
 			       android:layout_height="wrap_content"
 			       android:textColor="@color/black"
 			       android:layout_weight="1"
-			       android:text="@string/smartplug_shake_shake" />			   
+			       android:text="@string/smartplug_shake_shake" />
+			   	
+			   <RadioButton
+			       android:id="@+id/rb_growlight_ble"
+			       android:layout_width="wrap_content"
+			       android:layout_height="wrap_content"
+			       android:textColor="@color/black"
+			       android:layout_weight="1"
+			       android:text="@string/smartplug_growlightble" />			   
 			</RadioGroup>               
        </RelativeLayout>        
    

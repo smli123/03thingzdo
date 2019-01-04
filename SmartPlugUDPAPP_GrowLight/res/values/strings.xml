@@ -42,6 +42,7 @@
     <string name="smartplug_commit">Commit</string> 
     <string name="smartplug_start_now">Start now</string>
     <string name="smartplug_shake_shake">Shake Shake</string>
+    <string name="smartplug_growlightble">GrowLight BLE</string>
     <string name="smartplug_wifi_login">WiFi Login</string>
     <string name="smartplug_wifi_notopen">WiFi not opened</string>
     <string name="smartplug_serverip_hangzhou">HangZhou server</string>
