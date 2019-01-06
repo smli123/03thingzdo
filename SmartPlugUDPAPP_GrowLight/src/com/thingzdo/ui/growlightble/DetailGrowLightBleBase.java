@@ -22,12 +22,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
-import com.thingzdo.smartplug_udp.R;
+import android.view.Window;
 
 /**
  * 特别说明：HC_BLE助手是广州汇承信息科技有限公司独自研发的手机APP，方便用户调试08蓝牙模块。
@@ -43,11 +38,9 @@ import com.thingzdo.smartplug_udp.R;
  * @version: V1.0
  */
 @SuppressLint("NewApi")
-public class Activity_GrowLightBle_Control extends Activity
-		implements
-			OnClickListener {
+public class DetailGrowLightBleBase extends Activity implements OnClickListener {
 
-	private final static String TAG = Activity_GrowLightBle_Control.class
+	private final static String TAG = DetailGrowLightBleBase.class
 			.getSimpleName();
 	// 蓝牙4.0的UUID,其中0000ffe1-0000-1000-8000-00805f9b34fb是广州汇承信息科技有限公司08蓝牙模块的UUID
 	public static String HEART_RATE_MEASUREMENT = "0000ffe1-0000-1000-8000-00805f9b34fb";
@@ -68,12 +61,12 @@ public class Activity_GrowLightBle_Control extends Activity
 	// 蓝牙service,负责后台的蓝牙服务
 	private static Service_Bluetooth mService_Bluetooth;
 	// 文本框，显示接受的内容
-	private TextView rev_tv, connect_state;
+	// private TextView rev_tv, connect_state;
 	// 发送按钮
-	private Button send_btn;
+	// private Button send_btn;
 	// 文本编辑框
-	private EditText send_et;
-	private ScrollView rev_sv;
+	// private EditText send_et;
+	// private ScrollView rev_sv;
 	private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
 	// 蓝牙特征值
 	private static BluetoothGattCharacteristic target_chara = null;
@@ -86,7 +79,7 @@ public class Activity_GrowLightBle_Control extends Activity
 				case 1 : {
 					// 更新View
 					String state = msg.getData().getString("connect_state");
-					connect_state.setText(state);
+					// connect_state.setText(state);
 					break;
 				}
 			}
@@ -94,11 +87,28 @@ public class Activity_GrowLightBle_Control extends Activity
 		}
 	};
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	// @Override
+	// protected void onCreate(Bundle savedInstanceState) {
+	// // TODO Auto-generated method stub
+	// super.onCreate(savedInstanceState);
+	// setContentView(R.layout.activity_growlight_ble_control);
+	// b = getIntent().getExtras();
+	// // 从意图获取显示的蓝牙信息
+	// mDeviceName = b.getString(EXTRAS_DEVICE_NAME);
+	// mDeviceAddress = b.getString(EXTRAS_DEVICE_ADDRESS);
+	// mRssi = b.getString(EXTRAS_DEVICE_RSSI);
+	//
+	// /* 启动蓝牙service */
+	// Intent gattServiceIntent = new Intent(this, Service_Bluetooth.class);
+	// bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+	// }
+
+	protected void onCreate(Bundle savedInstanceState, int layoutResID,
+			boolean backToExit) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_growlight_ble_control);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(layoutResID);
+
 		b = getIntent().getExtras();
 		// 从意图获取显示的蓝牙信息
 		mDeviceName = b.getString(EXTRAS_DEVICE_NAME);
@@ -108,7 +118,6 @@ public class Activity_GrowLightBle_Control extends Activity
 		/* 启动蓝牙service */
 		Intent gattServiceIntent = new Intent(this, Service_Bluetooth.class);
 		bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-		init();
 	}
 
 	@Override
@@ -130,24 +139,6 @@ public class Activity_GrowLightBle_Control extends Activity
 			final boolean result = mService_Bluetooth.connect(mDeviceAddress);
 			Log.d(TAG, "Connect request result=" + result);
 		}
-	}
-
-	/**
-	 * @Title: init
-	 * @Description: TODO(初始化UI控件)
-	 * @param 无
-	 * @return void
-	 * @throws
-	 */
-	private void init() {
-		rev_sv = (ScrollView) this.findViewById(R.id.rev_sv);
-		rev_tv = (TextView) this.findViewById(R.id.rev_tv);
-		connect_state = (TextView) this.findViewById(R.id.connect_state);
-		send_btn = (Button) this.findViewById(R.id.send_btn);
-		send_et = (EditText) this.findViewById(R.id.send_et);
-		connect_state.setText(status);
-		send_btn.setOnClickListener(this);
-
 	}
 
 	/* Service_Bluetooth绑定的回调函数 */
@@ -256,8 +247,8 @@ public class Activity_GrowLightBle_Control extends Activity
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				rev_tv.setText(rev_str);
-				rev_sv.scrollTo(0, rev_tv.getMeasuredHeight());
+				// rev_tv.setText(rev_str);
+				// rev_sv.scrollTo(0, rev_tv.getMeasuredHeight());
 				System.out.println("rev:" + rev_str);
 			}
 		});
@@ -374,8 +365,32 @@ public class Activity_GrowLightBle_Control extends Activity
 	 */
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		byte[] buff = send_et.getText().toString().getBytes();
+		// // TODO Auto-generated method stub
+		// byte[] buff = send_et.getText().toString().getBytes();
+		// int len = buff.length;
+		// int[] lens = dataSeparate(len);
+		// for (int i = 0; i < lens[0]; i++) {
+		// String str = new String(buff, 20 * i, 20);
+		// target_chara.setValue(str);// 只能一次发送20字节，所以这里要分包发送
+		// // 调用蓝牙服务的写特征值方法实现发送数据
+		// mService_Bluetooth.writeCharacteristic(target_chara);
+		// }
+		// if (lens[1] != 0) {
+		// String str = new String(buff, 20 * lens[0], lens[1]);
+		// target_chara.setValue(str);
+		// // 调用蓝牙服务的写特征值方法实现发送数据
+		// mService_Bluetooth.writeCharacteristic(target_chara);
+		// }
+	}
+
+	public void sendMsg(boolean containCookie, String msg, boolean needDelay) {
+		String cookie = "0,";
+		if (containCookie == true) {
+			// cookie = PubFunc.getTimeString();;
+		}
+		String command = cookie + msg;
+
+		byte[] buff = command.getBytes();
 		int len = buff.length;
 		int[] lens = dataSeparate(len);
 		for (int i = 0; i < lens[0]; i++) {
@@ -391,5 +406,4 @@ public class Activity_GrowLightBle_Control extends Activity
 			mService_Bluetooth.writeCharacteristic(target_chara);
 		}
 	}
-
 }

@@ -110,10 +110,8 @@ public class Activity_GrowLightBle_Main extends Activity
 					e.printStackTrace();
 					// TODO: handle exception
 				}
-
 			}
 		});
-
 	}
 
 	/**

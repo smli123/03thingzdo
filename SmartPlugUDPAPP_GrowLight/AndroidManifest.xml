@@ -512,6 +512,83 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
 		</activity>
 			
+		
+		
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleManualActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleAutoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleTimeTaskActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleTimerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleTimeCurveActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleTimeCurvePointActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBlePointActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLightBleSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+		
+		<activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.thingzdo.ui.growlightble.DetailGrowLigthBleSettingTemperatureControl"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+		</activity>
+			
+		
         <activity
             android:name="com.thingzdo.ui.manage.SceneManagement_Activity"
             android:label="@string/app_name" 
