@@ -318,6 +318,17 @@
 			       	    android:textColor="@color/white"
 			       	    android:textSize="@dimen/text_size_larsamll" />
 			 
+			       	<TextView
+			       	    android:id="@+id/tv_moduletime"
+			       	    android:layout_width="wrap_content"
+			       	    android:layout_height="wrap_content"
+			       	    android:background="@null"
+			       	    android:layout_marginLeft="@dimen/margin_10dip"
+			       	    android:text="@null"
+			       	    android:textColor="@color/black"
+			       	    android:layout_centerInParent="true"
+			       	    android:layout_below="@id/btn_reset_to_AP"
+			       	    android:textSize="@dimen/text_size_larsamll"/>
 	
 				</RelativeLayout>
 		    </LinearLayout>

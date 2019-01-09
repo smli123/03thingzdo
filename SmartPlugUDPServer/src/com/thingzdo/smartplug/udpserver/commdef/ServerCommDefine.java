@@ -37,6 +37,7 @@ public class ServerCommDefine {
 	public final static String APP_MOD_PLUG_MSG_HEADER		= "APPMODPLUG";
 	public final static String APP_QRY_PLUG_MSG_HEADER		= "APPQRYPLUG";
 	public final static String APP_NOTIFY_ONLINE_MSG_HEADER	= "APPNOTIFYONLINE";
+	public final static String APP_NOTIFY_MODULETIME_MSG_HEADER	= "APPNOTIFYMODULETIME";
 	public final static String APP_LIGHT_CTRL_MSG_HEADER		= "APPLIGHT";				//小夜灯
 	public final static String APP_POWER_CTRL_MSG_HEADER		= "APPPOWER";				//继电器
 	public final static String APP_BACK2AP_CTRL_MSG_HEADER		= "APPBACK2AP";				//继电器

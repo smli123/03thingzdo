@@ -106,6 +106,7 @@ public class PubDefine {
 	public static final String PLUG_NOTIFY_POWER = "com.thingzdo.smartplug.notifypower";
 	public static final String PLUG_NOTIFY_LIGHT = "com.thingzdo.smartplug.notifylight";
 	public static final String PLUG_NOTIFY_ONLINE = "com.thingzdo.smartplug.notifyonline";
+	public static final String PLUG_NOTIFY_MODULETIME = "com.thingzdo.smartplug.notifymoduletime";
 	public static final String PLUG_NOTIFYTIMER = "com.thingzdo.smartplug.notifytimer";
 	public static final String PLUG_RGB_ACTION = "com.thingzdo.ctrl.rgb";
 

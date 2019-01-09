@@ -1,6 +1,8 @@
 package com.thingzdo.ui.control;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.BroadcastReceiver;
@@ -47,6 +49,8 @@ public class PlugDetailInfoActivity extends TitledActivity
 	private LinearLayout ll_smartplugtype;
 	private List<String> list_smartplugtype = new ArrayList<String>();
 
+	private TextView tv_moduletime;
+
 	private BroadcastReceiver mPlugDetailRev = new BroadcastReceiver() {
 
 		@Override
@@ -57,6 +61,9 @@ public class PlugDetailInfoActivity extends TitledActivity
 			} else if (intent.getAction().equals(
 					PubDefine.PLUG_NOTIFY_UPGRADEAP)) {
 				updateUpgradeAP(intent);
+			} else if (intent.getAction().equals(
+					PubDefine.PLUG_NOTIFY_MODULETIME)) {
+				updateModuleTime(intent);
 			}
 		}
 	};
@@ -110,6 +117,29 @@ public class PlugDetailInfoActivity extends TitledActivity
 		}
 	}
 
+	private void updateModuleTime(Intent intent) {
+		timeoutHandler.removeCallbacks(timeoutProcess);
+		if (null != mProgress) {
+			mProgress.dismiss();
+		}
+
+		String moduleTime = intent.getStringExtra("MODULETIME");
+
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		String strAPPTime = format.format(date);
+		String temp = "APP: " + strAPPTime;
+		moduleTime = "MOD: " + moduleTime;
+		temp = temp + "\r\n" + moduleTime;
+		tv_moduletime.setText(temp);
+		// StringBuffer sb = new StringBuffer(moduleTime);
+		// sb.insert(4, "-");
+		// sb.insert(7, "-");
+		// sb.insert(10, " ");
+		// sb.insert(13, ":");
+		// sb.insert(16, ":");
+		// tv_moduletime.setText(new String(sb));
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, R.layout.activity_plug_detail_info,
@@ -145,6 +175,7 @@ public class PlugDetailInfoActivity extends TitledActivity
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.PLUG_BACK2AP_ACTION);
 		filter.addAction(PubDefine.PLUG_NOTIFY_UPGRADEAP);
+		filter.addAction(PubDefine.PLUG_NOTIFY_MODULETIME);
 		registerReceiver(mPlugDetailRev, filter);
 	}
 
@@ -300,12 +331,15 @@ public class PlugDetailInfoActivity extends TitledActivity
 				ll_smartplugtype.setVisibility(View.VISIBLE);
 			}
 
+			tv_moduletime = (TextView) findViewById(R.id.tv_moduletime);
+
 			// DEBUG BUTTON
 			if (true == PubDefine.RELEASE_VERSION && false) {
 				ImageView image_sep_5 = (ImageView) findViewById(R.id.image_sep_5);
 				image_sep_5.setVisibility(View.GONE);
 				RelativeLayout rl_resetmodule = (RelativeLayout) findViewById(R.id.rl_resetmodule);
 				rl_resetmodule.setVisibility(View.GONE);
+				tv_moduletime.setVisibility(View.GONE);
 			}
 		}
 	}

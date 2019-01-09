@@ -89,6 +89,7 @@ public class SmartPlugMessage {
 
 	// 服务器主动通知的命令
 	public static final String CMD_SP_NOTIFYONLINE = "APPNOTIFYONLINE";
+	public static final String CMD_SP_NOTIFYMODULETIME = "APPNOTIFYMODULETIME";
 	public static final String CMD_SP_NOTIFYPOWER = "APPNOTIFYPOWER";
 	public static final String CMD_SP_NOTIFYLIGHT = "APPNOTIFYLIGHT";
 	public static final String CMD_SP_NOTIFYTIMER = "APPTIMER";
@@ -155,6 +156,7 @@ public class SmartPlugMessage {
 	public static final int EVT_SP_NOTIFYWINDOW = 205;
 	public static final int EVT_SP_NOTIFYALED = 206;
 	public static final int EVT_SP_NOTIFYAIRCON = 207;
+	public static final int EVT_SP_NOTIFYMODULETIME = 208;
 
 	public static final int EVT_SP_AIRCONSERVER = 210;
 	public static final int EVT_SP_AIRCONSERVER_IRDATA = 211;
@@ -228,6 +230,7 @@ public class SmartPlugMessage {
 		mEventCommand.put(CMD_SP_PARENTCTRL, EVT_SP_PARENTCTRL);
 		mEventCommand.put(CMD_SP_USB, EVT_SP_USB);
 		mEventCommand.put(CMD_SP_NOTIFYONLINE, EVT_SP_NOTIFYONLINE);
+		mEventCommand.put(CMD_SP_NOTIFYMODULETIME, EVT_SP_NOTIFYMODULETIME);
 		mEventCommand.put(CMD_SP_NOTIFYPOWER, EVT_SP_NOTIFYPOWER);
 		mEventCommand.put(CMD_SP_NOTIFYLIGHT, EVT_SP_NOTIFYLIGHT);
 		mEventCommand.put(CMD_SP_NOTIFYTIMER, EVT_SP_NOTIFYTIMER);
@@ -365,6 +368,8 @@ public class SmartPlugMessage {
 		mCommandAction.put(CMD_SP_PARENTCTRL, PubDefine.PLUG_PARENTCTRL_ACTION);
 		mCommandAction.put(CMD_SP_USB, PubDefine.PLUG_USB_ACTION);
 		mCommandAction.put(CMD_SP_NOTIFYONLINE, PubDefine.PLUG_NOTIFY_ONLINE);
+		mCommandAction.put(CMD_SP_NOTIFYMODULETIME,
+				PubDefine.PLUG_NOTIFY_MODULETIME);
 		mCommandAction.put(CMD_SP_NOTIFYPOWER, PubDefine.PLUG_NOTIFY_POWER);
 		mCommandAction.put(CMD_SP_NOTIFYLIGHT, PubDefine.PLUG_NOTIFY_LIGHT);
 		mCommandAction.put(CMD_SP_NOTIFYTIMER, PubDefine.PLUG_NOTIFYTIMER);

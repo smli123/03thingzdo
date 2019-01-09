@@ -290,6 +290,7 @@ public class LoginActivity extends TitledActivity {
 		mRdShake = (RadioButton) findViewById(R.id.rb_shake);
 		mRdShake.setVisibility(View.GONE);
 		rb_growlight_ble = (RadioButton) findViewById(R.id.rb_growlight_ble);
+		rb_growlight_ble.setVisibility(View.GONE);
 
 		mRlLoginInput = (RelativeLayout) findViewById(R.id.rlLoginInput);
 

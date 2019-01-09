@@ -12,6 +12,7 @@ import com.thingzdo.smartplug.udpserver.commdef.ServerCommDefine;
 import com.thingzdo.smartplug.udpserver.commdef.ServerParamConfiger;
 import com.thingzdo.smartplug.udpserver.commdef.ServerRetCodeMgr;
 import com.thingzdo.smartplug.udpserver.db.ServerDBMgr;
+import com.thingzdo.smartplug.udpserver.db.USER_MODULE;
 
 public class ModuleHeartMsgHandle  implements ICallFunction {
 	/**********************************************************************************************************
@@ -59,6 +60,22 @@ public class ModuleHeartMsgHandle  implements ICallFunction {
 					thread.getPacket().getAddress().toString(), 
 					thread.getPacket().getPort(),
 					strHeartRsp0));
+			
+			// 测试使用，APP中显示模块的当前时间
+//			NotifyToAPP(strUserName, strDevId, 
+//					ServerCommDefine.APP_NOTIFY_MODULETIME_MSG_HEADER, 
+//					ServerRetCodeMgr.SUCCESS_CODE,
+//					strCookie) ;
+			
+			ServerDBMgr dbMgr = new ServerDBMgr();
+			USER_MODULE user_info = dbMgr.QueryUserModuleByDevId(strDevId);
+			if (null != user_info)
+			{
+				NotifyToAPP(user_info.getUserName(), strDevId, 
+						ServerCommDefine.APP_NOTIFY_MODULETIME_MSG_HEADER, 
+						ServerRetCodeMgr.SUCCESS_CODE,
+						strCookie) ;
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

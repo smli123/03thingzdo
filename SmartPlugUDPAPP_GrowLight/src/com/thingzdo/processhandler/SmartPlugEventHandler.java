@@ -189,6 +189,9 @@ public class SmartPlugEventHandler extends Handler {
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_NOTIFYONLINE,
 				new SmartPlugEventHandlerNotifyOnline()));
+		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
+				SmartPlugMessage.EVT_SP_NOTIFYMODULETIME,
+				new SmartPlugEventHandlerNotifyModuleTime()));
 
 		mEventHandlerMaps.add(new SmartPlugEventHandlerMap(
 				SmartPlugMessage.EVT_SP_NOTIFYPOWER,
