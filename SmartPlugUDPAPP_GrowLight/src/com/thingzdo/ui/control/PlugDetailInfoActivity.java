@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,6 +43,7 @@ public class PlugDetailInfoActivity extends TitledActivity
 	SmartPlugDefine mPlug = null;
 	private boolean mOnline = false;
 	private String mErrorMsg = "";
+	private String strSaveTimeInfo = "";
 
 	private TextView tv_type_select_content;
 	private TextView tv_sb_content;
@@ -50,6 +53,9 @@ public class PlugDetailInfoActivity extends TitledActivity
 	private List<String> list_smartplugtype = new ArrayList<String>();
 
 	private TextView tv_moduletime;
+
+	private SharedPreferences mSharedPreferences;
+	private SharedPreferences.Editor editor;
 
 	private BroadcastReceiver mPlugDetailRev = new BroadcastReceiver() {
 
@@ -123,22 +129,29 @@ public class PlugDetailInfoActivity extends TitledActivity
 			mProgress.dismiss();
 		}
 
-		String moduleTime = intent.getStringExtra("MODULETIME");
+		String moduleID = intent.getStringExtra("PLUGID");
+		if (moduleID.equals(mPlugId) == true) {
+			String moduleTime = intent.getStringExtra("MODULETIME");
 
-		Date date = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-		String strAPPTime = format.format(date);
-		String temp = "APP: " + strAPPTime;
-		moduleTime = "MOD: " + moduleTime;
-		temp = temp + "\r\n" + moduleTime;
-		tv_moduletime.setText(temp);
-		// StringBuffer sb = new StringBuffer(moduleTime);
-		// sb.insert(4, "-");
-		// sb.insert(7, "-");
-		// sb.insert(10, " ");
-		// sb.insert(13, ":");
-		// sb.insert(16, ":");
-		// tv_moduletime.setText(new String(sb));
+			Date date = new Date();
+			SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+			String strAPPTime = format.format(date);
+			String temp = strAPPTime + " [APP]";
+			moduleTime = moduleTime + " [MOD]";
+			temp = temp + "\r\n" + moduleTime;
+
+			strSaveTimeInfo = temp;
+			saveData();
+
+			tv_moduletime.setText(temp);
+			// StringBuffer sb = new StringBuffer(moduleTime);
+			// sb.insert(4, "-");
+			// sb.insert(7, "-");
+			// sb.insert(10, " ");
+			// sb.insert(13, ":");
+			// sb.insert(16, ":");
+			// tv_moduletime.setText(new String(sb));
+		}
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -149,11 +162,16 @@ public class PlugDetailInfoActivity extends TitledActivity
 
 		mPlugHelper = new SmartPlugHelper(this);
 
+		mSharedPreferences = getSharedPreferences("DetailInfo"
+				+ PubStatus.g_CurUserName, Activity.MODE_PRIVATE);
+
 		Intent intent = getIntent();
 		mPlugId = intent.getStringExtra("PLUGID");
 		mOnline = intent.getBooleanExtra("ONLINE", false);
 
 		mPlug = mPlugHelper.getSmartPlug(mPlugId);
+
+		loadData();
 
 		InitView();
 
@@ -166,9 +184,21 @@ public class PlugDetailInfoActivity extends TitledActivity
 
 	}
 
+	private void saveData() {
+		editor = mSharedPreferences.edit();
+		editor.putString("DEBUGTIMEINFO" + mPlugId, strSaveTimeInfo);
+
+		editor.commit();
+	}
+
+	private void loadData() {
+		// Must Be Modify
+		strSaveTimeInfo = mSharedPreferences.getString("DEBUGTIMEINFO"
+				+ mPlugId, "");
+	}
+
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		SmartPlugApplication.resetTask();
 
@@ -181,7 +211,6 @@ public class PlugDetailInfoActivity extends TitledActivity
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 
 		super.onDestroy();
 		unregisterReceiver(mPlugDetailRev);
@@ -332,6 +361,7 @@ public class PlugDetailInfoActivity extends TitledActivity
 			}
 
 			tv_moduletime = (TextView) findViewById(R.id.tv_moduletime);
+			tv_moduletime.setText(strSaveTimeInfo);
 
 			// DEBUG BUTTON
 			if (true == PubDefine.RELEASE_VERSION && false) {
